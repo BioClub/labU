@@ -31,8 +31,6 @@ Site Features
 
 
 
-Site Structure
+Site Structure != Design!
 
 
-TODO
-Make Graphic
