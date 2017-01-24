@@ -2,10 +2,11 @@
 
 Wordpress Theme for bioclub.org
 
-## Designs -> _design
+### Designs
+New Design should go into the \_design folder.
 
-## Necessary Plugins
-ACF Pro Sync
-ACF Pro.zip
-WPML
-WP DB Backup
+### Necessary Plugins
+* ACF Pro Sync
+* ACF Pro.zip
+* WPML
+* WP DB Backup
