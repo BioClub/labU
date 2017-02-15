@@ -9,6 +9,6 @@ New Design should go into the \_design folder.
 Free plugins are in \_plugins folder, paid plugins need to installed seperately.
 
 * ACF Pro Sync
-* ACF Pro.zip
+* ACF Pro 5
 * WPML
 * WP DB Backup
