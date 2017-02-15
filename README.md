@@ -6,7 +6,7 @@ Wordpress Theme for bioclub.org
 New Design should go into the \_design folder.
 
 ### Necessary Plugins
-Free plugins are in \_plugin folder, paid plugins need to installed seperately.
+Free plugins are in \_plugins folder, paid plugins need to installed seperately.
 
 * ACF Pro Sync
 * ACF Pro.zip
