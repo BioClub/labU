@@ -5,15 +5,18 @@ Site Features
 * Pages
 
 * Blog Posts
+  - Tags
+  - People
 
 * Event Pages
   - Description
   - Link to FB Event
   - Key Image
-  - Additional Images
+  - Additional Images (Link to Flickr)
 
 * Projects
   - Description
+  - Key Image
   - Project Members
   - Project Updates
   
@@ -21,7 +24,9 @@ Site Features
   - Social Links
   - Text
   - User Image
-  - Projects
+  - Mentions
+    - Projects
+    - Events
   
 * Users
   - Subscriber -> BioClub Affiliate (Lecturer, Advisor) (can: edit own page)
