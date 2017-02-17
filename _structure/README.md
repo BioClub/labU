@@ -9,17 +9,26 @@ Site Features
   - People
 
 * Event Pages
+  - Event Date
   - Description
   - Link to FB Event
-  - Key Image
+  - Key Image(s)
   - Additional Images (Link to Flickr)
+  - Participants?
+  - Video?
+  - Comments? (Facebook Comments?)
 
 * Projects
   - Description
   - Key Image
   - Project Members
   - Project Updates
-  
+ 
+* Protocols
+  - Description
+  - Images
+  - Material List
+
 * User Pages
   - Social Links
   - Text
@@ -37,5 +46,6 @@ Site Features
 
 
 Site Structure != Design!
+
 
 
