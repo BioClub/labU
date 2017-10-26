@@ -17,13 +17,13 @@ General Structure and Features go into \_structure folder.
 - Clone the Theme
 
 ### Necessary Plugins
-Free plugins are in \_plugins folder, paid plugins need to installed separately.
+Free plugins are in \_plugins folder, paid plugins need to be installed separately.
 
 #### Free
-* (WPML)[https://wpml.org]
-* WP DB Backup
+* [WPML](https://wpml.org)
+* [WP DB Backup](https://wordpress.org/plugins/wp-db-backup/)
 
 ### Paid
-* ACF Pro Sync
-* ACF Pro 5
+* [ACF Pro 5](https://www.advancedcustomfields.com)
+* [ACF Sync](https://github.com/thomascharbit/acf-sync)
 
