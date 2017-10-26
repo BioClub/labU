@@ -1,10 +1,14 @@
 # BioClub Wordpress Theme
 
-Open Development of our shiny new Wordpress Theme for bioclub.org
+Open Development for our shiny new Wordpress Theme for bioclub.org
 
 ## Designs
 
-New Design should go into the _\_design folder.
+New Designs ideas/suggestion should go into the \_design folder.
+
+## Structure
+
+General Structure and Features go into \_structure folder.
 
 ## Installation
 
@@ -15,7 +19,11 @@ New Design should go into the _\_design folder.
 ### Necessary Plugins
 Free plugins are in \_plugins folder, paid plugins need to installed separately.
 
+#### Free
+* (WPML)[https://wpml.org]
+* WP DB Backup
+
+### Paid
 * ACF Pro Sync
 * ACF Pro 5
-* WPML
-* WP DB Backup
+
