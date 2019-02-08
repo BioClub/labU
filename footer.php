@@ -1,59 +1,22 @@
-<?php
-/**
- * The template for displaying the footer
- *
- * Contains the closing of the #content div and all content after
- *
- * @package WordPress
- * @subpackage Twenty_Sixteen
- * @since Twenty Sixteen 1.0
- */
-?>
+      </div><!-- end content -->
+      <div class="push"></div>
+    </div><!-- end wrap -->
 
-		</div><!-- .site-content -->
+    <div class="footer_wrap">
+      <div class="footer_content">
+        <div class="footer_row">
+          <a href="<?php echo site_url(); ?>" class="footer_col">Introduction</a>
+          <a href="<?php echo site_url('/histoire'); ?>" class="footer_col">Notre histoire</a>
+          <a href="<?php echo site_url('/participants'); ?>" class="footer_col">Nos participants</a>
+          <a href="<?php echo site_url('/devenez'); ?>" class="footer_col">Devenez Pionnier!</a>
+          <a href="#top" class="footer_col top">top</a>
+        </div><!-- end footer_row -->
 
-		<footer id="colophon" class="site-footer" role="contentinfo">
-			<?php if ( has_nav_menu( 'primary' ) ) : ?>
-				<nav class="main-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Primary Menu', 'twentysixteen' ); ?>">
-					<?php
-						wp_nav_menu( array(
-							'theme_location' => 'primary',
-							'menu_class'     => 'primary-menu',
-						 ) );
-					?>
-				</nav><!-- .main-navigation -->
-			<?php endif; ?>
-
-			<?php if ( has_nav_menu( 'social' ) ) : ?>
-				<nav class="social-navigation" role="navigation" aria-label="<?php esc_attr_e( 'Footer Social Links Menu', 'twentysixteen' ); ?>">
-					<?php
-						wp_nav_menu( array(
-							'theme_location' => 'social',
-							'menu_class'     => 'social-links-menu',
-							'depth'          => 1,
-							'link_before'    => '<span class="screen-reader-text">',
-							'link_after'     => '</span>',
-						) );
-					?>
-				</nav><!-- .social-navigation -->
-			<?php endif; ?>
-
-			<div class="site-info">
-				<?php
-					/**
-					 * Fires before the twentysixteen footer text for footer customization.
-					 *
-					 * @since Twenty Sixteen 1.0
-					 */
-					do_action( 'twentysixteen_credits' );
-				?>
-				<span class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span>
-				<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'twentysixteen' ) ); ?>"><?php printf( __( 'Proudly powered by %s', 'twentysixteen' ), 'WordPress' ); ?></a>
-			</div><!-- .site-info -->
-		</footer><!-- .site-footer -->
-	</div><!-- .site-inner -->
-</div><!-- .site -->
-
-<?php wp_footer(); ?>
+        <div class="footer_row">
+          <div class="footer_col company">&copy;<?php echo date("Y"); ?> mict, all rights reserved</div>
+        </div><!-- end footer_row -->
+      </div><!-- end footer_content -->
+    </div><!-- end footer_wrap -->
+  </div><!-- end wrapall -->
 </body>
 </html>

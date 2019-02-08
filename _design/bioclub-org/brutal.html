@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [OpenLayers-Users] Util.extend: I can't unregister
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:openlayers-users%40lists.osgeo.org?Subject=Re%3A%20%5BOpenLayers-Users%5D%20Util.extend%3A%20I%20can%27t%20unregister&In-Reply-To=%3C1391013881984-5100759.post%40n6.nabble.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="029357.html">
+   <LINK REL="Next"  HREF="029360.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[OpenLayers-Users] Util.extend: I can't unregister</H1>
+    <B>Franz1965</B> 
+    <A HREF="mailto:openlayers-users%40lists.osgeo.org?Subject=Re%3A%20%5BOpenLayers-Users%5D%20Util.extend%3A%20I%20can%27t%20unregister&In-Reply-To=%3C1391013881984-5100759.post%40n6.nabble.com%3E"
+       TITLE="[OpenLayers-Users] Util.extend: I can't unregister">fsozzi at INTERCAD.CH
+       </A><BR>
+    <I>Wed Jan 29 08:44:42 PST 2014</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="029357.html">[OpenLayers-Users] Switching style to use external graphic only	when not clustered
+</A></li>
+        <LI>Next message: <A HREF="029360.html">[OpenLayers-Users] Selecting underlying features in the same layer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#29358">[ date ]</a>
+              <a href="thread.html#29358">[ thread ]</a>
+              <a href="subject.html#29358">[ subject ]</a>
+              <a href="author.html#29358">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi everybody,
+
+I create a custom control to develop a function for selecting features by
+use of the code below. Everything works fine, but I don't know how to
+unregister this control to go back to pan mode. I've tried to remove this
+control from map, but this function continues to be activated.
+
+Any idea?
+
+Best regards
+
+
+           ///selection control: if shift is pressed a selection is made
+            _selectcontrol = new OpenLayers.Control();
+            OpenLayers.Util.extend(_selectcontrol, {
+                draw: function () {
+                    // this Handler.Box will intercept the shift-mousedown
+                    // before Control.MouseDefault gets to see it
+                    this.box = new OpenLayers.Handler.Box(_selectcontrol,
+                            { &quot;done&quot;: this.notice },
+                            { keyMask: OpenLayers.Handler.MOD_NONE });
+                    this.box.activate();
+                },
+                notice: selectRectangle
+            });
+            _map.addControl(_selectcontrol);/
+
+
+
+--
+View this message in context: <A HREF="http://osgeo-org.1560.x6.nabble.com/Util-extend-I-can-t-unregister-tp5100759.html">http://osgeo-org.1560.x6.nabble.com/Util-extend-I-can-t-unregister-tp5100759.html</A>
+Sent from the OpenLayers Users mailing list archive at Nabble.com.
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="029357.html">[OpenLayers-Users] Switching style to use external graphic only	when not clustered
+</A></li>
+	<LI>Next message: <A HREF="029360.html">[OpenLayers-Users] Selecting underlying features in the same layer
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#29358">[ date ]</a>
+              <a href="thread.html#29358">[ thread ]</a>
+              <a href="subject.html#29358">[ subject ]</a>
+              <a href="author.html#29358">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="http://lists.osgeo.org/mailman/listinfo/openlayers-users">More information about the Users
+mailing list</a><br>
+</body></html>

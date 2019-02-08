@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 60 180" style="enable-background:new 0 0 60 180;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:none;}
+</style>
+<g>
+	<path class="st0" d="M8.5,126.25c0,5.79,3.06,10.87,7.63,13.75c-4.57,2.88-7.63,7.96-7.63,13.75c0,8.96,7.29,16.25,16.25,16.25H50
+		v-5H24.75c-6.2,0-11.25-5.05-11.25-11.25s5.05-11.25,11.25-11.25H50v-5H24.75c-6.2,0-11.25-5.05-11.25-11.25S18.55,115,24.75,115
+		H50v-5H24.75C15.79,110,8.5,117.29,8.5,126.25"/>
+	<rect y="97.5" class="st0" width="10" height="5"/>
+	<polygon class="st0" points="10,10 10,50 15,50 15,32.5 50,32.5 50,27.5 15,27.5 15,10 	"/>
+	<path class="st0" d="M46.5,70c0,9.1-7.4,16.5-16.5,16.5S13.5,79.1,13.5,70c0-4.09,1.5-8.01,4.24-11.04l-3.71-3.35
+		C10.46,59.57,8.5,64.68,8.5,70c0,11.85,9.65,21.5,21.5,21.5S51.5,81.85,51.5,70c0-5.32-1.96-10.43-5.52-14.38l-3.72,3.35
+		C44.99,61.99,46.5,65.91,46.5,70"/>
+</g>
+<rect class="st1" width="60" height="180"/>
+</svg>
