@@ -30,4 +30,4 @@ Free plugins are in \_plugins folder, paid plugins need to be installed separate
 # TODO
 - Upgrade to WPML
 - Migrate to Guttenberg Editor
-- Make Live Dev site at (https://bioclub.tokyo)[https://bioclub.tokyo]
+- Make Live Dev site at [https://bioclub.tokyo](https://bioclub.tokyo__)
