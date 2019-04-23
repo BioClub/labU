@@ -1,10 +1,19 @@
 # BioClub Wordpress Theme
 
-Open Development for our shiny, new Wordpress Theme for BioClub Tokyo
+Open Development for our shiny, new Wordpress Theme for BioClub Tokyo.
 
-## Designs
+# Structure
+
+Site structure ideas/suggestion should go into the \_structure folder.
+
+# Designers
 
 New Designs ideas/suggestion should go into the \_design folder.
+
+# Developers
+
+- Wordpress & PHP
+- Javascript
 
 ## Structure
 
@@ -23,11 +32,12 @@ Free plugins are in \_plugins folder, paid plugins need to be installed separate
 * [WPML](https://wpml.org)
 * [WP DB Backup](https://wordpress.org/plugins/wp-db-backup/)
 
-### Paid
+#### Paid
 * [ACF Pro 5](https://www.advancedcustomfields.com)
 * [ACF Sync](https://github.com/thomascharbit/acf-sync)
+* Get in touch with me [trembl](https://fb.me/trembl) for help with the Dev Setup
 
 # TODO
 - Upgrade to WPML
 - Migrate to Guttenberg Editor
-- Make Live Dev site at [https://bioclub.tokyo](https://bioclub.tokyo__)
+- Make Live Dev site at [https://bioclub.tokyo](https://bioclub.tokyo)
