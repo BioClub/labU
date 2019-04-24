@@ -5,7 +5,7 @@ Open Development for our shiny, new Wordpress Theme for BioClub Tokyo.
 The current (April 2019) situation at bioclub.org is a bit chaotic. The site is at the moment run with dev version of CraftCMS, the initial design, coding and hosting was kindly provided by our host at FabCafe/Loftwork. Unfortunately, the BioClub Community was not given access to the theme or the server, so we can not contribute to the development.
 Also, the site is currently not managed by the Community - that means the community can not make posts or reviews or change the structure of the site. The only director who can currently update content on bioclub.org is a bit too busy with other works, as a result, not all the events and info at BioClub make it to bioclub.org
 
-The BioClub Community wants to (and can) develop the site - and help in running it. While CraftCMS is a great platform, we want a software that is free and open-source (and has a GPLv2 License). In the tradition of hackerspace, the website and it's theme should also be free and open-source. Some members of the BioClub Community have experience and expertise in Wordpress, let's build upon that.
+The BioClub Community wants to (and can) develop the site - and help in running it. While [CraftCMS](https://craftcms.com) is a great platform, we want a software that is free and open-source (and has a GPLv2 License). In the tradition of hackerspace, the website and it's theme should also be free and open-source. Some members of the BioClub Community have experience and expertise in [Wordpress](https://wordpress.org), let's build upon that!
 
 # Discussion
 
