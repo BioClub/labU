@@ -2,6 +2,10 @@
 
 Open Development for our shiny, new Wordpress Theme for BioClub Tokyo.
 
+# Discussion
+
+What do you want from the site? What is still missing? What is needed to run the BioClub? Please write your ideas/suggestions at [Wiki]().
+
 # Structure
 
 Site structure ideas/suggestion should go into the \_structure folder.
@@ -38,6 +42,6 @@ Free plugins are in \_plugins folder, paid plugins need to be installed separate
 * Get in touch with me [trembl](https://fb.me/trembl) for help with the Dev Setup
 
 # TODO
-- Upgrade to WPML
-- Migrate to Guttenberg Editor
-- Make Live Dev site at [https://bioclub.tokyo](https://bioclub.tokyo)
+[ ]  Upgrade to Wordpress 5
+[ ] Migrate to Guttenberg Editor
+[ ] Make Live Dev site at [https://bioclub.tokyo](https://bioclub.tokyo)
