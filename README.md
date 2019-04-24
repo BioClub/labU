@@ -52,9 +52,11 @@ Free plugins are in \_plugins folder, paid plugins need to be installed separate
 * [WP DB Backup](https://wordpress.org/plugins/wp-db-backup/) Exporting DB
 
 # TODO
-[ ] Upgrade to Wordpress 5
-[ ] Migrate to Guttenberg Editor
-[ ] Add MarkDown Block
-[ ] Add SSL Certificate via [Let's Encrypt](https://letsencrypt.org)
-[ ] Contact Form!
-[ ] Make Live Dev site at [https://bioclub.tokyo](https://bioclub.tokyo)
+- [ ] Upgrade to Wordpress 5
+- [ ] Migrate to Guttenberg Editor
+- [ ] Add MarkDown Block
+- [ ] Add SSL Certificate via [Let's Encrypt](https://letsencrypt.org)
+- [ ] Contact Form!
+- [ ] Make Live Dev site at [https://bioclub.tokyo](https://bioclub.tokyo)
+
+Shall we move that to `issues`?
