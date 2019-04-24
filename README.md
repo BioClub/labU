@@ -45,7 +45,7 @@ Free plugins are in \_plugins folder, paid plugins need to be installed separate
 
 #### Paid
 * [ACF Pro 5](https://www.advancedcustomfields.com)
-* Get in touch with me [trembl](https://fb.me/trembl) for help with the Dev Setup
+* [Help](https://fb.me/trembl) with the Dev Setup
 
 #### Optional
 * [ACF Sync](https://github.com/thomascharbit/acf-sync) Importing ACFs
