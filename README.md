@@ -36,13 +36,15 @@ General Structure and Features go into \_structure folder.
 Free plugins are in \_plugins folder, paid plugins need to be installed separately.
 
 #### Free
-* [WPML](https://wpml.org)
-* [WP DB Backup](https://wordpress.org/plugins/wp-db-backup/)
+* [WPML](https://wpml.org) Multi-Language
 
 #### Paid
 * [ACF Pro 5](https://www.advancedcustomfields.com)
-* [ACF Sync](https://github.com/thomascharbit/acf-sync)
 * Get in touch with me [trembl](https://fb.me/trembl) for help with the Dev Setup
+
+#### Optional
+* [ACF Sync](https://github.com/thomascharbit/acf-sync) Importing ACFs
+* [WP DB Backup](https://wordpress.org/plugins/wp-db-backup/) Exporting DB
 
 # TODO
 [ ] Upgrade to Wordpress 5
