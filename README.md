@@ -61,9 +61,5 @@ Free plugins are in \_plugins folder, paid plugins need to be installed separate
 - [ ] Add SSL Certificate via [Let's Encrypt](https://letsencrypt.org), so we can have https://bioclub.toyko
 - [ ] Add Contact Form!
 
-Shall we move that to `issues`?
+Shall we move that to [issues](https://github.com/BioClub/BioClub-Wordpress-Theme/issues)?
 
-```php
-$test = "jhjk";
-exec("Jbjh");
-```
