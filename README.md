@@ -62,8 +62,7 @@ Free plugins are in \_plugins folder, paid plugins need to be installed separate
 
 Shall we move that to `issues`?
 
-```ruby
+```
 require 'redcarpet'
 markdown = Redcarpet.new("Hello World!")
-puts markdown.to_html
 ```
