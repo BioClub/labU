@@ -1,6 +1,6 @@
 # BioClub Wordpress Theme
 
-Open Development for our shiny, new Wordpress Theme for BioClub Tokyo.
+Public Development for our shiny, new Wordpress Theme for [BioClub Tokyo](http://www.bioclub.tokyo).
 
 The current (April 2019) situation at bioclub.org is a bit chaotic. The site is at the moment run with dev version of CraftCMS, the initial design, coding and hosting was kindly provided by our host at FabCafe/Loftwork. Unfortunately, the BioClub Community was not given access to the theme or the server, so we can not contribute to the development.
 Also, the site is currently not managed by the Community - that means the community can not make posts or reviews or change the structure of the site. The only director who can currently update content on bioclub.org is a bit too busy with other works, as a result, not all the events and info at BioClub make it to bioclub.org
@@ -33,7 +33,7 @@ General Structure and Features go into \_structure folder.
 
 ## Installation
 
-- Make a local installation of the latest [Wordpress](http://wordpress.org)
+- Locally install [Wordpress 5.1.1](http://wordpress.org)
 - Install the Plugins listest below
 - Clone the Theme
 
@@ -41,20 +41,21 @@ General Structure and Features go into \_structure folder.
 Free plugins are in \_plugins folder, paid plugins need to be installed separately.
 
 #### Free
-* [WPML](https://wpml.org) Multi-Language
+* [Classic Editor 1.4](https://wordpress.org/plugins/classic-editor/)
 
 #### Paid
-* [ACF Pro 5](https://www.advancedcustomfields.com)
-* [Help](https://fb.me/trembl) with the Dev Setup
+* [WPML 4.2.6](https://wpml.org) Multi-Language
+* [ACF Pro 5.7.13](https://www.advancedcustomfields.com)
+* _Get [help](https://fb.me/trembl) with the Dev Setup_
 
 #### Optional
 * [ACF Sync](https://github.com/thomascharbit/acf-sync) Importing ACFs
 * [WP DB Backup](https://wordpress.org/plugins/wp-db-backup/) Exporting DB
 
 # TODO
+- [x] Upgrade to Wordpress 5
 - [ ] Make Developement site at [https://bioclub.tokyo](https://bioclub.tokyo)
 - [ ] Give Access to BioClub Community Members
-- [ ] Upgrade to Wordpress 5
 - [ ] Migrate to Guttenberg Editor
 - [ ] Add MarkDown Block
 - [ ] Add SSL Certificate via [Let's Encrypt](https://letsencrypt.org), so we can have https://bioclub.toyko
@@ -62,7 +63,7 @@ Free plugins are in \_plugins folder, paid plugins need to be installed separate
 
 Shall we move that to `issues`?
 
-```
-require 'redcarpet'
-markdown = Redcarpet.new("Hello World!")
+```php
+$test = "jhjk";
+exec("Jbjh");
 ```
