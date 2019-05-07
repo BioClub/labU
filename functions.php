@@ -1,18 +1,14 @@
 <?php
 
-// update_option( 'siteurl', 'http://127.0.0.1/gb/syrnet' );
-// update_option( 'home', 'http://127.0.0.1/gb/syrnet' );
+// update_option( 'siteurl', 'http://127.0.0.1/bioclub' );
+// update_option( 'home', 'http://127.0.0.1/bioclub' );
 
-
-$p = get_template_directory();
-$p .= '/functions/';
-
-// General
-require $p.'disable_updates.php';
-require $p.'clean_header.php';
-require $p.'disable_adminbar_links.php';
-require $p.'disable_visual_editor.php';
-require $p.'disable_auto_p.php';
+include('components/custom_post_types.php');      // Events, Projects
+include('components/disable_updates.php');
+include('components/clean_header.php');
+include('components/disable_adminbar_links.php');
+include('components/disable_visual_editor.php');
+include('components/disable_auto_p.php');
 
 
 function isFront() {
