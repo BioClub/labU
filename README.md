@@ -33,7 +33,7 @@ General Structure and Features go into \_structure folder.
 
 ## Installation
 
-- Locally install [Wordpress 5.1.1](http://wordpress.org)
+- Locally install [Wordpress 5.2](http://wordpress.org)
 - Install the Plugins listest below
 - Clone the Theme
 
