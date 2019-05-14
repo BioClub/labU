@@ -41,7 +41,7 @@ General Structure and Features go into \_structure folder.
 Free plugins are in \_plugins folder, paid plugins need to be installed separately.
 
 #### Free
-* [Classic Editor 1.4](https://wordpress.org/plugins/classic-editor/)
+* [Classic Editor 1.5](https://wordpress.org/plugins/classic-editor/)
 
 #### Paid
 * [WPML 4.2.6](https://wpml.org) Multi-Language
