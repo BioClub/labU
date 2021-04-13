@@ -11,6 +11,9 @@ The BioClub Community wants to (and can) develop the site - and help in running 
 
 What do you want from the site? What is still missing? What is needed to run the BioClub? Please write your ideas/suggestions at the [Wiki](https://github.com/BioClub/BioClub-Wordpress-Theme/wiki).
 
+There is also a Google Doc for easily Sharing Ideas: https://docs.google.com/document/d/1o2WTNjTxkZYKmCmdziS-a4XgKwddnrclsKorgtMeCUo/edit?usp=sharing 
+Please ping a BioClub Admin for Write Access.
+
 # Structure
 
 Site structure ideas/suggestion should go into the \_structure folder.
