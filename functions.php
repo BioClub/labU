@@ -23,6 +23,14 @@ function isActive($pageName) {
   }
 }
 
+// Include Markdown Parser
+include('includes/Parsedown.php');
+$Parsedown = new Parsedown();
+
+function the_markdown_content() {
+  global $Parsedown;
+  echo $Parsedown->text(get_the_content());
+}
 
 
 
