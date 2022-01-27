@@ -5,15 +5,11 @@
     <div class="footer_wrap">
       <div class="footer_content">
         <div class="footer_row">
-          <a href="<?php echo site_url(); ?>" class="footer_col">Introduction</a>
-          <a href="<?php echo site_url('/histoire'); ?>" class="footer_col">Notre histoire</a>
-          <a href="<?php echo site_url('/participants'); ?>" class="footer_col">Nos participants</a>
-          <a href="<?php echo site_url('/devenez'); ?>" class="footer_col">Devenez Pionnier!</a>
-          <a href="#top" class="footer_col top">top</a>
+
         </div><!-- end footer_row -->
 
         <div class="footer_row">
-          <div class="footer_col company">&copy;<?php echo date("Y"); ?> mict, all rights reserved</div>
+          <div class="footer_col company">Site Design / Logo &copy;<?php echo date("Y"); ?> BioClub Tokyo, User Contributed Content by <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
         </div><!-- end footer_row -->
       </div><!-- end footer_content -->
     </div><!-- end footer_wrap -->
