@@ -21,11 +21,9 @@
           <div class="col_row col_standard col_center">
             <div class="mainnav_on_box col_wrap">
               <div class="mainnav_on">
+
                 <div class="mainnav_text">
-                  <a href="<?php echo site_url(); ?>" class="mainnav_item <?php isActive('front'); ?>">Introduction</a>
-                  <a href="<?php echo site_url('/histoire'); ?>" class="mainnav_item <?php isActive('histoire'); ?>">Notre histoire</a>
-                  <a href="<?php echo site_url('/participants'); ?>" class="mainnav_item <?php isActive('participants'); ?>">Nos participants</a>
-                  <a href="<?php echo site_url('/devenez'); ?>" class="mainnav_item <?php isActive('devenez'); ?>">Devenez Pionnier!</a>
+                  <a href="http://bioclub.org" class="mainnav_item">BioClub Tokyo</a>
                 </div><!-- end mainnav_text -->
               </div><!-- end mainnav_on -->
             </div><!-- end mainnav_on_box -->

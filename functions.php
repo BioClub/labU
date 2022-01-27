@@ -33,6 +33,17 @@ function the_markdown_content() {
 }
 
 
+add_filter( 'the_content', 'filter_the_content_markdown', 1 );
+
+function filter_the_content_markdown( $content ) {
+  if (get_field('enable_markdown_filter')) {
+    global $Parsedown;
+    return $Parsedown->text($content);
+  }
+  return $content;
+}
+
+
 
 
 ?>
