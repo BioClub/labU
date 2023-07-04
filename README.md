@@ -34,9 +34,9 @@ Here is also a shared [Figma Project](https://www.figma.com/file/UlvsISNrw5YMwFB
 
 ## Installation
 
-- Locally install [Wordpress 5.2](http://wordpress.org)
-- Install the Plugins listest below
-- Clone the Theme
+- Locally install the latest [Wordpress](https://wordpress.org/download/) version.
+- Install the lastest Plugins listest below
+- Clone the Theme in this repo
 
 ### Necessary Plugins
 Free plugins are in \_plugins folder, paid plugins need to be installed separately.
