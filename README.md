@@ -18,21 +18,19 @@ Please ping a BioClub Admin for Write Access.
 
 Site structure ideas/suggestion should go into the \_structure folder.
 
-# Designers
+# Designer
 
 - HTML
 - CSS
 
-New Designs ideas/suggestion should go into the \_design folder. (or in the Google Doc)
+New Designs ideas/suggestion should go into the \_design folder.
 
-# Developers
+Here is also a shared [Figma Project](https://www.figma.com/file/UlvsISNrw5YMwFB7B3MuC6/BioClub-Tokyo---Website?type=design&node-id=0%3A1&mode=design&t=hWTEsAzRiLPzzu5x-1) where we can jointly develop the Design for the Website.
+
+# Developer
 
 - Wordpress & PHP
 - Javascript, jQuery?, Vue?
-
-## Structure
-
-General Structure and Features go into \_structure folder.
 
 ## Installation
 
