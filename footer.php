@@ -33,7 +33,7 @@
   </a>
 </footer>
 
-<div class="tc pa3">Site Design / Logo &copy;<?php echo date("Y"); ?> BioClub Tokyo, User Contributed Content by <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></div>
+<div class="tc pa3">Site Design / Logo &copy;<?php echo date("Y"); ?> BioClub Tokyo, User Contributed Content by <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div>
 
 </main>
 </body>

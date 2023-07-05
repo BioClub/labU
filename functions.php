@@ -9,7 +9,7 @@ include('components/clean_header.php');
 include('components/disable_adminbar_links.php');
 include('components/disable_visual_editor.php');
 include('components/disable_auto_p.php');
-
+include('components/menus.php');
 
 function isFront() {
  if (is_front_page()) {
