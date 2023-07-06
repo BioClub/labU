@@ -16,7 +16,7 @@ $updated = get_the_modified_date();
 
 if ($published != $updated):
 ?>
-    Updated by: YYYY on <?php the_modified_date(); ?>
+    Last Updated by: YYYY on <?php the_modified_date(); ?>
 <?php
 endif;
 ?>
