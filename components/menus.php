@@ -4,8 +4,12 @@
 // function.php
 function register_theme_menu() {
   register_nav_menu('header-menu', 'Header Menu');
+  register_nav_menu('footer-left-menu', 'Footer Left Menu');
+  register_nav_menu('footer-center-menu', 'Footer Center Menu');
+  register_nav_menu('footer-right-menu', 'Footer Right Menu');
 }
-add_action( 'init', 'register_theme_menu' );
+add_action('init', 'register_theme_menu');
+
 
 /*
 // display
