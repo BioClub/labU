@@ -12,9 +12,12 @@
   </head>
   <body class="w-100 sans-serif bg-white">
     <!-- Temporary Dev Message -->
-    <div class="bg-dark-red white pa1 tc">
-      This is a development site for the new <span class="i">BioClub Tokyo Community Website</span>. Please join the Design & Development at GitHub.
-    </div><!-- END Temporary Dev Message -->
+    <div class="bg-dark-red white pa1" id="message">
+      This is a development site for the new <span class="i">BioClub Tokyo Community Website</span>.
+      Please join the Design & Development at <a href="https://github.com/BioClub/labu">GitHub</a>.
+      Legacy Website → <a href="http://www.bioclub.org">www.bioclub.org</a> 
+    </div>
+    <!-- END Temporary Dev Message -->
     <main>
       <nav class="dt w-100 border-box pt3 ph5-ns b">
         <div class="f2">
@@ -33,7 +36,7 @@ foreach($menuItems as $menuItem) {
   $link = get_permalink($pageId);
   $isCurrentPage = ($postID == $pageId);
   $active = ($isCurrentPage) ? ' class="active"' : '';
-  echo "    <a class=\"pr2\" href=\"$link\"$active>$menuItem->title</a>\n";
+  echo "    <a class=\"mr2\" href=\"$link\"$active>$menuItem->title</a>\n";
 }
 
 ?>

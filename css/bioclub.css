@@ -1,0 +1,30 @@
+html {
+ /* font-family: "Helvetica Neue"; */
+}
+a, a:visited {
+  color: black;
+  text-decoration: none;
+}
+a:hover {
+  color: white;
+  background: blue;
+}
+a:active {
+  color: white;
+  background: #ff00ff;
+}
+
+#message a, #message a:visited, #message a:active {
+  color: white;
+  text-decoration: none;
+  background: blue;
+}
+#message a:hover {
+  color: blue;
+  background: white;
+}
+#message a:active {
+  color: white;
+  background: blue;
+
+}

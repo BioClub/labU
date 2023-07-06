@@ -9,15 +9,47 @@
 <link rel="stylesheet" href="../css/tachyons.min.css">
 <style>
   html {
-    
+   /* font-family: "Helvetica Neue"; */
   }
+  a, a:visited {
+    color: black;
+    text-decoration: none;
+  }
+  a:hover {
+    color: white;
+    background: blue;
+  }
+  a:active {
+    color: white;
+    background: #ff00ff;
+  }
+  
+  #message a, #message a:visited, #message a:active {
+    color: white;
+    text-decoration: none;
+    background: blue;
+  }
+  #message a:hover {
+    color: blue;
+    background: white;
+  }
+  #message a:active {
+    color: white;
+    background: blue;
+
+  }
+  
 </style>
 </head>
 <body class="w-100 sans-serif bg-white">
-<div class="bg-dark-red white pa1">
+  
+
+<div class="bg-dark-red white pa1" id="message">
   This is a development site for the new <span class="i">BioClub Tokyo Community Website</span>.
-  Please join the Design & Development at GitHub.
+  Please join the Design & Development at <a href="https://github.com/BioClub/labu">GitHub</a>.
+  Legacy Website → <a href="http://www.bioclub.org">www.bioclub.org</a> 
 </div>
+
 <main>
   <nav class="dt w-100 border-box pt3 ph5-ns b">
     <div class="f2">BioClub Tokyo</div>
@@ -28,17 +60,20 @@
   </nav>
   
   <nav class="dt w-100 border-box pt3 ph5-ns b f4">
-    <a class="pr2" href="">About</a> | 
-    <a class="pr2" href="">Events</a> | 
-    <a class="pr2" href="">Projects</a> | 
-    <a class="pr2" href="">People</a> |
-    <a class="pr2" href="">Contact</a>
+    <a class="mr2" href="">About</a>
+    <a class="mr2" href="">Events</a> 
+    <a class="mr2" href="">Projects</a>
+    <a class="mr2" href="">People</a>
+    <a class="mr2" href="">Contact</a>
   </nav>
 
 <article class="ph3 ph5-ns pv5 ">
   <h1 class="f1">
     Page Title
   </h1>
+  <div id="byline" class="pb2">
+    Written by: XXXX on July 6th 2023, Updated by: YYYY on July 7th 2023
+  </div>
   <div class=" lh-copy">
     Page Content.
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
