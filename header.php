@@ -38,6 +38,4 @@ foreach($menuItems as $menuItem) {
 
 ?>
       </nav>
-    </main>
-  </body>
-</html>
+
