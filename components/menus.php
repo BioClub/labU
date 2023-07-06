@@ -43,6 +43,18 @@ function getMenu($menuSlug) {
 }
 
 
+function showFooterMenu($slug, $padding="      ") {
+  $menuItems = getMenu($slug);
+  foreach($menuItems as $menuItem) {
+    $pageId = $menuItem->object_id;
+    $link = get_permalink($pageId);
+    $isCurrentPage = ($postID == $pageId);
+    $active = ($isCurrentPage) ? ' class="active"' : '';
+    echo "$padding<a class=\"mr2\" href=\"$link\"$active>$menuItem->title</a><br />\n";
+  }
+}
+
+
 
 
 /*
