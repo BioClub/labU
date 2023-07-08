@@ -30,10 +30,27 @@ Here is also a shared [Figma Project](https://www.figma.com/file/UlvsISNrw5YMwFB
 
 # Developer
 
-- [Wordpress](https://wordpress.org) & PHP
-- Spiral 2: Vue/React?
+What we need:
+- Multi-lingual Pages/Post Tyepes
+-  Custom Post/Page Types (ie. Events, Inventory, News)
+-  Strong Custom Fields Support
 
-## Installation
+      
+## Option 1: Wordpress
+
+While the basic Wordpress is free and open-source, the necessary plug-ins that are needed for a complex, multi-lingual site are not. Both [WPML](https://wpml.org/purchase/) and [Advanced Custom Fields/ACF](https://www.advancedcustomfields.com) have switch their previous "life-time" accounts to yearly-billed account. That means we would have to pay each year $99 for WMPL and $149 for ACF.
+
+Wordpress was my choice of CMS, because it was relatively easy to get clear, junk-free output, the recently introduced API was great for headerless systems, and clients were familiar with the back-end.
+
+The introduction of the Gutenberg Block Editor was great for being more expressive on indivial site, but a horror for sites which require a more structured content. I practically never used it for my own or client sites.
+
+
+## Option 2: ProcessWire (currently evaluating)
+
+Processwire is ... differnt. It requires you to build the site from scratch
+
+
+## WordPress Installation (outdated)
 
 - Locally install the latest [Wordpress](https://wordpress.org/download/) version.
 - Install the lastest Plugins listest below
