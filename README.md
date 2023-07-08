@@ -77,5 +77,13 @@ Missing:
 - No native Search
 
 
+# TODO
+- [x] Add SSL Certificate via [Let's Encrypt](https://letsencrypt.org), so we can have https://bioclub.toyko
+- [x] Make Developement Site at [https://bioclub.tokyo](https://bioclub.tokyo)
+- [x] Install Developement site
+- [ ] Make Accounts for BioClub Community Members
+- [ ] Add Contact Form!
+- [ ] Make Bi-Lingual, Japanese/English
+
 Shall we move that to [issues](https://github.com/BioClub/BioClub-Wordpress-Theme/issues)?
 
