@@ -47,6 +47,15 @@ Wordpress was my choice of CMS, because it was relatively easy to get clear, jun
 
 The introduction of the Gutenberg Block Editor was great for being more expressive on indivial site, but a horror for sites which require a more structured content. I practically never used it for my own or client sites.
 
+Plus:
+- User Management
+- Native Search
+- Markdown (with my Plugin)
+- Custom Fields
+- Lots of experience with Theme Development
+Minus:
+- ACF Pro & WPML cost ~$250/year
+
 
 ## Option 2: ProcessWire (currently evaluating)
 
@@ -56,42 +65,17 @@ Processwire is ... differnt. It requires you to build the site from scratch
 
 SSGs are great for Documentation Pages, but they are not great for site with multiple users, as they usually don't provide user management. That would have to been done in GitHub, which would mean 
 
+Plus:
 + Fast
++ Markdown
 
+Missing:
 - No User Management
+- No Custom Fields
 - File Conflicts
 - No DB for generating Pages
 - No native Search
 
-
-## WordPress Installation (outdated)
-
-- Locally install the latest [Wordpress](https://wordpress.org/download/) version.
-- Install the lastest Plugins listest below
-- Clone the Theme in this repo
-
-### Necessary Plugins
-Free plugins are in `\_plugins` folder, paid plugins need to be installed separately. Please ask in the BioClub Discord #website channel for details.
-
-#### Free
-* [Classic Editor](https://wordpress.org/plugins/classic-editor/)
-
-#### Paid
-* [WPML](https://wpml.org) Multi-Language
-* [ACF Pro](https://www.advancedcustomfields.com)
-* _Get [help](https://fb.me/trembl) with the Dev Setup_
-
-#### Optional
-* [ACF Sync](https://github.com/thomascharbit/acf-sync) Importing ACFs from Dev to Production
-* [WP DB Backup](https://wordpress.org/plugins/wp-db-backup/) Exporting DB
-
-# TODO
-- [x] Upgrade to Wordpress 6
-- [x] Make Developement site at [https://bioclub.tokyo](https://bioclub.tokyo)
-- [ ] Make Accounts for BioClub Community Members
-- [x] Add SSL Certificate via [Let's Encrypt](https://letsencrypt.org), so we can have https://bioclub.toyko
-- [ ] Add Contact Form!
-- [ ] Make Bi-Lingual, Japanese/English
 
 Shall we move that to [issues](https://github.com/BioClub/BioClub-Wordpress-Theme/issues)?
 
