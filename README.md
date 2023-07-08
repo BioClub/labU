@@ -6,7 +6,7 @@ The [old BioClub](bioclub.org) Website at is a bit chaotic, it does not really r
 
 Unfortunately it's not possible for the BioClub community to change/update the CMS and structure of the server, therefore we decided to make a new website - where we can implement the needs and requirements of the community.
 
-The website and it's theme should also be free and open-source. Some members of the BioClub Community have experience and expertise in [Wordpress](https://wordpress.org), so let's build upon that!
+The website and it's theme should also be free and open-source.
 
 # Discussion
 
