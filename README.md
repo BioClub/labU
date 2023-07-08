@@ -18,7 +18,7 @@ There is also a [Google Doc](https://docs.google.com/document/d/1o2WTNjTxkZYKmCm
 
 Site structure ideas/suggestion should go into the `\_structure` folder.
 
-# Designer
+# Design
 
 New Designs ideas/suggestion should go into the `\_design` folder.
 
@@ -28,14 +28,17 @@ Here is also a shared [Figma Project](https://www.figma.com/file/UlvsISNrw5YMwFB
 2. Make Production-ready HTML/CSS
 3. Implement as Theme in PHP
 
-# Developer
+# Development
 
 What we need:
-- Multi-lingual Pages/Post Tyepes
--  Custom Post/Page Types (ie. Events, Inventory, News)
--  Strong Custom Fields Support
+- User Management & Roles
+- Multi-lingual JP/EN
+- MarkDown
+- Custom Post/Page Types (ie. Events, Inventory, News)
+- Strong Custom Fields Support
+- Server-side Image Resize
 
-      
+
 ## Option 1: Wordpress
 
 While the basic Wordpress is free and open-source, the necessary plug-ins that are needed for a complex, multi-lingual site are not. Both [WPML](https://wpml.org/purchase/) and [Advanced Custom Fields/ACF](https://www.advancedcustomfields.com) have switch their previous "life-time" accounts to yearly-billed account. That means we would have to pay each year $99 for WMPL and $149 for ACF.
@@ -48,6 +51,17 @@ The introduction of the Gutenberg Block Editor was great for being more expressi
 ## Option 2: ProcessWire (currently evaluating)
 
 Processwire is ... differnt. It requires you to build the site from scratch
+
+## Option 3: Static Site Generators (MkDocs, Hugo, Jekyll)
+
+SSGs are great for Documentation Pages, but they are not great for site with multiple users, as they usually don't provide user management. That would have to been done in GitHub, which would mean 
+
++ Fast
+
+- No User Management
+- File Conflicts
+- No DB for generating Pages
+- No native Search
 
 
 ## WordPress Installation (outdated)
