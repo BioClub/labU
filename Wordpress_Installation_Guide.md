@@ -39,3 +39,18 @@ Free plugins are in `\_plugins` folder, paid plugins need to be installed separa
 #### Optional
 * [ACF Sync](https://github.com/thomascharbit/acf-sync) Importing ACFs from Dev to Production
 * [WP DB Backup](https://wordpress.org/plugins/wp-db-backup/) Exporting DB
+
+## Option 3: Static Site Generators (MkDocs, Hugo, Jekyll)
+
+SSGs are great for Documentation Pages, but they are not great for site with multiple users, as they usually don't provide user management. That would have to been done in GitHub, which would mean 
+
+Plus:
++ Fast
++ Markdown
+
+Missing:
+- No User Management
+- No Custom Fields
+- File Conflicts
+- No DB for generating Pages
+- No native Search
