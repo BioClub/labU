@@ -1,3 +1,24 @@
+(This page is out-of-date and only maintaine for historic reasons)
+
+## Option 1: Wordpress
+
+While the basic Wordpress is free and open-source, the necessary plug-ins that are needed for a complex, multi-lingual site are not. Both [WPML](https://wpml.org/purchase/) and [Advanced Custom Fields/ACF](https://www.advancedcustomfields.com) have switch their previous "life-time" accounts to yearly-billed account. That means we would have to pay each year $99 for WMPL and $149 for ACF.
+
+Wordpress was my choice of CMS, because it was relatively easy to get clear, junk-free output, the recently introduced API was great for headerless systems, and clients were familiar with the back-end.
+
+The introduction of the Gutenberg Block Editor was great for being more expressive on indivial site, but a horror for sites which require a more structured content. I practically never used it for my own or client sites.
+
+Plus:
+- User Management
+- Native Search
+- Markdown (with my Plugin)
+- Custom Fields
+- Lots of experience with Theme Development
+Minus:
+- ACF Pro & WPML cost ~$250/year
+
+
+
 # WordPress Installation Guide
 
 - Locally install the latest [Wordpress](https://wordpress.org/download/) version.
