@@ -22,13 +22,9 @@ Please write your ideas, suggestions and proposed content in the
 
 Site structure ideas/suggestion should go into the `\_structure` folder.
 
-# Design & HTML
+# Design
 
 New Designs ideas/suggestion should go into the `\_design` folder.
-
-1. Design in Figma, XD or any other software
-2. Make Production-ready HTML/CSS
-3. Implement as Theme in PHP
 
 ### Figma
 
@@ -37,6 +33,19 @@ Here is also a shared [Figma Project](https://www.figma.com/file/UlvsISNrw5YMwFB
 ### XD
 
 We also have a shared XD Document, please ask in the [Discord](https://discord.bioclub.tokyo) #website channel for access.
+
+# HTML-izing
+
+Turing the visual ideas into production-ready HTML is not the nicest work, but necessary.
+
+1. Use the [tachyons](http://tachyons.io) CSS Kit for creating the HMTL/CSS files. Tachyone is realatively simple and verbose, no need to install a dev-environment, anyone with a web-browser and text-editor can start using it. The CSS file is not optimzed.
+
+2. [TailwindCSS](https://tailwindcss.com) is another take on a utility-first CSS framework, the advantage of mix-ins and smaller file size, come with a slightly more [complex dev-setup](https://tailwindcss.com/docs/installation), that might deter first-time users. Refactoring and optimizing from _Tachyons_ to _Tailwind_ should be relatively easy.
+
+See the Tachyons and Tailwind Exampels in the [_html](https://github.com/BioClub/labu/_html) folder.
+
+Why don't we just use code exported from Figma/XD? Because the code is usually messy, slow and difficult to update. Exactly what we don't want.
+
 
 # Development
 
