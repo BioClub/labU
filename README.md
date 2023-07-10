@@ -42,58 +42,29 @@ We also have a shared XD Document, please ask in the [Discord](https://discord.b
 What we need:
 
 - User Management & Roles
-- Multi-lingual JP/EN
+- Bi-lingual JP/EN
 - MarkDown
-- Custom Post/Page Types (ie. Events, Inventory, News)
+- Custom Post/Page Types (ie. Events, Inventory, News, etc)
 - Strong Custom Fields Support
 - Server-side Image Resize
-
-
-## Option 1: Wordpress
-
-While the basic Wordpress is free and open-source, the necessary plug-ins that are needed for a complex, multi-lingual site are not. Both [WPML](https://wpml.org/purchase/) and [Advanced Custom Fields/ACF](https://www.advancedcustomfields.com) have switch their previous "life-time" accounts to yearly-billed account. That means we would have to pay each year $99 for WMPL and $149 for ACF.
-
-Wordpress was my choice of CMS, because it was relatively easy to get clear, junk-free output, the recently introduced API was great for headerless systems, and clients were familiar with the back-end.
-
-The introduction of the Gutenberg Block Editor was great for being more expressive on indivial site, but a horror for sites which require a more structured content. I practically never used it for my own or client sites.
-
-Plus:
-- User Management
-- Native Search
-- Markdown (with my Plugin)
-- Custom Fields
-- Lots of experience with Theme Development
-Minus:
-- ACF Pro & WPML cost ~$250/year
+- Security
 
 
 ## Option 2: ProcessWire (currently evaluating)
 
 Processwire is ... differnt. It requires you to build the site from scratch
 
-## Option 3: Static Site Generators (MkDocs, Hugo, Jekyll)
 
-SSGs are great for Documentation Pages, but they are not great for site with multiple users, as they usually don't provide user management. That would have to been done in GitHub, which would mean 
-
-Plus:
-+ Fast
-+ Markdown
-
-Missing:
-- No User Management
-- No Custom Fields
-- File Conflicts
-- No DB for generating Pages
-- No native Search
 
 
 # TODO
 - [x] Add SSL Certificate via [Let's Encrypt](https://letsencrypt.org), so we can have https://bioclub.toyko
 - [x] Make Developement Site at [https://bioclub.tokyo](https://bioclub.tokyo)
-- [x] Install Developement site
+- [x] Install ProcessWire ar Developement Site
+- [ ] Make Basic Pages
+- [ ] Make Site Bi-lingual, Japanese/English
 - [ ] Make Accounts for BioClub Community Members
 - [ ] Add Contact Form!
-- [ ] Make Bi-Lingual, Japanese/English
 
-Shall we move that to [issues](https://github.com/BioClub/BioClub-Wordpress-Theme/issues)?
+Please share your ideas, whishes and content at the [Google Docs](https://docs.google.com/document/d/1o2WTNjTxkZYKmCmdziS-a4XgKwddnrclsKorgtMeCUo/edit?usp=sharing) , and any more Development-related issues at [GitHub Issues](https://github.com/BioClub/BioClub-Wordpress-Theme/issues).
 
