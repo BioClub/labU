@@ -40,6 +40,10 @@ We also have a shared XD Document, please ask in the [Discord](https://discord.b
 
 # Development
 
+[Wordpress used to be the universal tool of choice](https://github.com/BioClub/labu/Wordpress_Installation_Guide.md), but in recent releases Wordpress went more into an Website-Builder direcetion, rather than strengthening the CMS aspects of it, to a point where it does not longer make sense to bend Wordpress to function as a CMS.
+
+After evaluation other framesworks and alternatives like SSGs, we decided to build the new BioClub Community Website using [ProcessWire](https://www.processwire.com).
+
 What we need:
 
 - User Management & Roles
