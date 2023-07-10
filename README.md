@@ -44,25 +44,19 @@ We also have a shared XD Document, please ask in the [Discord](https://discord.b
 
 After evaluation other framesworks and alternatives like SSGs, we decided to build the new BioClub Community Website using [ProcessWire](https://www.processwire.com).
 
-What we need:
+What we need/want from a CMS/CMF:
 
-- User Management & Roles
-- Bi-lingual JP/EN
-- MarkDown
-- Custom Post/Page Types (ie. Events, Inventory, News, etc)
-- Strong Custom Fields Support
-- Server-side Image Resize
-- Security
+- [x] [Free and Open-Source Software](https://github.com/processwire/processwire/blob/master/LICENSE.TXT)
+- [x] User Management & Roles
+- [x] Bi-lingual JP/EN
+- [x] MarkDown
+- [x] Custom Post/Page Types (ie. Events, Inventory, News, etc)
+- [x] Strong Custom Fields Support
+- [x] Server-side Image Resize
+- [x] Security
 
+## TODO
 
-## Option 2: ProcessWire (currently evaluating)
-
-Processwire is ... differnt. It requires you to build the site from scratch
-
-
-
-
-# TODO
 - [x] Add SSL Certificate via [Let's Encrypt](https://letsencrypt.org), so we can have https://bioclub.toyko
 - [x] Make Developement Site at [https://bioclub.tokyo](https://bioclub.tokyo)
 - [x] Install ProcessWire ar Developement Site
