@@ -14,7 +14,8 @@ The website and it's theme should also be free and open-source.
 - What is still missing?
 - What is needed to run the BioClub?
 
-# Please write your ideas, suggestions and proposed content in the [Shared Google Doc](https://docs.google.com/document/d/1o2WTNjTxkZYKmCmdziS-a4XgKwddnrclsKorgtMeCUo/edit?usp=sharing).
+Please write your ideas, suggestions and proposed content in the 
+# [Shared Google Doc](https://docs.google.com/document/d/1o2WTNjTxkZYKmCmdziS-a4XgKwddnrclsKorgtMeCUo/edit?usp=sharing).
 
 
 # Site Structure
