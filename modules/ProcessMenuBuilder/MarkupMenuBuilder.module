@@ -1,0 +1,2212 @@
+<?php
+
+namespace ProcessWire;
+
+/**
+ * Markup Menu Builder Module for ProcessWire
+ * This module enables you to display on your website custom menus built using ProcessMenuBuilder
+ *
+ * @author Francis Otieno (Kongondo)
+ *
+ * https://github.com/kongondo/ProcessMenuBuilder
+ * Created 1 September 2013
+ * Major update in March 2015
+ *
+ * ProcessWire 3.x
+ * Copyright (C) 2016 by Ryan Cramer
+ * Licensed under GNU/GPL v2, see LICENSE.TXT
+ *
+ * http://www.processwire.com
+ *
+ */
+
+class MarkupMenuBuilder extends WireData implements Module {
+
+	/**
+	 * Return information about this module (required)
+	 * @ Requires ProcessMenubuilder
+	 *
+	 */
+	public static function getModuleInfo() {
+
+		return array(
+			'title' => 'Menu Builder: Markup',
+			'summary' => 'Render menus created by Process Menu Builder',
+			'author' => 'Francis Otieno (Kongondo)',
+			'version' => '0.2.7',
+			'href' => 'http://processwire.com/talk/topic/4451-module-menu-builder/',
+			'singular' => true,
+			'autoload' => false,
+			'requires' => 'ProcessMenuBuilder'
+		);
+	}
+
+	/**
+	 * Array to store menu items for easy retrieval through the whole class.
+	 *
+	 */
+	protected $menuItems = array();
+
+	/**
+	 * Array to store a single menu's options for easy retrieval throughout the class.
+	 *
+	 */
+	protected $options = array();
+
+	/**
+	 * Array to store names and options of optional extra fields validated for use in getMenuItems().
+	 *
+	 */
+	private $validExtraFields = array();
+
+	/**
+	 * Current count to use as a menu items' ID ($m->id) for easy retrieval throughout the class.
+	 *
+	 */
+	public $currentMenuItemID;
+
+	/**
+	 * Initialise the module. This is an optional initialisation method called before any execute methods.
+	 *
+	 * Initialises various class properties ready for use throughout the class.
+	 *
+	 * @access public
+	 *
+	 */
+	public function init() {
+		// required
+	}
+
+	/**
+	 * Pass on menu items for processing and rendering.
+	 *
+	 * This is just a method that the user interfaces with.
+	 * The processing work is done by other methods.
+	 *
+	 * @access public
+	 * @param mixed $menuItems Page, ID, Title, Name of a menu or Array of menu items.
+	 * @param array $options Array of menu options.
+	 * @return string $menu Markup of built menu.
+	 *
+	 */
+	public function render($menuItems, array $options = null) {
+
+		// processed menu options (object)
+		$options = $this->processOptions($options); // run options first so that some properties can be set early on
+
+		$cachedMenu = array();
+		// check if can build menu from cache
+		// if yes, convert fully cached menu items to Menu objects for use in buildMenuFromCache()
+		if ($options->cachedMenu) $cachedMenu = $this->processMenuFromCache($menuItems);
+
+		// building menu from cache
+		if (!empty($cachedMenu)) {
+			// convert raw menu items settings to WireData Objects for use in buildMenuFromCache()
+			$this->menuItems = $this->arrayToObject($cachedMenu); // @note: returns an array containing WireData objects
+			$menu = $this->buildMenuFromCache();
+		}
+		// building menu as normal
+		else {
+			// process menu items
+			$rawMenuItems = $this->processRawMenu($menuItems);
+			if (!is_array($rawMenuItems)) return $this->throwError();
+			// convert raw menu items settings to Menu objects for use in buildMenu()
+			$this->menuItems = $this->processMenu($rawMenuItems);
+			$menu = $this->buildMenu();
+		}
+
+		// render the menu
+		return $menu;
+
+	}
+
+	/**
+	 * Process menu/breadcrumb items before passing on for building/rendering.
+	 *
+	 * The method determines and processes $menu variable type to return an array of menu settings from saved JSON.
+	 * The JSON string is saved in the backend when menu is edited.
+	 * Used by renderMenu() and renderBreadcrumbs()
+	 *
+	 * @access private
+	 * @param mixed $menu Page, ID, Title, Name of a menu or Array of menu items.
+	 * @return array $menuItems Array of menu items settings as per decoded JSON string.
+	 *
+	 */
+	private function processRawMenu($menu) {
+
+		$menuItems = '';
+		$menuPage = null;
+
+		#### - work on the menu items - ###
+
+		// if we got a Page object
+		if ($menu instanceof Page) {
+			//  we already have a menu page
+			$menuPage = $menu;// for consistency
+		}
+
+		// if we got a populated array of menu items
+		elseif (is_array($menu)) {
+			$menuItems = $menu; // for consistency
+		}
+
+		// if we got a menu title|name
+		elseif (is_string($menu)) {
+			// grab the menu
+			$menuName = $this->wire('sanitizer')->pageName($menu);
+			// get menu name selector
+			/*  @note: this caters for multi-lingual sites in cases menu is called using its language name or title
+			*/
+			$fieldSelector = $this->getMenuNameSearchFieldSelector();
+			// get ProcessWire setup page (this is the parent of Menu Builder Page)
+			$setupPage = $this->wire('pages')->get($this->config->adminRootPageID)->child("$fieldSelector=setup, include=all");
+			// get Menu Builder Page
+			$menuBuilderPage = $setupPage->child("$fieldSelector=menu-builder, include=all");
+			// grab the menu page
+			$menuPage = $menuBuilderPage->child("$fieldSelector=$menuName, include=all");
+		}
+
+		// if we got an id
+		elseif (is_integer($menu)) {
+			// grab the menu page
+			$menuPage = $this->wire('pages')->get($menu);
+		}
+
+		####
+
+		// if we have a menu page, check that the menu IS NOT unpublished
+		if($menuPage && !$menuPage->is(Page::statusUnpublished)) {
+			$menuItems = json_decode($menuPage->menu_items, true);
+		}
+
+		return $menuItems;
+
+	}
+
+	/**
+	 * Convert each menu/breadcrumb item to a Menu object ready for building/rendering.
+	 *
+	 * Menu objects are stored in a WireArray.
+	 *
+	 * @access private
+	 * @param array $menuItems Array of processed menu items.
+	 * @return object $menuItems WireArray with processed menu items.
+	 *
+	 */
+	private function processMenu(array $menuItems)	{
+
+		# STEP 1: create new menu objects from each item in the array #
+		$menu = $this->processMenuObjects($menuItems);
+		# STEP 2: add some other menu properties directly to the menu objects in this WireArray #
+		$menu = $this->processMenuObjects2($menu);
+		# STEP 3: APPLY 'current_class_level' to both mb and non-mb (included) menu items #
+		$menu = $this->processMenuObjects3($menu);
+
+		$this->menuItems = $menu;
+
+		return $this->menuItems;
+	}
+
+	/**
+	 * Create new menu objects from each item in a given array of menu items.
+	 *
+	 * @access private
+	 * @param array $menuItems Array of processed menu items.
+	 * @return WireArray $menu A menu WireArray object with menu objects added
+	 *
+	 */
+	private function processMenuObjects($menuItems)	{
+
+		$o = $this->options;
+		$language = $this->wire('user')->language ? $this->wire('user')->language : null;
+		$page = $this->wire('page');
+		$pages = $this->wire('pages');
+		$menu = new WireArray();
+
+		foreach ($menuItems as $id => $item) {
+
+			// if menu item disabled, ignore it
+			if (isset($item['disabled_item'])) continue;
+
+			$pagesID = isset($item['pages_id']) ? (int) $item['pages_id'] : '';
+			$p = null;
+			if ($pagesID) {
+				$p = $pages->get($pagesID);
+				if (!$p || $p->id < 0) continue;
+				// skip inactive language page @note: PW will do this automatically for 'include_children'
+				if (!$p->viewable($language)) continue;
+			}
+
+			// if option to check listable, skip if page not listable
+			if ($o->checkListable && $p && !$p->listable()) continue;
+
+			$m = new Menu();
+
+			## set Object Properties ##
+
+			$m->id = $id;
+			$m->parentID = isset($item['parent_id']) ? $item['parent_id'] : 0; // if parent_id not set, it means they are top tier items
+			$m->pagesID = $pagesID ? $pagesID : 0; // for PW pages, use their native IDs
+
+			// TITLE
+			$title = $item['title'];
+			// display saved actual/multilingual menu title/label
+			if ($o->defaultTitle == 0 || $m->pagesID == 0) {
+				// if multi-lingual site, check for multi-lingual title, otherwise fall back to default
+				if (!is_null($language)) {
+					if ($language->name != 'default' && isset($item["title_{$language->name}"])) $title = $item["title_{$language->name}"];
+					else $title = $item['title'];
+				}
+			}
+			// pw page, if showing default title
+			elseif ($o->defaultTitle == 1) $title = $p->title;
+
+			$m->title = $title;
+
+			// URL
+			if ($m->pagesID) $url = $p->url;
+			elseif (!is_null($language)) {
+				// if multi-lingual site, check for multi-lingual url, otherwise fall back to default
+				if ($language->name != 'default' && isset($item["url_{$language->name}"])) $url = $item["url_{$language->name}"];
+				else $url = $item['url'];
+			} else $url = $item['url'];
+
+			$m->url = $url;
+
+			// NEW TAB
+			$m->newtab = isset($item['newtab']) ? 1 : '';
+
+			// CSS
+			$m->cssID = isset($item['css_itemid']) ? $item['css_itemid'] : '';
+			$cssItemClass = isset($item['css_itemclass']) ? $item['css_itemclass'] : '';
+			$cssItemClass .= ' ' . $o->defaultClass;
+			//$m->cssClass = isset($item['css_itemclass']) ? $item['css_itemclass'] : '';
+			#$m->cssClass = trim($cssItemClass) != '' ? $cssItemClass : '';
+			$m->cssClass = !ctype_space($cssItemClass) ? $cssItemClass : '';
+			// if current class level is unlimited (0) it means we apply current class to all ANCESTORS of CURRENT PAGE BEING VIEWED irrespective of whether the current page is part of the menu (including via includeChildren) or not
+			// @note: we exclude 'Home' since it is always a parent
+			if ($o->currentClassLevel == 0 && $m->pagesID != 1 && $page->parents->has('id=' . $m->pagesID)) $m->isCurrent = 1;
+
+			// INCLUDE CHILDREN
+			$m->includeChildren = isset($item['include_children']) ? $item['include_children'] : '';
+			if ($m->includeChildren == 5) $m->includeChildren = 0; // for consistency with $o->includeChildren
+			$m->menuMaxLevel  = isset($item['m_max_level']) ? $item['m_max_level'] : '';
+
+			// ADD EXTRA FIELDS if requested
+			// @note: : this is only applicable to getMenuItems(). check already done in getMenuItems()!
+			// @note: we skip non PW pages here!
+			if ($p !== null && !empty($this->validExtraFields)) $m = $this->addExtraFields($m, $p);
+
+
+			// add menu Object to WireArray
+			$menu->add($m);
+		} // end foreach $menuItems
+
+		return $menu;
+	}
+
+	/**
+	 * Add other menu properties directly to the menu objects in a given WireArray.
+	 *
+	 * We add 'isParent', 'isFirst' and 'isLast' properties.
+	 *
+	 * @access private
+	 * @param object $menu WireArray of processed menu objects.
+	 * @return WireArray $menu A menu WireArray object with menu objects processed further.
+	 *
+	 */
+	private function processMenuObjects2($menu)	{
+
+		// deal with top level menu items first
+		$topMenuItems = $menu->find("parentID=0");
+		// if we found
+		// assign isFirst to the first top most menu item
+		$firstTop = $topMenuItems->first();
+		// if we found the first item
+		if($firstTop) $firstTop->isFirst = 1;
+
+		// assign isLast to last top most menu item
+		$lastTop = $topMenuItems->last();
+		// if we found the last item
+		if($lastTop) $lastTop->isLast = 1;
+
+		// assign isFirst and isLast as applicable to sub-menu items
+		foreach ($menu as $m) {
+			$children = $menu->find("parentID=$m->id"); // @note: we need these children for first and last
+			if ($children->count()) {
+				// set this item as a parent if it has children - for 'has_children'
+				$m->isParent = 1;
+				// add a first-child property to the menu item that is a first child - for use with 'first_class'
+				$first = $menu->get('id=' . $children->first()->id);
+				$first->isFirst = 1;
+				// add a last-child property to the menu item that is a last child - for use with 'last_class'
+				$last = $menu->get('id=' . $children->last()->id);
+				$last->isLast = 1;
+			}
+		}
+
+		return $menu;
+	}
+
+	/**
+	 * Apply 'current_class_level' to both Menu Builder and non-Menu Builder (included) ancestors of menu items.
+	 *
+	 * @access private
+	 * @param object $menu WireArray of processed menu objects.
+	 * @return WireArray $menu A menu WireArray object with menu objects processed further.
+	 *
+	 */
+	private function processMenuObjects3($menu)	{
+
+		$o = $this->options;
+		$page = $this->wire('page');
+
+		# 1. CURRENT PAGE BEING VIEWED IS NOT already part of this menu
+		// we we will check if it is perhaps an INCLUDED ITEM
+		if (!$menu->get('pagesID=' . $page->id)) {
+			// closest natural parent that is PART of this menu
+			$closestNaturalParent = '';
+			// returns a normal array with reversed parent IDs, closest first
+			$currentPageNaturalParentsIDs = $this->currentPageParents(true);
+
+			// find the closest parent. We'll use it to determine if 'include_children' was used...
+			// and if we have 'net' mb parents needing a 'current_class'
+			// we assume that any included children were added via a closest parent
+			foreach ($currentPageNaturalParentsIDs as $id) {
+				$closestNaturalParent = $menu->get('pagesID=' . $id); // menu object
+				if ($closestNaturalParent) break; // stop if we found a natural parent
+			}
+
+			// if we have a closest natural parent AND the parent does not forbid 'include_children' either locally (in backend menu settings) OR globally (in options in template file)...
+			//...OR, the closest parent DOES NOT only allow 'include_children' in Breadcrumbs...
+			if ($closestNaturalParent && ($closestNaturalParent->includeChildren !== 0 && $closestNaturalParent->includeChildren != 2 && $o->includeChildren != 0)) {
+				// if 'include_children' in menu declared locally (item-level) or globally (options-level)
+				if (($closestNaturalParent->includeChildren == 1 || $closestNaturalParent->includeChildren == 3) || ($o->includeChildren == 1 || $o->includeChildren == 3)) {
+					//$net = $o->currentClassLevel - count($currentPageNaturalParentsIDs);// determine if we have 'remaining' parents
+					/*
+						@TODO: REVISIT THIS -> sometimes we get unexpected results
+						E.g., where we have /about-us/what-we-do/mission/ and about-us is an MB child of sports
+							sports
+								about-us
+									what-we-do
+										mission
+						with current_class_level = 0, we get current class applied all the way up to 'sports' when viewing page 'mission'
+
+						However, when viewing 'what-we-do' OR 'about-us', current class is NOT applied all the way up to 'sports'
+
+						In the latter case, a high enough 'current_class_level' solves the issue
+
+					*/
+					// in limited mode
+					if ($o->currentClassLevel != 0) {
+						$net = $o->currentClassLevel - count($currentPageNaturalParentsIDs); // determine if we have 'remaining' parents
+					}
+					// in unlimited mode
+					else $net = count($currentPageNaturalParentsIDs);
+					// if we have 'remaining' parents to apply 'current_class' to
+					if ($net > 0) {
+						$closestNaturalParent->isCurrent = 1; // we first apply isCurrent to closest parent
+						// we then apply isCurrent property to limited number of mb parents of our natural parent
+						$netParents = $this->currentItemParents($closestNaturalParent->parentID, $menu);
+						$i = 1;
+						foreach (explode(',', $netParents) as $netParent) {
+							if ($i == $net) break;
+							$m = $menu->get('id=' . $netParent);
+							if ($m) $m->isCurrent = 1;
+							$i++;
+						}
+					} // end if $net > 0
+				} // end if valid includeChildren declared
+			} // END if $closestNaturalParent->includeChildren allowed
+		} //END if current page being viewed is NOT already part of this menu
+
+		# 2. CURRENT PAGE BEING VIEWED IS PART OF THIS MB MENU but we check if we need to apply 'current_class' to ANCESTORS: parents, grandparents, etc...
+		else {
+			// first apply isCurrent to the current item
+			$c = $menu->get('pagesID=' . $page->id);
+			if ($c) $c->isCurrent = 1;
+
+			// if 'current_class' needs to be applied to $c's ancestors
+			if ($o->currentClassLevel && $o->currentClassLevel > 1) {
+				// we've already applied isCurrent to the current menu item so we subtract it
+				$net = $o->currentClassLevel - 1;
+				// we apply isCurrent property to limited ($net) number of the current item's mb parents
+				$cParents = $this->currentItemParents($c->parentID, $menu);
+
+				$i = 0;
+				foreach (explode(',', $cParents) as $cParent) {
+					$m = $menu->get('id=' . $cParent);
+					if ($m) $m->isCurrent = 1;
+					$i++;
+					if ($i == $net) break;
+				}
+			} // END if currentClassLevel > 1
+		} // END else the current page is part of this menu
+
+		return $menu;
+	}
+
+	/**
+	 * Processes menu items for building menu from Cache.
+	 *
+	 * Useful for large menus/lists or busy sites.
+	 * Avoids making API calls to retrieve pages to build menus.
+	 *
+	 * @access private
+	 * @param mixed $menu Page, ID, Title or Name of a menu.
+	 * @return array $cachedMenu Array with menu items that were saved to cache.
+	 *
+	 */
+	private function processMenuFromCache($menu) {
+
+		// validate. we need the ID of the menu
+		$menuID = 0;
+		$cachedMenu = array();
+
+		// if we got a Page object
+		if ($menu instanceof Page) $menuID = $menu->id;
+		// if we got an id
+		elseif (is_integer($menu)) $menuID = $menu;
+		// if we got a menu title|name
+		elseif (is_string($menu)) {
+			// grab the menu
+			$menuName = $this->wire('sanitizer')->pageName($menu);
+			$menuParent = $this->wire('pages')->get($this->config->adminRootPageID)->child('name=setup, check_access=0')->child('name=menu-builder, check_access=0');
+			$menu = $menuParent->child("name=$menuName, check_access=0");
+			if ($menu) $menuID = $menu->id;
+		}
+
+		if ($menuID) {
+			$cachedMenu = $this->getMenuCache($menuID);
+			// if no menu cache, build one
+			if (empty($cachedMenu)) $this->createMenuCache($menuID);
+		}
+
+		return $cachedMenu;
+	}
+
+	/**
+	 * Determine field selector for searching for a menu by name.
+	 *
+	 * This is multi-lingual aware.
+	 *
+	 * @access private
+	 * @return string $fieldSelector String to use as field selector to search for a given menu name|title.
+	 *
+	 */
+	private function getMenuNameSearchFieldSelector() {
+
+		// if in multi-lingual environment
+		if($this->wire('languages')) {
+			$languagesIDs = array();
+				foreach($this->wire('languages') as $language) {
+					// for default language, we just search 'name'
+					if($language->name == 'default') $languagesIDs[] = "name";
+					// else for other languages: @note: this will set the field to name1012, etc, where '1012' is the language id
+					else $languagesIDs[] = "name{$language->id}";
+				}
+				$fieldSelector = implode("|", $languagesIDs);
+		}
+		// non multi-lingual site
+		else $fieldSelector = "name";
+
+		return $fieldSelector;
+
+	}
+
+	/**
+	 * Fetch cached data of a given menu.
+	 *
+	 * @access private
+	 * @param integer $menuID ID of the Menu Builder Menu whose cache we want to retrieve.
+	 * @return array $cacheData Data to build menu from.
+	 *
+	 */
+	private function getMenuCache($menuID) {
+		$cacheName = 'menu-builder-' . $menuID . $this->setLanguageSuffix();
+		$cacheData = $this->wire('cache')->get($cacheName);
+		$cacheData = is_array($cacheData) ? $cacheData : array();
+		return $cacheData;
+	}
+
+	/**
+	 * Create cache of a given Menu.
+	 *
+	 * This is for use with buildMenuFromCache().
+	 *
+	 * @access private
+	 * @param integer $menuID ID of the Menu Builder Menu whose cache we want to create.
+	 *
+	 */
+	private function createMenuCache($menuID) {
+		$cacheName = 'menu-builder-' . $menuID . $this->setLanguageSuffix();
+		$menuItems = $this->getMenuItems($menuID, 1, $this->options); // get array of menu items @note: it includes 'included children'
+		$cachedMenuTime = $this->options->cachedMenuTime;
+		$this->wire('cache')->save($cacheName, $menuItems, $cachedMenuTime);
+	}
+
+	/**
+	 * Set the name of user's language as suffix for finding cached menus.
+	 *
+	 * @access private
+	 * @return string $languageSuffix Hyphenated language name.
+	 *
+	 */
+	private function setLanguageSuffix() {
+		$language = $this->wire('user')->language ? $this->wire('user')->language : null;
+		$languageSuffix = $language ?  "-" . $language->name : '';
+		return $languageSuffix;
+	}
+
+	/**
+	 * Returns a collection of WireData objects of a multi-dimensional array.
+	 *
+	 * @param array $data Array to convert to collection of WireData objects.
+	 * @return array $data Array carrying WireData Objects of menu items.
+	 *
+	 */
+	private function arrayToObject($data) {
+		/* @credits:
+		 https://www.if-not-true-then-false.com/2009/php-tip-convert-stdclass-object-to-multidimensional-array-and-convert-multidimensional-array-to-stdclass-object/
+		*/
+		// Return array converted to WireArray object Using $this->arrayToWireData for recursive callback
+		if (is_array($data)) return array_map(array($this, "arrayToWireData"), $data);
+		// if we already have an object, just return it
+		else return $data;
+	}
+
+	/**
+	 * Set a given array to a new WireData object.
+	 *
+	 * Used as a callback in $this->arrayToObject() method.
+	 *
+	 * @param array $data Array to set to WireData object.
+	 * @return object $menuItem WireData with set array.
+	 */
+	private function arrayToWireData($data)	{
+		$menuItem = new WireData();
+		$menuItem->setArray($data);
+		return $menuItem;
+	}
+
+	/**
+	 * Builds a nested list (menu items) of a single menu.
+	 *
+	 * A recursive function to return nested list of menu items.
+	 *
+	 * @access private
+	 * @param Int $parent ID of a menu item's parent to determine if to build sub-menus.
+	 * @return string $out Markup of menu.
+	 *
+	 */
+	private function buildMenu($parent = 0)	{
+
+		$menu = $this->menuItems; // WireArray with Menu objects
+		// $total = count($menu);
+		$cnt = 0;
+		$o = $this->options;
+
+		$out = '';
+		$hasChild = false;
+		$wTag = $o->wrapperListType; // item wrapper tag. default = <ul>
+		$iTag = $o->listType; // item tag. default = <li>
+
+		foreach ($menu as $m) {
+
+			// set properties
+			$newtab = $m->newtab ? " target='_blank'" : '';
+
+			// if this menu item is a parent; create the sub-items/child-menu-items
+			if ($m->parentID == $parent) {
+
+				// if this is the first child output '<ul>'/specified $wTag
+				if ($hasChild === false) {
+					$hasChild = true; // This is a parent
+					if ($cnt == 0) {
+						// assign menu css id and class if provided
+						$cssMenuID =  $o->menucssID ? ' id="' . $o->menucssID . '"' : '';
+						$cssMenuClass = $o->menucssClass ? ' class="' . $o->menucssClass . '"' : '';
+						$out .= "\n<{$wTag}{$cssMenuID}{$cssMenuClass}>";
+						$first = 1;
+					} elseif ($cnt > 0 && $m->isFirst) {
+						// assign sub-menu classes if provided
+						$cssSubMenuClass = $o->submenucssClass ? ' class="' . $o->submenucssClass . '"' : '';
+						$out .= "\n<{$wTag}{$cssSubMenuClass}>";
+					}
+				} // end if has child
+
+				// check if this menu item will be including native children using includeChildren option
+				// we need this here to be able to apply 'has_children' css class to parent
+				// items with native children added via includeChildren
+				$pInclude = $this->includeChildrenCheck($o->includeChildren, $m);
+				$home = 0;
+				$hasNativeChildren = 0;
+
+				if ($pInclude) {
+					// get PW page whose natural children we will be including
+					$p = $this->wire('pages')->get($pInclude);
+					if ($p->id == 1) $home = 1; // we skip home since all children are hers anyway
+					if ($p->numChildren) $hasNativeChildren = 1; // has children to add
+				} // end if $pInclude
+
+				// item CSS
+				$itemCSSID = $m->cssID ? ' id="' . $m->cssID . '"' : '';
+				$itemCSSClass = $m->cssClass ? $m->cssClass . ' ' : '';
+				$itemFirst = $m->isFirst ? $o->firstClass : '';
+				$itemHasChildren = $m->isParent || $hasNativeChildren ? $o->hasChildrenClass . ' ' : '';
+				$itemLast = $m->isLast ? $o->lastClass . ' ' : '';
+				// apply current item class to current page + ancestors if specified for both native and included menu items
+				$itemCurrent =     $m->isCurrent == 1 ? $o->currentClass . ' ' : '';
+
+				$classes = $itemCSSClass . $itemHasChildren . $itemLast . $itemCurrent . $itemFirst;
+				$classes = trim(preg_replace('/\s+/', ' ', $classes));
+				$class = strlen($classes) ? ' class="' . $classes . '"' : '';
+
+				// if $iTag is empty, apply css id and classes to <a> instead
+				if (!$iTag) $out .= "\n\t<a{$itemCSSID}{$class}{$newtab} href='{$m->url}'>{$m->title}</a>";
+				else $out .= "\n\t<{$iTag}{$itemCSSID}{$class}>\n\t\t<a{$newtab} href='{$m->url}'>{$m->title}</a>";
+
+				// build nested/sub-elements
+				$out .= str_replace("\n", "\n\t\t", $this->buildMenu($m->id));
+
+				// children menu items included via 'includeChildren option'
+				if ($home == 0 && $hasNativeChildren == 1) {
+					#if item-level $m->menuMaxLevel is set, use that, otherwise default to $o->menuMaxLevel;
+					$depth = $m->menuMaxLevel ? $m->menuMaxLevel : $o->menuMaxLevel;
+					$firstChild = $m->isParent ? $p->child->id : null; // for skipping 'first_class' when native MB children already exist for this item
+					$out .= str_replace("\n", "\n\t\t", $this->includedFamilyMenu($p, $depth, $firstChild));
+				}
+
+				$out .= $iTag ? "\n\t</{$iTag}>" : ''; // if $iTag specified, close it
+
+			} // end if $parentID == $parent
+
+			$cnt++;
+		} // end foreach
+
+		if ($hasChild === true) $out .= "\n</{$wTag}>";
+
+		return $out;
+	}
+
+	/**
+	 * Builds a nested list (menu items) of a single menu from cached values.
+	 *
+	 * A recursive function to return nested list of menu items.
+	 * @note: objects here built directly from array so property names are the array indices.
+	 *
+	 * @access private
+	 * @param integer $parent ID of a menu item's parent to determine if to build sub-menus.
+	 * @return string $out Markup of menu.
+	 *
+	 */
+	private function buildMenuFromCache($parent = 0) {
+
+		$menu = $this->menuItems; // array with collection of WireData objects
+		$total = count($menu);
+		$cnt = 0;
+		$o = $this->options;
+		$page = $this->wire('page');
+
+		$out = '';
+		$hasChild = false;
+		$wTag = $o->wrapperListType; // item wrapper tag. default = <ul>
+		$iTag = $o->listType; // item tag. default = <li>
+
+		foreach ($menu as $id => $m) {
+
+			// set properties
+			$newtab = $m->newtab ? " target='_blank'" : '';
+
+			// if this menu item is a parent; create the sub-items/child-menu-items
+			if ($m->parent_id == $parent) { // @note: here and throughout, property names == original array index!
+
+				// if this is the first child output '<ul>'/specified $wTag
+				if ($hasChild === false) {
+					$hasChild = true; // This is a parent
+					if ($cnt == 0) {
+						// assign menu css id and class if provided
+						$cssMenuID =  $o->menucssID ? ' id="' . $o->menucssID . '"' : '';
+						$cssMenuClass = $o->menucssClass ? ' class="' . $o->menucssClass . '"' : '';
+						$out .= "\n<{$wTag}{$cssMenuID}{$cssMenuClass}>";
+						$first = 1;
+					} elseif ($cnt > 0 && $m->is_first) {
+						// assign sub-menu classes if provided
+						$cssSubMenuClass = $o->submenucssClass ? ' class="' . $o->submenucssClass . '"' : '';
+						$out .= "\n<{$wTag}{$cssSubMenuClass}>";
+					}
+				} // end if has child
+
+				// item CSS
+				$itemCSSID = $m->css_itemid ? ' id="' . $m->css_itemid . '"' : '';
+				$itemCSSClass = $m->css_itemclass ? $m->css_itemclass . ' ' : '';
+				$itemFirst = $m->is_first || $cnt == 0 ? $o->firstClass : '';
+				$itemHasChildren = $m->is_parent  ? $o->hasChildrenClass . ' ' : '';
+				$itemLast = $m->is_last || $total - $cnt == 1 ? $o->lastClass . ' ' : '';
+				// apply current item class to current page + ancestors if specified for both native and included menu items
+				//$itemCurrent = 	$m->is_current == 1 ? $o->currentClass . ' ' : '';
+				// @note: $itemCurrent: This needs to be live! it cannot be cached
+				$itemCurrent =     '';
+				if ($o->currentClassLevel == 0 && $m->pages_id != 1 && $page->parents->has('id=' . $m->pages_id)) $itemCurrent = $o->currentClass . ' ';
+				elseif ($page->id == $m->pages_id) $itemCurrent = $o->currentClass . ' ';
+				// @TODO: MAKE $currentClassLevel > 1 work with cached items
+				/* elseif($o->currentClassLevel > 1) {
+				} */
+
+				$classes = $itemCSSClass . $itemHasChildren . $itemLast . $itemCurrent . $itemFirst;
+				$classes = trim(preg_replace('/\s+/', ' ', $classes));
+				$class = strlen($classes) ? ' class="' . $classes . '"' : '';
+
+				// if $iTag is empty, apply css id and classes to <a> instead
+				if (!$iTag) $out .= "\n\t<a{$itemCSSID}{$class}{$newtab} href='{$m->url}'>{$m->title}</a>";
+				else $out .= "\n\t<{$iTag}{$itemCSSID}{$class}>\n\t\t<a{$newtab} href='{$m->url}'>{$m->title}</a>";
+
+				// build nested/sub-elements
+				$out .= str_replace("\n", "\n\t\t", $this->buildMenuFromCache($id));
+
+				$out .= $iTag ? "\n\t</{$iTag}>" : ''; // if $iTag specified, close it
+
+			} // end if $parentID == $parent
+
+			$cnt++;
+		} // end foreach
+
+		if ($hasChild === true) $out .= "\n</{$wTag}>";
+
+		return $out;
+	}
+
+	/**
+	 * Displays a breadcrumb of menu items.
+	 *
+	 * A recursive function to display a breadcrumb trail of menu items built of the current menu item.
+	 *
+	 * @access public
+	 * @param mixed $menu Page, ID, Title, Name of a menu or Array of menu items.
+	 * @param array $options Array of markup options for displaying the breadcrumb.
+	 * @return string $out.
+	 *
+	 */
+	public function renderBreadcrumbs($menuItems, array $options = null) {
+
+		$o = $this->processOptions($options);
+
+		// process menu items
+		$rawMenuItems = $this->processRawMenu($menuItems);
+
+		// exit with error if no menu items found
+		if (!is_array($rawMenuItems)) return $this->throwError();
+
+		$menu = $this->processMenu($rawMenuItems); // convert raw menu items to Menu objects
+
+		### - checks to see if to apply 'include_children' etc... - ###
+
+		// step #1: First we check if the current page is already part of the menu items/navigation
+		$currentItem = $this->currentItem(true);
+
+		// if we found a menu item, just return the breadcrumb
+		if ($currentItem) {
+			return $this->buildBreadcrumbs($currentItem);
+		}
+
+		/*
+		step #2 & #3:
+			- if current page is not part of menu items/navigation
+			- check if there's at least one menu item that has 'include_children' set OR if that is set in $options
+		 */ elseif (!$currentItem) {
+
+			// check for API/template file breadcrumb 'include_children' setting
+
+			$selectedParents = $this->currentPageParents(false); // will return a PageArray of this item's parents
+
+			// find closest parent of the current page that is already in the menu
+			// we'll start building breadcrumbs off of that (i.e. it is our $currentItem)
+			$closestParent = $this->currentItem(false, $selectedParents); // returns a Page Object
+
+			// if we find a $closestParent, it becomes our $currentItem
+			// it will be a Page object with an overloaded property menuID
+			// we pass this $closestParent->menuID to buildBreadcrumbs()
+			if ($closestParent) {
+
+				// add selected parents if any to our breadcrumbs
+				$cp = $closestParent;
+
+				// if overriding with 'never show'
+				if ($o->includeChildren === 0 || $cp->includeChildren === 0) {
+					// return early without including children
+					return $this->buildBreadcrumbs($cp->menuID);
+				}
+				// no need to check for zeros again, only check if can display in breadcrumbs (2|3)
+				elseif ($cp->includeChildren === 2 || $cp->includeChildren === 3) {
+					$includeFamily = $this->includedFamilyBreadcrumbs($selectedParents, $cp);
+					return $this->buildBreadcrumbs($cp->menuID, $includeFamily);
+				}
+				// $option overriding item-level only when blank. Other conditions covered above and below
+				elseif (($o->includeChildren === 2 || $o->includeChildren === 3) && (!strlen($cp->includeChildren))) {
+					$includeFamily = $this->includedFamilyBreadcrumbs($selectedParents, $cp);
+					return $this->buildBreadcrumbs($cp->menuID, $includeFamily);
+				}
+				// either $options is 1 OR not set OR $cp is 1 (i.e., only applicable to menus)
+				else {
+					// return early without including children
+					return $this->buildBreadcrumbs($cp->menuID);
+				}
+			} // end if $closestparent
+
+			else {
+				// @todo - should we not just show breadcrumb up to valid parents? Problem is in that case there is no closest parent
+				return $this->throwError();
+			}
+		} // end elseif no $currentItem matching this page in menu items
+
+	}
+
+	/**
+	 * Displays a breadcrumb of menu items.
+	 *
+	 * A recursive function to display a breadcrumb trail of menu items built off of the current (base) menu item.
+	 *
+	 * @access private
+	 * @param Int $currentItem ID of the current menu item to start building breadcrumbs from.
+	 * @param string $includeFamily String with non-MB menu item pages if 'include_children option set.
+	 * @return string $out.
+	 *
+	 */
+	private function buildBreadcrumbs($currentItem, $includeFamily = null) {
+
+		$itemIDs = '';
+		$menuItemsIDs = null;
+		$menu = $this->menuItems;
+
+		$o = $this->options;
+
+		// append the current item's ID
+		$itemIDs .= $currentItem . ',';
+
+		// the 'parent_id' of the current menu item
+		$parentID = $menu->get('id=' . $currentItem)->parentID ? $menu->get('id=' . $currentItem)->parentID : '';
+
+		// recursively build the breadcrumbs
+		$itemIDs .= $this->currentItemParents($parentID, $menu); // returns comma separated string of parent IDs of this menu item
+		$itemIDs = rtrim($itemIDs, ',');
+
+		if ($itemIDs) {
+			// array of menu item IDs
+			$menuItemsIDs = explode(',', $itemIDs);
+			// we reverse the items array, starting with grandparents first....
+			$menuItemsIDs = array_reverse($menuItemsIDs, true);
+		}
+
+
+		if (is_array($menuItemsIDs)) {
+
+			$wTag = $o->wrapperListType; // item wrapper tag. default = <ul>
+			$iTag = $o->listType; // item tag. default = <li>
+
+			// assign menu css id and class if provided
+			$cssMenuID =  $o->menucssID ? ' id ="' . $o->menucssID . '" ' : '';
+			$cssMenuClass = $o->menucssClass ? 'class ="' . $o->menucssClass . '"' : '';
+
+			// css ID + Class for current menu item {there is only one}
+			$itemCurrent = $o->currentCSSID;
+			$cssID = strlen($itemCurrent) ? 'id="' . $itemCurrent . '"' : '';
+			$currentClass = $o->currentClass ? 'class ="' . $o->currentClass . '"' : '';
+
+			// build the breadcrumb
+			$out = '';
+
+			$out .= "<{$wTag} {$cssMenuID} {$cssMenuClass}>" . "\n";
+
+			// if option to prepend homepage specified, we prepend to menuItemsIDs
+			if ($o->prependHome) $menuItemsIDs = array_merge(array('Home' => 'Home'), $menuItemsIDs);
+
+			$i = 0;
+			$total = count($menuItemsIDs);
+
+			foreach ($menuItemsIDs as $item) {
+
+				// if prepended homepage
+				if ($item === 'Home') {
+
+					$item = $this->wire('pages')->get('/');
+					$title = $item->title;
+
+					// if we prepended homepage AND homepage is also part of this breadcrumb navigation AND we are on the homepage...
+					// we exit early to avoid duplicate Home >> Home
+					if ($item->id === $this->wire('page')->id) {
+						$out .= !$iTag ? "{$title}" : "<{$iTag} {$cssID} >{$title}</{$iTag}></{$wTag}>";
+						return $out;
+					}
+
+					$url = $item->url;
+					$newtab = '';
+				} else {
+
+					// grab the menu item in the WireArray with the id=$item
+					$m = $menu->get('id=' . $item);
+					$title = $m->title;
+					$url = $m->url;
+					$newtab = $m->newtab ? "target='_blank'" : '';
+				}
+
+				// ancestor items
+				if ($total - $i != 1) {
+					$divider = " {$o->divider} "; // note the spaces before and after!
+					// if $iTag is empty, default to <a> instead
+					if (!$iTag) $out .= "<a {$newtab} href='{$url}'>{$title}</a>{$divider}";
+					else $out .= "<$iTag><a {$newtab} href='{$url}'>{$title}</a>{$divider}</$iTag>";
+				}
+
+				// the last breadcrumb item, i.e., the current page
+				else {
+					// if option set, include non-MB menu item pages if applicable
+					if ($includeFamily) $out .= $includeFamily;
+					else $out .= !$iTag ? "{$title}" : "<{$iTag} {$cssID} {$currentClass}>{$title}</{$iTag}>";
+				}
+
+				$i++;
+			} // end foreach
+
+			$out .= "</{$wTag}>";
+
+			return $out;
+		} // end if is_array menuItemsIDs
+
+	}
+
+	/**
+	 * Find Menu Builder IDs of the parents of the current menu item.
+	 *
+	 * A recursive function to return IDs of Menu Builder ancestral parents of the current menu item.
+	 *
+	 * @access private
+	 * @param Int $id Menu ID of the parent of the current item.
+	 * @param WireArray $menu Contains Menu objects to traverse to locate direct ancestors of the current menu item.
+	 * @return string $out.
+	 *
+	 */
+	private function currentItemParents($id, WireArray $menu) {
+
+		$out = '';
+		if ($id && $menu->get('id=' . $id)->parentID) { // @todo...php errors here sometimes?
+			$out .= $id . ','; // add the first's parent id
+			$parentID = $menu->get('id=' . $id)->parentID;
+			// recursively get the next parent item (ancestry: grandparent, great-grandparent...etc)
+			$out .= $this->currentItemParents($parentID, $menu);
+		}
+
+		// the current item is a top most item (i.e. has no parent)
+		else $out .= $id;
+
+		return $out;
+	}
+
+	/**
+	 * Find IDs of a limited number of the current page's natural parents.
+	 *
+	 * For menus, this determines which natural parents to apply 'current_class' to with respect to 'current_class_level'.
+	 * For breadcrumbs, it determines how deep a breadcrumb should go in relation to 'include_children'
+	 * Limit is determined by what are set in $options 'current_class_level' and 'b_max_level'
+	 *
+	 * @access private
+	 * @param Bool $format Whether to return an array or PageArray of parent IDs.
+	 * @return array|PageArray $out.
+	 *
+	 */
+	private function currentPageParents($format = null)	{
+
+		$o = $this->options;
+		// get current page's parents
+		$parents = $this->wire('page')->parents->reverse();
+
+		$i = 1; // using this for current_class_level
+		$j = 0; // using this for breadcrumb 'include_children' setting
+
+		// if true, return an array
+		if ($format) {
+			$parentIDs = array();
+			foreach ($parents as $parent) {
+				// filter for viewable parents and homepage
+				if ($parent->viewable() && $parent->id != 1) $parentIDs[] = $parent->id;
+				$i++; // this means even non-viewable parents are counted
+				if ($i == $o->currentClassLevel) break;
+			}
+		}
+
+		// else, return a PageArray
+		else {
+			$parentIDs = new PageArray();
+			foreach ($parents as $parent) {
+				// filter for viewable parents and homepage
+				if ($parent->viewable() && $parent->id != 1) $parentIDs->add($parent);
+				$j++; // this means even non-viewable parents are counted
+				if ($j == $o->breadcrumbMaxLevel) break; // @todo. @note: for now, no $m->breadcrumbMaxLevel
+			}
+		}
+
+		return $parentIDs;
+	}
+
+	/**
+	 * ID|page object of the menu item that matches the current page OR a closest parent.
+	 *
+	 * From a breadcrumb point of view, the menu item being sought (via pages_id) is the last item in the trail.
+	 *
+	 * @access private
+	 * @param null $single If true, get ID of menu item whose pages_id matches current page id (i.e. $page->id). If false, find closest parent of the current page
+	 * @param null $parents If set, it is a PageArray of current item's parents.
+	 * @return string|object $currentItem.
+	 *
+	 */
+	private function currentItem($single = null, $parents = null) {
+
+		$currentItem = '';
+		$menu = $this->menuItems;
+
+		// grab menu item that matches the current page (i.e. where we currently are in the breadcrumb trail)
+		if ($single) {
+
+			foreach ($menu as $m) {
+				if ($m->pagesID == $this->wire('page')->id) {
+					$currentItem = $m->id;
+					break;
+				}
+			}
+		} // end if single == true
+
+		else {
+
+			$found = false;
+			foreach ($parents as $parent) {
+				foreach ($menu as $m) {
+					if (!$m->pagesID) continue; // skip non-pw items
+					if ($parent->id == $m->pagesID) {
+						$parent->menuID = $m->id; // temporarily save this item's menu id to the page object
+						$parent->includeChildren = $m->includeChildren; // temporarily save this item's menu include children status to the page object
+						$currentItem = $parent; // this is a page object
+						$found = true;
+						break;
+					}
+				}
+
+				if ($found) break;
+			}
+		} // end else single == false
+
+		return $currentItem;
+	}
+
+	/**
+	 * Return breadcrumb items of included 'relatives'.
+	 *
+	 * Triggered if user specifies in $options or on a per/item basis to include natural children of a breadcrumb item(s).
+	 * By 'naturally' is meant from a ProcessWire tree point of view, i.e. 'child - parent - grandparent - great grandparent' etc...
+	 *
+	 * @access private
+	 * @param PageArray $selectedParents PageArray containing  intermediate parents of a menu item.
+	 * @param Page $closestParent Instance of a Page from which to start building the breadcrumbs. We remove it below to avoid duplication later on.
+	 * @return string $miniBreadcrumbs.
+	 *
+	 */
+	private function includedFamilyBreadcrumbs($selectedParents, $closestParent) {
+
+		$o = $this->options;
+		$miniBreadcrumbs = '';
+
+		$iTag = $o->listType; // item tag. default = <li>
+		$divider = ' ' . $o->divider . ' '; // note the spaces before and after!
+		// css ID + Class for current menu item {there is only one}
+		$itemCurrent = $o->currentCSSID;
+		$cssID = strlen($itemCurrent) ? 'id="' . $itemCurrent . '"' : '';
+		$currentClass = $o->currentClass ? 'class ="' . $o->currentClass . '"' : '';
+
+		foreach ($selectedParents->reverse() as $p) {
+			if ($closestParent->parents->has($p)) continue; // remove any parents that are already part of the navigation (to avoid duplicates)
+			// use the MB menu item title as previously set using 'default_title' option
+			$menuItem = $this->menuItems->get('pagesID=' . $p->id);
+			$title = $menuItem ? $menuItem->title : $p->title;
+			/* if(!$iTag) $miniBreadcrumbs .= "<a href='{$p->url}'>{$p->title}</a>{$divider}";
+			else $miniBreadcrumbs.= "<$iTag><a href='{$p->url}'>{$p->title}</a>{$divider}</$iTag>"; */
+			if (!$iTag) $miniBreadcrumbs .= "<a href='{$p->url}'>{$title}</a>{$divider}";
+			else $miniBreadcrumbs .= "<$iTag><a href='{$p->url}'>{$title}</a>{$divider}</$iTag>";
+		}
+
+		// append current page (our last item in this case)
+		$title = $this->wire('page')->title;
+		$miniBreadcrumbs .= !$iTag ? "{$title}" : "<{$iTag} {$cssID} {$currentClass}>{$title}</{$iTag}>";
+
+		return $miniBreadcrumbs;
+	}
+
+	/**
+	 * Return menu items of included 'children'.
+	 *
+	 * Triggered if user specifies in $options or on a per/item basis to include natural children of a menu item(s).
+	 * By 'naturally' is meant from a ProcessWire tree point of view, i.e. 'child - parent - grandparent - great grandparent' etc...
+	 * @note: For internal use by buildMenu() ONLY!
+	 * @see includedFamilyMenuRaw() for getMenuItems() use.
+	 *
+	 * @access private
+	 * @param Page $page Page whose children are to be included as menu items.
+	 * @param integer $depth How deep (descendant-wise) to fetch children.
+	 * @param integer|Null $firstChild To check if to apply 'first_class' to menu item.
+	 * @return string $out.
+	 *
+	 */
+	private function includedFamilyMenu(Page $page = null, $depth = 1, $firstChild = null)	{
+
+		// @credits @slkwrm for some code (https://processwire.com/talk/topic/563-page-level-and-sub-navigation/?p=4490)
+		// @todo...unsure if $depth is working properly here?
+
+		$o = $this->options;
+		$depth -= 1;
+
+		if (is_null($page)) $page = $this->wire('page');
+
+		$wTag = $o->wrapperListType; // item wrapper tag. default = <ul>
+		$iTag = $o->listType; // item tag. default = <li>
+		$cssSubMenuClass = $o->submenucssClass ? ' class="' . $o->submenucssClass . '"' : '';
+		$defaultClass = $o->defaultClass . ' '; // default CSS class set via $options at runtime
+
+		// if option to apply current_class to MB ancestor items as well is specified
+		$parentIDs = array();
+		// true=return array/false=return PageArray
+		// if NOT limiting number of ancestors to apply current class to
+		if ($o->currentClassLevel == 0) $parentIDs = $this->currentPageParents(true);
+		// limiting number of ancestors to apply current_class to @note: needs to be checked like this!
+		elseif ($o->currentClassLevel && $o->currentClassLevel > 1) $parentIDs = $this->currentPageParents(true);
+
+		$out = "\n<{$wTag}{$cssSubMenuClass}>";
+
+		$count = $page->numVisibleChildren - 1;
+
+		foreach ($page->children as $n => $child) {
+
+			// note: we skip 'first_class' for this menu page/item when native sibling MB children already exist for Page
+			$itemFirst = $n == 0 && $child->id != $firstChild ? $o->firstClass : '';
+			$itemHasChildren = '';
+			$itemLast = $count - $n == 0 ? $o->lastClass . ' ' : '';
+
+			// check for current items (family tree)
+			$itemCurrent = in_array($child->id, $parentIDs) || $child->id == $this->wire('page')->id ? $o->currentClass . ' ' : '';
+
+			$s = '';
+			// build sub-menus
+			if ($child->numVisibleChildren && $depth > 0) { // equivalent to above - only visible children returned
+				$itemHasChildren = $o->hasChildrenClass . ' ';
+				$s = str_replace("\n", "\n\t\t", $this->includedFamilyMenu($child, $depth));
+			} // end if has visible children
+
+			$classes = $itemHasChildren . $itemLast . $defaultClass . $itemCurrent . $itemFirst;
+			$classes = trim(preg_replace('/\s+/', ' ', $classes));
+			$class = strlen($classes) ? ' class="' . $classes . '"' : '';
+
+			// if $iTag is empty, apply css id and classes to <a> instead
+			if (!$iTag) $out .= "\n\t<a{$class} href='{$child->url}'>{$child->title}</a>$s";
+			else $out .= "\n\t<{$iTag}{$class}>\n\t\t<a href='{$child->url}'>{$child->title}</a>$s\n\t</{$iTag}>";
+		} // end foreach
+
+		$out .= "\n</{$wTag}>";
+
+		return $out;
+	}
+
+	/**
+	 * Return menu objects of included 'children'.
+	 *
+	 * Triggered if user specifies in $options or on a per/item basis to include natural children of a menu item(s).
+	 * By 'naturally' is meant from a ProcessWire tree point of view, i.e. 'child - parent - grandparent - great grandparent' etc...
+	 * @note: Used by getMenuItemsIncludedChildren() ONLY to return the menu objects themselves for getMenuItems().
+	 * @see: includedFamilyMenu() for buildMenu() use.
+	 *
+	 * @access private
+	 * @param Page $page Page whose children are to be included as menu items.
+	 * @param integer $depth How deep (descendant-wise) to fetch children.
+	 * @param object $menu WireArray with menu objects.
+	 * @param integer $parentID parent ID to apply to menu objects.
+	 * @param integer|null $firstChild To check if to apply 'first_class' to menu item.
+	 * @return object $menu WireArray with added menu objects.
+	 *
+	 */
+	private function includedFamilyMenuRaw(Page $page = null, $depth = 1, $menu, $parentID,  $firstChild = null) {
+
+		// @credits @slkwrm for some code (https://processwire.com/talk/topic/563-page-level-and-sub-navigation/?p=4490)
+		// @todo...unsure if $depth is working properly here?
+
+		# get all options
+		$o = $this->options;
+		$depth -= 1;
+
+		if (is_null($page)) $page = $this->wire('page'); // @note/@todo: not really necessary in this case?
+
+
+		# current class
+		// if option to apply current_class to MB ancestor items as well is specified
+		$parentIDs = array();
+		// true=return array/false=return PageArray
+		// if NOT limiting number of ancestors to apply current class to
+		if ($o->currentClassLevel == 0) $parentIDs = $this->currentPageParents(true);
+		// limiting number of ancestors to apply current_class to @note: needs to be checked like this!
+		elseif ($o->currentClassLevel && $o->currentClassLevel > 1) $parentIDs = $this->currentPageParents(true);
+
+		# counts
+		$count = $page->numVisibleChildren - 1; // to counter-balance 0-based index below ($n)
+
+		// if maximum children per parent menu item is set, limit included (natural/pw) children to that number
+		// @todo: should we deduct any present non-native children? i.e. those already in GUI? Maybe doesn't make sense since those added via GUI are done so deliberately and visibly!
+		$childrenLimit = (int) $o->maximumChildrenPerParent;
+		$selector = $childrenLimit ? "limit={$childrenLimit}" : '';
+
+		# build objects
+		foreach ($page->children($selector) as $n => $child) {
+
+			$m = new Menu();
+			#$m->id = $child->id;// @note: better to give unique ID in case natural parent used twice in menu
+			$m->id = $this->currentMenuItemID; // @note: initial value of currentMenuItemID set in getMenuItems()
+			$m->parentID = $parentID; // @note: specifically sent via @param above
+			$m->pagesID = $child->id;
+			$m->title = $child->title;
+			$m->url = $child->url;
+			// note: we skip 'first_class' for this menu page/item when native sibling MB children already exist for Page
+			$m->isFirst = $n == 0 && $child->id != $firstChild ? 1 : '';
+			// @note: we let last child remain irrespective of $childrenLimit above! In that case, showMore (@see below) should designate what the last child is!
+			$m->isLast = $count - $n == 0 ? 1 : '';
+			// add 'show more' text to last SHOWN item if applicable
+			// if last item in show limit AND there are more visible children available (i.e. more children than limit allows)
+			if ($childrenLimit - $n == 1 && $page->numVisibleChildren > $childrenLimit) $m->showMoreText = $o->showMoreText;
+
+
+			// check for current items (family tree)
+			$m->isCurrent = in_array($child->id, $parentIDs) || $child->id == $this->wire('page')->id ? 1 : '';
+
+			// ADD EXTRA FIELDS if requested
+			// @note: : this is only applicable to getMenuItems(). check already done in getMenuItems()!
+			if (!empty($this->validExtraFields)) $m = $this->addExtraFields($m, $child);
+
+			// add menu Object to WireArray
+			$menu->add($m);
+			$this->currentMenuItemID++; // increment for next menu item ID
+
+			# build sub-menus (equivalent to above - only visible children returned)
+			if ($child->numVisibleChildren && $depth > 0) {
+				$m->isParent = 1; // @note: can add here and will still work with adding to $menu WireArray above (PHP has the reference to the object)
+				$this->includedFamilyMenuRaw($child, $depth, $menu, $m->id);
+			} // end if has visible children
+
+			// default CSS class set via $options at runtime
+			$m->cssClass = $o->defaultClass ? $o->defaultClass : '';
+
+		} // end foreach
+
+		return $menu;
+	}
+
+	/**
+	 * Check if a menu item will be including native/natural children.
+	 *
+	 * Can be specified via menu $options or in menu item settings (includeChildren).
+	 * By 'native/natural' is considered from a ProcessWire tree point of view, i.e. 'child - parent - grandparent - great grandparent' etc...
+	 *
+	 * @access private
+	 * @param integer $o 'Include Children' option set via menu $options.
+	 * @param Menu Object $m Menu item to check for includeChildren option.
+	 * @return int|empty string $pInclude.
+	 *
+	 */
+	private function includeChildrenCheck($o, $m) {
+
+		// if overriding with 'never show'
+		if ($o === 0 || $m->includeChildren === 0) $pInclude = ''; // don't include children
+		// no need to check for zeros again, only check if can display in menu (1|3)
+		elseif ($m->includeChildren === 1 || $m->includeChildren === 3) $pInclude = $m->pagesID;
+		// $option overriding item-level only when blank. Other conditions covered above and below
+		elseif (($o === 1 || $o === 3) && (!strlen($m->includeChildren))) $pInclude = $m->pagesID;
+		// either $options is 2 OR not set OR $m is 2 (i.e., only applicable to breadcrumbs)
+		else $pInclude = '';
+
+		return $pInclude;
+	}
+
+	/**
+	 * Process menu options, overwriting defaults.
+	 *
+	 * The options are mainly css and markup related.
+	 *
+	 * @access private
+	 * @param array $options Array of menu options.
+	 * @return array $options.
+	 *
+	 */
+	private function processOptions(array $options = null) {
+		// default (mainly css) menu options. For css, we make no assumptions & don't output default values
+		// shared with renderBreadcrumbs() where applicable
+		// merge menu options set by user to default ones
+		$this->options = new MenuOptions($options);
+		return $this->options;
+	}
+
+	/**
+	 * Process menu options, overwriting defaults.
+	 *
+	 * The options are mainly css and markup related.
+	 *
+	 * @access public
+	 * @param mixed $menu Page, ID, Title, Name of a menu or Array of menu items.
+	 * @param integer $type Whether to return array of menu items (1) or a Menu object with menu items (2).
+	 * @param array $options Array of menu options.
+	 * @return array|object $menuItems.
+	 *
+	 */
+	public function getMenuItems($menu, $type = 2, $options = array()) {
+
+		// @note: currently we don't implement grabbing from cache. users can cache their own menus
+
+		// process menu items
+		$rawMenuItems = $this->processRawMenu($menu);
+		if (!is_array($rawMenuItems)) return $this->throwError();
+
+		// process menu options. Will be needed by $this->processMenu()
+		// For cached menus, $options is already an object as set in createMenuCache(), we ignore it
+		if (is_array($options)) $options = $this->processOptions($options); // run options first so that some properties can be set early on
+
+		## extra fields ##
+		/*
+			@note:: running here so that we confine to getMenuItems() use only! - we also run before process processMenu()! to be ready for it
+		*/
+		if (is_array($options->extraFields) && !empty($options->extraFields)) {
+			$this->validExtraFields = $this->getValidExtraFields();
+		}
+
+		$menuItemsObject = $this->processMenu($rawMenuItems);
+
+		// get the item with the highest menu ID so as to increment and apply to subsequent included children as IDs
+		$lastMenuItem = $menuItemsObject->get('sort=-id');
+		// check if we found the last menu item
+		// @todo: confirm works! needs further testing
+		if($lastMenuItem) {
+			$lastMenuItemID = (int) $lastMenuItem->id;
+			$this->currentMenuItemID = $lastMenuItemID + 1;
+		}
+
+
+		// add 'include children' if applicable
+		// @note: it will check for both globally or locally included children
+		$menuItemsObject = $this->getMenuItemsIncludedChildren($menuItemsObject);
+
+		$menuItems = array();
+
+		// if $type == 2 we return a Menu Object
+		if ($type == 2) $menuItems = $menuItemsObject;
+		// else return Menu Array if $type == 1
+		elseif ($type == 1) {
+			foreach ($menuItemsObject as $m) {
+
+				// get number of children if requested in options
+				if ($options->getTotalChildren) {
+					// add number of children for parent items
+					if ($m->isParent) $m->totalChildren = $this->getTotalChildren($m->id, $menuItemsObject);
+				}
+
+				$menuItems[$m->id] = array(
+					'parent_id' => $m->parentID, // parent ID of this menu item; if 0 means top tier menu item
+					'pages_id' => $m->pagesID, // if 0 means external URl; if ID, then the REAL PW id of that page
+					'title' => $m->title, // default_title: 0=show saved mb titles;1=show actual/current pw titles
+					'url' => $m->url, // menu items URL
+					'newtab' => $m->newtab, // open link in new tab?
+					'css_itemid' => $m->cssID, // the items own CSS ID
+					'css_itemclass' => $m->cssClass, // the items own CSS class(es)
+					'include_children' => $m->includeChildren, // include this menu items natural children
+					'm_max_level' => $m->menuMaxLevel, // menu depth
+					'is_parent' => $m->isParent, // does this menu item have children (bool)
+					'is_first' => $m->isFirst, // first menu item at its tier? (bool)
+					'is_last' => $m->isLast, // last menu item at its tier? (bool)
+					'is_current' => $m->isCurrent, // menu item matches current page? (bool) @todo: unset for cache!
+					// number of natural/pw children items if menu item is a parent
+					'num_children' => $m->numChildren,
+					// total number of children items if menu item is a parent (natural + GUI children)
+					'total_children' => $m->totalChildren,
+					'show_more_text' => $m->showMoreText,
+				);
+
+				// @todo: use this in getmenu items?
+				// $m->extraFieldsAdded (BOOL)
+				// add custom fields values
+				if (!empty($this->validExtraFields)) {
+					foreach ($this->validExtraFields as $extraField) {
+						$field = $extraField['name'];
+						$menuItems[$m->id][$field] = $m->$field;
+					}
+				}
+			}
+
+			// filter out empty values
+			$menuItems = array_map('array_filter', $menuItems);
+		} // end if $type == 2
+
+		return $menuItems;
+	}
+
+	/**
+	 * Fetch included children to add to menu items as objects.
+	 * For internal use by getMenuItems().
+	 *
+	 * @access private
+	 * @param object $menu WireArray with menu objects to add included children to.
+	 * @return object $menu WireArray with added menu objects.
+	 *
+	 */
+	private function getMenuItemsIncludedChildren($menu) {
+
+		$o = $this->options;
+
+		// global include children
+		if (in_array($o->includeChildren, array(1, 3))) $menuItems = $menu;
+		// per-item/selective include children
+		else $menuItems = $menu->find("includeChildren=1|3,pagesID!=1"); // @note: skip Home!
+
+		if (!empty($menuItems)) {
+			foreach ($menuItems as $m) {
+				if ($m->pagesID == 1) continue; // skip Home page!
+				// if overriding 'global include' with 'never show' at per-item level
+				$pInclude = $this->includeChildrenCheck($o->includeChildren, $m);
+				if (!$pInclude) continue;
+				########
+				$page = $this->wire('pages')->get($m->pagesID);
+				if (!$page->numChildren) continue; // skip non-parents
+
+				// total natural/pw children of menu item
+				$m->numChildren = $page->numChildren;
+				###################
+				$depth = $m->menuMaxLevel ? $m->menuMaxLevel : $o->menuMaxLevel;
+				// for skipping 'first_class' when native MB
+				$firstChild = $m->isParent ? $page->child->id : null;
+
+				$menu = $this->includedFamilyMenuRaw($page, $depth, $menu, $m->id, $firstChild);
+				// @note/@todo: confirm OK to apply here rather than earlier due to the 'first_class' issue above
+				$m->isParent = 1;
+			}
+		}
+
+		return $menu;
+	}
+
+	/**
+	 * Count total number of child items for a menu item.
+	 * Includes both natural/ProcessWire children and items added via GUI.
+	 * For internal use by getMenuItems().
+	 *
+	 * @access private
+	 * @param integer $parentID ID of the parent menu item whose children to count.
+	 * @param object WireArray of menu objects.
+	 * @return integer $totalChildren->count Count of children.
+	 *
+	 */
+	private function getTotalChildren($parentID, $menu)	{
+		$totalChildren = $menu->find('parentID=' . $parentID);
+		return $totalChildren->count;
+	}
+
+	/**
+	 * Adds values of custom fields specified in menu options.
+	 *
+	 * Only 'simple' values (e.g. text, integers, etc) are added.
+	 * The names of the fields are the properties.
+	 * Only applicable to getMenuItems().
+	 *
+	 * @access private
+	 * @param integer $parentID ID of the parent menu item whose children to count.
+	 * @param WireData $m A single menu item object.
+	 * @param Page $page Page represenging the single menu item object.
+	 * @return integer WireData $m A single menu item object that has been populated with custom fields values..
+	 *
+	 */
+	private function addExtraFields($m, $page)	{
+		$extraFields = $this->validExtraFields;
+
+		$countFieldsAdded = 0;
+		foreach ($extraFields as $extraField) {
+			$fieldname = $extraField['name'];
+			if ($page->hasField($fieldname)) {
+
+				// check how to add the field value
+				$fieldtype = $extraField['fieldtype'];
+
+				# we start with fields that can have options #
+
+				// images
+				if($fieldtype == 'FieldtypeImage') {
+					$value = $this->getExtraFieldImages($extraField, $page);
+				}
+				// files
+				elseif($fieldtype == 'FieldtypeFile') {
+					$value = $this->getExtraFieldFiles($extraField, $page);
+				}
+				// pagefields
+				elseif($fieldtype == 'FieldtypePage') {
+					$value = $this->getExtraFieldPages($extraField, $page);
+				}
+				// options
+				elseif($fieldtype == 'FieldtypeOptions') {
+					$value = $this->getExtraFieldOptions($extraField, $page);
+				}
+				// datetime
+				elseif($fieldtype == 'FieldtypeDatetime') {
+					$value = $this->getExtraFieldDatetime($extraField, $page);
+				}
+
+				# else, this is a field that does not have options #
+				// checkbox, integer, float, url, email, textfield (including multi-lingual), textareafield (including multi-lingual)
+				else $value = $page->$fieldname;
+
+
+				##############
+
+				// set field value
+				$m->$fieldname = $value;
+
+				######################
+				// track field value added
+				$countFieldsAdded ++;
+
+			}
+		}
+
+		// if we added at least one extra field value, we track that in the menu item
+		// @todo: use this in getmenu items?
+		//if($countFieldsAdded) $m->extraFieldsAdded = true;
+
+		return $m;
+
+	}
+
+	/**
+	 * Checks if fields passed to extraFields exist and are valid for use..
+	 *
+	 * For use with extraFields only.
+	 * Builds new array with valid extra fields.
+	 *
+	 * @access private
+	 * @return array $validExtraFields Array with names and options (if applicable) of valid fields.
+	 *
+	 */
+	private function getValidExtraFields() {
+
+		$validExtraFields = array();
+
+		foreach ($this->options->extraFields as $value) {
+
+			// first, check if we have a field name
+			if(!isset($value['name']) || empty($value['name'])) continue;
+
+			$name = $value['name'];
+
+
+			// get the field and check if it is valid
+			$field = $this->wire('fields')->get($name);
+			if ($field) {
+				$type = $this->getClassWithoutPWNamespace($field->type);
+				// if field not allowed, skip it
+				if(!in_array($type, $this->allowedFieldTypes())) continue;
+
+				// if field disallowed, skip it
+				if(in_array($field->name, $this->disallowedFields())) continue;
+				// add field type for later field's options checks
+				$value['fieldtype'] = $type;
+
+				// @note: we make sure we have unique values, i.e. no repeated field names in options
+				$validExtraFields[$name] = $value;
+			}
+		}
+
+		return $validExtraFields;
+
+	}
+
+	/**
+	 * Return an objects classname without  the ProcessWire namespace.
+	 *
+	 * @access private
+	 * @param object $object The object whose non-namespaced class we want.
+	 * @return void
+	 */
+	private function getClassWithoutPWNamespace($object) {
+		return str_replace('ProcessWire\\','',get_class($object));
+	}
+
+	/**
+	 * Return array of allowed Fieldtypes for use with extraFields.
+	 *
+	 * @access private
+	 * @param array $extraField Array with options for the image field.
+	 * @param Page $page Page with the required field value.
+	 * @return array $value Array of with values for returned image(s).
+	 *
+	 */
+	private function getExtraFieldImages($extraField, $page) {
+
+
+		$field = $extraField['name'];
+
+		// return if field empty
+		if(!$page->$field) return;
+
+		$items = null;
+		$values = array();
+
+		// for checking if single or mutli image field
+		$class = $this->getClassWithoutPWNamespace($page->$field);
+
+		// IMAGES: single
+		// if one image, for consistency, we add to WireArray to loop through
+		if($class == "Pageimage") {
+			$items = new WireArray();
+			$items->add($page->$field);
+		}
+
+		// IMAGES: multi
+		else {
+
+			// @note: eq takes precedence over count since it is more specific!
+			// first, check if we are returning a particular image
+			if(isset($extraField['eq'])) {
+				$singleImage = $page->$field->eq($extraField['eq']);
+				// if one image, for consistency, we add to WireArray to loop through
+				if($singleImage) {
+					$items = new WireArray();
+					$items->add($singleImage);
+				}
+
+			}
+			// else check if returning a specific COUNT
+			else if(isset($extraField['count'])) {
+				$count = (int) $extraField['count'] ? (int) $extraField['count'] : 1;
+				$items = $page->$field->find("limit={$count}");
+				// if no items, just reset to null
+				if(!$items->count) $items = null;
+			}
+
+			// if no count provided we get first image only
+			else {
+					$singleImage = $page->$field->first();
+					// if one image, for consistency, we add to WireArray to loop through
+					if($singleImage) {
+						$items = new WireArray();
+						$items->add($singleImage);
+					}
+			}
+
+		}// end: multi images
+
+		###############
+
+		// populate values if we have items
+		if(!is_null($items)){
+			foreach($items as $item) {
+				// we always populate name (of the original image)
+				$values[$item->name] = array('name' => $item->name);
+
+				## check if getting other specific meta for image ##
+
+				// set description
+				if(!empty($extraField['description']) ) {
+					$values[$item->name]['description'] = $item->description;
+				}
+
+				// set tags
+				if(!empty($extraField['tags'])) {
+					$values[$item->name]['tags'] = $item->tags;
+				}
+
+				// get particular size if applicable
+				$width = 0;
+				$height = 0;
+				$img = null;
+				// get required width
+				if(isset($extraField['width'])) {
+					$width = (int) $extraField['width'];
+				}
+				// get required height
+				if(isset($extraField['height'])) {
+					$height = (int) $extraField['height'];
+				}
+
+				// if we have both width and height, get image in that size
+				if($width && $height) {
+					$img = $item->size($width, $height);
+				}
+
+				// else, get image of this width only
+				elseif($width) {
+					$img = $item->width($width);
+				}
+				// else, get image of this height only
+				elseif($height) {
+					$img = $item->height($height);
+				}
+
+				// set URL
+				$url = $img ? $img->url : $item->url;
+				$values[$item->name]['url'] = $url;
+
+			}
+
+		}
+
+		return $values;
+
+	}
+
+	/**
+	 * Return array of allowed Fieldtypes for use with extraFields.
+	 *
+	 * @access private
+	 * @param array $extraField Array with options for the file field.
+	 * @param Page $page Page with the required field value.
+	 * @return array $value Array of with values for returned file(s).
+	 *
+	 */
+	private function getExtraFieldFiles($extraField, $page) {
+
+		$field = $extraField['name'];
+
+		// return if field empty
+		if(!$page->$field) return;
+
+		$items = null;
+		$values = array();
+
+		// for checking if single or mutli file field
+		$class = $this->getClassWithoutPWNamespace($page->$field);
+
+		// FILES: single
+		// if one file, for consistency, we add to WireArray to loop through
+		if($class == "Pagefile") {
+			$items = new WireArray();
+			$items->add($page->$field);
+		}
+
+		// FILES: multi
+		else {
+
+			// @note: eq takes precedence over count since it is more specific!
+			// first, check if we are returning a particular file
+			if(isset($extraField['eq'])) {
+				$singleFile = $page->$field->eq($extraField['eq']);
+				// if one file, for consistency, we add to WireArray to loop through
+				if($singleFile) {
+					$items = new WireArray();
+					$items->add($singleFile);
+				}
+
+			}
+			// else check if returning a specific COUNT
+			else if(isset($extraField['count'])) {
+				$count = (int) $extraField['count'] ? (int) $extraField['count'] : 1;
+				$items = $page->$field->find("limit={$count}");
+				// if no items, just reset to null
+				if(!$items->count) $items = null;
+			}
+
+			// if no count provided we get first file only
+			else {
+					$singleFile = $page->$field->first();
+					// if one file, for consistency, we add to WireArray to loop through
+					if($singleFile) {
+						$items = new WireArray();
+						$items->add($singleFile);
+					}
+			}
+
+		}// end: multi files
+
+		###############
+
+		// populate values if we have items
+		if(!is_null($items)){
+			foreach($items as $item) {
+				// we always populate name and url
+				$values[$item->name] = array(
+					'name' => $item->name,
+					'url' => $item->url
+				);
+
+				## check if getting other specific meta for file ##
+
+				// set description
+				if(!empty($extraField['description'])) {
+					$values[$item->name]['description'] = $item->description;
+				}
+
+				// set tags
+				if(!empty($extraField['tags'])) {
+					$values[$item->name]['tags'] = $item->tags;
+				}
+
+				// set filesizeStr
+				if(!empty($extraField['filesize_str']) ) {
+					$values[$item->name]['filesize_str'] = $item->filesizeStr;
+				}
+
+			}
+
+		}
+
+		return $values;
+
+	}
+
+	/**
+	 * Return array of allowed Fieldtypes for use with extraFields.
+	 *
+	 * @access private
+	 * @param array $extraField Array with options for the page field.
+	 * @param Page $page Page with the required field value.
+	 * @return array $value Array of with values for returned pagefield(s).
+	 *
+	 */
+	private function getExtraFieldPages($extraField, $page) {
+
+		$field = $extraField['name'];
+
+		// return if field empty
+		if(!$page->$field) return;
+
+		$items = null;
+		$values = array();
+
+		// for checking if single or mutli page reference field
+		$class = $this->getClassWithoutPWNamespace($page->$field);
+
+		// PAGE REFERENCE: single
+		// if one page  for consistency, we add to WireArray to loop through
+		if($class == "Page") {
+			$items = new WireArray();
+			$items->add($page->$field);
+		}
+
+		// PAGE REFERENCE: multi
+		else {
+
+			// @note: eq takes precedence over count since it is more specific!
+			// first, check if we are returning a particular page
+			if(isset($extraField['eq'])) {
+				$singlePage = $page->$field->eq($extraField['eq']);
+				// if one page, for consistency, we add to WireArray to loop through
+				if($singlePage) {
+					$items = new WireArray();
+					$items->add($singlePage);
+				}
+
+			}
+			// else check if returning a specific COUNT
+			else if(isset($extraField['count'])) {
+				$count = (int) $extraField['count'] ? (int) $extraField['count'] : 1;
+				$items = $page->$field->find("limit={$count}");
+				// if no items, just reset to null
+				if(!$items->count) $items = null;
+			}
+
+			// if no count provided we get first page only
+			else {
+					$singlePage = $page->$field->first();
+					// if one page, for consistency, we add to WireArray to loop through
+					if($singlePage) {
+						$items = new WireArray();
+						$items->add($singlePage);
+					}
+			}
+
+		}// end: multi pages
+
+		###############
+
+		// populate values if we have items
+		if(!is_null($items)){
+			foreach($items as $item) {
+				// we always populate title and url
+				$values[$item->name] = array(
+					'title' => $item->title,
+					'url' => $item->url,
+				);
+
+				## check if getting other specific fields for page other than title and url ##
+				if(!empty($extraField['fields'])){
+					foreach($extraField['fields'] as $property) {
+						if($item->$property) {
+							$values[$item->name][$property] = $item->$property;
+						}
+					}
+				}
+
+			}
+
+		}
+
+		return $values;
+
+	}
+
+	/**
+	 * Return array of allowed Fieldtypes for use with extraFields.
+	 *
+	 * @access private
+	 * @param array $extraField Array with options for the options field.
+	 * @param Page $page Page with the required field value.
+	 * @return array $value Array of with values for returned options field(s).
+	 *
+	 */
+	private function getExtraFieldOptions($extraField, $page) {
+
+		$field = $extraField['name'];
+
+		// return if field empty
+		if(!$page->$field->count) return;
+
+		$allOptions = null;
+		$values = array();
+
+		// @note: irrespecitve if a single or multi options, always returns a SelectableOptionArray
+		$items = $page->$field;
+
+		// if show all selectable options requested
+		// SHOW ALL OPTION + 'mark' SELECTED
+		if(!empty($extraField['all_options'])){
+			// get all options for this options field
+			$f = $this->wire('fields')->get($field);
+			$allOptions = $f->type->getOptions($f);
+
+			foreach($allOptions as $option) {
+				$values[$option->id] = array(
+					'id' => $option->id,
+					'title' => $option->title,
+					'value' => $option->value
+				);
+
+				// if this option is selected on the page, mark it
+				if($items->get("id={$option->id}")) {
+					$values[$option->id]['selected'] = 1;
+				}
+			}
+		}
+		// ONLY return SELECTED option
+		else {
+			foreach($items as $item) {
+				$values[$item->id] = $item->title;
+				// we always populate id and title
+				$values[$item->id] = array(
+					'id' => $item->id,
+					'title' => $item->title,
+				);
+
+				// if value requested as well
+				if(!empty($extraField['value'])) {
+					$values[$item->id]['value'] = $item->value;
+				}
+			}
+		}
+
+		return $values;
+
+	}
+
+	/**
+	 * Return array of allowed Fieldtypes for use with extraFields.
+	 *
+	 * @access private
+	 * @param array $extraField Array with options for the datetime field.
+	 * @param Page $page Page with the required field value.
+	 * @return array $value Array of with values for returned datetime field.
+	 *
+	 */
+	private function getExtraFieldDatetime($extraField, $page) {
+
+		$field = $extraField['name'];
+
+		// return if field empty
+		if(!$page->$field) return;
+
+		// date format requested
+		if(isset($extraField['format']) && strlen($extraField['format'])) {
+			$timestamp = $page->getUnformatted($field);
+			$value = date($extraField['format'],$timestamp);
+		}
+		// else, return date formatted according to the field's date output format
+		else $value = $page->$field;
+
+		return $value;
+
+	}
+
+	/**
+	 * Return array of allowed Fieldtypes for use with extraFields.
+	 *
+	 * @access private
+	 * @return array $allowedFieldTypes Array of allowed Fieldtypes.
+	 *
+	 */
+	private function allowedFieldTypes() {
+		$allowedFieldTypes = array('FieldtypeDatetime', 'FieldtypeEmail', 'FieldtypeFile', 'FieldtypeFloat', 'FieldtypeImage', 'FieldtypeInteger', 'FieldtypeOptions', 'FieldtypePage', 'FieldtypePageTitle', 'FieldtypePageTitleLanguage', 'FieldtypeText', 'FieldtypeTextarea','FieldtypeTextLanguage', 'FieldtypeTextareaLanguage', 'FieldtypeURL', 'FieldtypeCheckbox',);
+		return $allowedFieldTypes;
+	}
+
+	/**
+	 * Return array of disallowed Fields for use with extraFields.
+	 *
+	 * @access private
+	 * @return array $disallowedFields Array of disallowed Fields.
+	 *
+	 */
+	private function disallowedFields() {
+		$disallowedFields = array('permissions', 'roles');
+		return $disallowedFields;
+	}
+
+	/**
+	 * Throw error or return false.
+	 *
+	 * This is called if either no menu or no menu items found.
+	 * Throws WireException for superusers but returns false for all others.
+	 *
+	 * @access public
+	 * @return WireException or false.
+	 *
+	 */
+	public function throwError() {
+		if ($this->wire('user')->isSuperuser()) throw new WireException($this->_('No menu items found! Confirm that such a menu exists and that it has menu items.'));
+		else return false;
+	}
+
+	/**
+	 * Called only when the module is installed.
+	 *
+	 * @access public
+	 *
+	 */
+	public function ___install() {
+		// Don't need to add anything here...
+	}
+
+	/**
+	 * Called only when the module is uninstalled.
+	 *
+	 * This returns the site to the same state it was in before the module was installed.
+	 *
+	 * @access public
+	 *
+	 */
+	public function ___uninstall() {
+		// Don't need to add anything here...
+	}
+}
+
+####################################### - HELPER CLASSES - #######################################
+
+/**
+ * An individual menu's options.
+ * Using this for OOP and WireArray convenience.
+ *
+ */
+class MenuOptions extends WireData {
+
+	/**
+	 * Construct menu options
+	 *
+	 * @access public
+	 * @param array $options Array of menu options
+	 *
+	 */
+	public function __construct($options) {
+
+		/* Available Options
+			wrapper_list_type// ul, ol, nav, div, etc.
+			list_type// li, a, span, etc.
+			menu_css_id
+			menu_css_class
+			submenu_css_class// NOT for breadcrumbs
+			has_children_class// any menu item that has children - NOT for breadcrumbs
+			first_class// NOT for breadcrumbs
+			last_class// NOT for breadcrumbs
+			current_class// for both breadcrumbs and menus
+			Number of ancestors to apply 'current_class' to besides current item
+			current_class_level// NOT for breadcrumbs - 0=unlimited (+ include ancestors of current page that are not menu items);1=current item only;2=current+parent;3=current+parent+grandparent
+			current_css_id// only for breadcrumbs
+			default_class// a default css class to be applied to all menu items
+			divider// only for breadcrumbs
+			prepend home page at the as topmost item even if it isn't part of the breadcrumb
+			prepend_home// only for breadcrumbs => 0=no;1=yes
+			for PW pages, whether to show saved menu item titles/labels vs actual ones, e.g. useful for multilingual sites
+			default_title// 0=show mb saved titles;1=show actual/current pw titles
+			include_children// whether to include natural/pw children of menu items;0=never;1=in menu only;2=in breadcrumbs only;3=in both;4=do not show
+			m_max_level// menus only - in conjunction with 'include_children', how many (depth) ancestral children, grandchildren, etc to show
+			b_max_level// breadcrumbs only - in conjunction with 'include_children', how many (depth) ancestral parents, grandparents, etc to show
+			check_listable// menus only -  If set to 1, will not display items that are not (ProcessWire-) listable to the current user. The default is to show all items.
+			cached_menu// menus only - will build and subsequently fetch menu items from cache to help speed up process if required
+			cached_menu_time// menus only - how long a cached menu should exist for. Default is 1 day @note: can use everything WireCache accepts @see: https://processwire.com/api/ref/wire-cache/save/
+
+			get_total_children// ONLY for getMenuItems()
+			maximum_children_per_parent// only for include_children, i.e. natural/pw children of menu items AND applies GLOBALLY, i.e. not per menu-item-level! for getMenuItems() ONLY
+			show_more_text// the text to show for 'show more'. Used in combination with 'maximum_children_per_parent'. for getMenuItems() ONLY
+
+			extra_fields// ONLY for getMenuItems(). Expects an array. Returns the values of named fields for each menu item as applicable. Not all Fieldtypes are supported!
+		*/
+
+		$showMoreText = $this->_('View More');
+
+		// define menu properties
+		$this->set('wrapperListType', isset($options['wrapper_list_type']) ? $options['wrapper_list_type'] : 'ul');
+		$this->set('listType', isset($options['list_type']) ? $options['list_type'] : 'li');
+		$this->set('menucssID', isset($options['menu_css_id']) ? $options['menu_css_id'] : '');
+		$this->set('menucssClass', isset($options['menu_css_class']) ? $options['menu_css_class'] : '');
+		$this->set('submenucssClass', isset($options['submenu_css_class']) ? $options['submenu_css_class'] : '');
+		$this->set('hasChildrenClass', isset($options['has_children_class']) ? $options['has_children_class'] : '');
+		$this->set('firstClass', isset($options['first_class']) ? $options['first_class'] : '');
+		$this->set('lastClass', isset($options['last_class']) ? $options['last_class'] : '');
+		$this->set('currentClass', isset($options['current_class']) ? $options['current_class'] : '');
+		$this->set('currentClassLevel', isset($options['current_class_level']) ? $options['current_class_level'] : 1);
+		$this->set('currentCSSID', isset($options['current_css_id']) ? $options['current_css_id'] : '');
+		$this->set('defaultClass', isset($options['default_class']) ? $options['default_class'] : '');
+		$this->set('divider', isset($options['divider']) ? $options['divider'] : '&raquo;');
+		$this->set('prependHome', isset($options['prepend_home']) ? $options['prepend_home'] : 0);
+		$this->set('defaultTitle', isset($options['default_title']) ? $options['default_title'] : 0);
+		$this->set('includeChildren', isset($options['include_children']) && strlen($options['include_children']) ? $options['include_children'] : 4);
+		$this->set('menuMaxLevel', isset($options['m_max_level']) ? $options['m_max_level'] : 1);
+		$this->set('breadcrumbMaxLevel', isset($options['b_max_level']) ? $options['b_max_level'] : 1);
+		$this->set('checkListable', isset($options['check_listable']) ? 1 : '');
+		$this->set('cachedMenu', isset($options['cached_menu']) && 1 == (int) $options['cached_menu'] ? 1 : '');
+		$this->set('cachedMenuTime', isset($options['cached_menu_time']) ? $options['cached_menu_time'] : 86400);
+		$this->set('getTotalChildren', isset($options['get_total_children']) ? $options['get_total_children'] : 0);
+		$this->set('maximumChildrenPerParent', isset($options['maximum_children_per_parent']) ? $options['maximum_children_per_parent'] : 0);
+		$this->set('showMoreText', isset($options['show_more_text']) ? $options['show_more_text'] : $showMoreText); // show_more_text
+		$this->set('extraFields', isset($options['extra_fields']) ? $options['extra_fields'] : null); // extra_fields
+
+	}
+}
+
+/**
+ * An individual menu item.
+ * Using this for OOP and WireArray convenience.
+ *
+ */
+class Menu extends WireData {
+
+	/**
+	 * Construct a single menu item.
+	 *
+	 * @access public
+	 *
+	 */
+	public function __construct() {
+
+		$this->set('id', '');
+		$this->set('title', '');
+		$this->set('url', '');
+		$this->set('newtab', '');
+		$this->set('parentID', ''); // mb menu item parent [not pw!]
+		$this->set('pagesID', ''); // for pw pages
+		$this->set('cssID', '');
+		$this->set('cssClass', '');
+		$this->set('disabledItem', '');
+		$this->set('numChildren', '');
+		$this->set('totalChildren', '');
+	}
+}
