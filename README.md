@@ -68,7 +68,7 @@ What we need/want from a CMS/CMF:
 
 - [x] Add SSL Certificate via [Let's Encrypt](https://letsencrypt.org), so we can have https://bioclub.toyko
 - [x] Make Developement Site at [https://bioclub.tokyo](https://bioclub.tokyo)
-- [ ] Install ProcessWire at Developement Site
+- [x] Install ProcessWire at Developement Site
 - [ ] Make Basic Pages
 - [ ] Make Site Bi-lingual, Japanese/English
 - [ ] Make Accounts for BioClub Community Members
