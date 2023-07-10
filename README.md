@@ -42,7 +42,7 @@ Turing the visual ideas into production-ready HTML is not the nicest work, but n
 
 2. [TailwindCSS](https://tailwindcss.com) is another take on a utility-first CSS framework, the advantage of mix-ins and smaller file size, come with a slightly more [complex dev-setup](https://tailwindcss.com/docs/installation), that might deter first-time users. Refactoring and optimizing from _Tachyons_ to _Tailwind_ should be relatively easy.
 
-See the Tachyons and Tailwind Exampels in the [_html](https://github.com/BioClub/labu/_html) folder.
+See the Tachyons and Tailwind Exampels in the [\_html](https://github.com/BioClub/labu/_html) folder.
 
 Why don't we just use code exported from Figma/XD? Because the code is usually messy, slow and difficult to update. Exactly what we don't want.
 
