@@ -44,9 +44,17 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
   <div class="f2">
     BioClub Tokyo
   </div>
+  <!-- Language Switcher -->
   <div class="dtc v-mid w-50 tr">
-    <a class="f6 f5-ns dib" href="https://bioclub.tokyo">日本語</a> / <a class="f6 f5-ns dib" href="https://bioclub.tokyo/en/">English</a>
+<?php 
+$once = true;
+foreach($languages as $language) : 
+  $active = ($user->language->id == $language->id) ? " active " : "";
+  ?>
+    <a class="f6 f5-ns dib <?=$active?>" href="<?=$page->localUrl($language)?>"><?=$language->title?></a><?php if ($once) echo " / "; $once = false;?> 
+<?php endforeach;?>
   </div>
+  <!-- End Language Switcher -->
 </nav>
 <nav class="dt w-100 border-box pt3 b f4">
 <?php 
@@ -68,11 +76,7 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 <?php if($page->editable()): ?><a href='<?php echo $page->editUrl(); ?>'>&nbsp;&nbsp;&nbsp;</a></p><?php endif; ?>
   </h1>
   <div id="byline" class="pb2">
-    Author: <?php $createdUser = $page->createdUser;
-    print_r($createdUser->userDisplayName);
-    
-    
-    ?><br />
+    Author: <?php $createdUser = $page->createdUser; echo $createdUser->userDisplayName; ?><br />
     Published: <?php echo date('l jS \of F Y h:i:s A', $page->published); ?>, 
     Last Update: <?php echo date('l jS \of F Y h:i:s A', $page->modified); ?>
     

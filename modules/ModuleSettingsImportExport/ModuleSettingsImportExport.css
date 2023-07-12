@@ -1,0 +1,17 @@
+#ModuleSettingsImportExport .uk-form-controls {
+	padding-top: 20px;
+}
+
+
+#importSettings {
+	margin-left: 15px;
+}
+
+.Inputfield_selectedModules ul {
+    -moz-column-count: 4;
+    -moz-column-gap: 20px;
+    -webkit-column-count: 4;
+    -webkit-column-gap: 20px;
+    column-count: 4;
+    column-gap: 20px;
+}
