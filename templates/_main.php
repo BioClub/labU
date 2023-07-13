@@ -27,7 +27,7 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 <script src="<?php echo $config->urls->templates; ?>scripts/main.js"></script>
 </head>
 
-<body id="html-body" class="w-100 sans-serif bg-white">
+<body id="html-body" class="w-100 bg-white">
 
 <!-- Temporary Dev Message -->
 <div class="bg-dark-red white pa1" id="message">
@@ -76,16 +76,14 @@ foreach($languages as $language) :
     <?php echo $page->title; ?>
 <?php if($page->editable()): ?><a href='<?php echo $page->editUrl(); ?>'>&nbsp;&nbsp;&nbsp;</a></p><?php endif; ?>
   </h1>
+  <div class="lh-copy">
+<?php echo $page->content; ?>
+  </div>
   <div id="byline" class="pb2">
     Author: <?php $createdUser = $page->createdUser; echo $createdUser->user_display_name; ?><br />
     Published: <?php echo date('l jS \of F Y h:i:s A', $page->published); ?>, 
     Last Update: <?php echo date('l jS \of F Y h:i:s A', $page->modified); ?>
     <?php if($page->editable()): ?><a href='<?php echo $page->editUrl(); ?>'>Edit</a></p><?php endif; ?>
-
-  </div>
-  <div class="lh-copy">
-<?php echo $page->content; ?>
-
   </div>
 </article>
 
