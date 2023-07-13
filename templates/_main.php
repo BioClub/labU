@@ -47,11 +47,12 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
   <!-- Language Switcher -->
   <div class="dtc v-mid w-50 tr">
 <?php 
-$once = true;
 foreach($languages as $language) : 
-  $active = ($user->language->id == $language->id) ? " active " : "";
-  ?>
-    <a class="f6 f5-ns dib <?=$active?>" href="<?=$page->localUrl($language)?>"><?=$language->title?></a><?php if ($once) echo " / "; $once = false;?> 
+  // $active = ($user->language->id == $language->id) ? " bg-yellow" : "";
+  $active = $user->language->id == $language->id;
+  if ($active) continue;
+?>
+    <a class="f6 f5-ns dib" href="<?=$page->localUrl($language)?>"><?=$language->title?></a>
 <?php endforeach;?>
   </div>
   <!-- End Language Switcher -->
