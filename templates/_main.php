@@ -71,7 +71,7 @@ foreach($languages as $language) :
 </nav>
 
 <!-- article -->
-<article class="pv5 ">
+<article id="content" class="pv5 ">
   <h1 class="f1">
     <?php echo $page->title; ?>
 <?php if($page->editable()): ?><a href='<?php echo $page->editUrl(); ?>'>&nbsp;&nbsp;&nbsp;</a></p><?php endif; ?>
