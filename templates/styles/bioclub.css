@@ -1,5 +1,7 @@
 html {
  /* font-family: "Helvetica Neue"; */
+ font-family: "Helvetica Neue",-apple-system,BlinkMacSystemFont,"Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif;
+ 
 }
 a, a:visited {
   color: black;
