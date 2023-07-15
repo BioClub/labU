@@ -3,3 +3,4 @@
 .fseventsd
 assets/
 config.php
+templates/.htaccess
