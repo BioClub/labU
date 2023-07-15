@@ -1,0 +1,38 @@
+<?php
+
+class TextformatterMarkdownImageTags extends Textformatter {
+
+  public static function getModuleInfo() {
+    return array(
+      'title' => 'Markdown Image Tags', 
+      'version' => 100, 
+      'summary' => "Inster Image URLs into TextAreas, for use with Markdown {fieldName:n}",
+      'href' => 'https://github.com/trembl/TextformatterMarkdownImageTags/',
+    ); 
+  }
+
+  public function format(&$str) {
+    if(strpos($str, '{') === false) return; // check if we even need to perform a preg_match and exit if not (added by Ryan)
+    preg_match_all("/{[\w]*:[\d]*}/", $str, $array);
+    foreach($array[0] as $match){
+      $nobrackets = str_replace(array("{","}"),"",$match);
+      $exploded = explode(":",$nobrackets);
+      $field = $this->page->get($exploded[0]);
+      $number = $exploded[1];
+      if ($number < 1) continue;
+      if (!isset($number)) continue;
+      $index = $number-1;
+      if($field instanceof Pageimages){
+        if ($number) {
+          $image = $field->eq($index);
+          $imageUrl = isset($image) ? $image->url : "";
+        }
+      } else if($field instanceof Pageimage){
+        $imageUrl = $field->url;
+      } else {
+        $imageUrl = "";
+      }
+      $str = str_replace($match, $imageUrl, $str);
+    }
+  }
+}
