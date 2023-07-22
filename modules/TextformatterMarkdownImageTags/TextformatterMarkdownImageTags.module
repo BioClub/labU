@@ -6,7 +6,7 @@ class TextformatterMarkdownImageTags extends Textformatter {
     return array(
       'title' => 'Markdown Image Tags', 
       'version' => 100, 
-      'summary' => "Inster Image URLs into TextAreas, for use with Markdown {fieldName:n}",
+      'summary' => "Insert Image URLs into TextAreas, for use with Markdown {fieldName:n}",
       'href' => 'https://github.com/trembl/TextformatterMarkdownImageTags/',
     ); 
   }
