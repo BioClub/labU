@@ -39,7 +39,7 @@ We also have a shared XD Document, please ask in the [Discord](https://discord.b
 
 Turing the visual ideas into production-ready HTML is not the nicest work, but necessary.
 
-1. Use the [tachyons](http://tachyons.io) CSS Kit for creating the HMTL/CSS files. Tachyone is realatively simple and verbose, no need to install a dev-environment, anyone with a web-browser and text-editor can start using it. The CSS file is not optimzed.
+1. Use the [tachyons](http://tachyons.io) CSS Kit for creating the HMTL/CSS files. Tachyons is realatively simple and verbose, no need to install a dev-environment, anyone with a web-browser and text-editor can start using it. The CSS file is not optimzed.
 
 2. [TailwindCSS](https://tailwindcss.com) is another take on a utility-first CSS framework, the advantage of mix-ins and smaller file size, come with a slightly more [complex dev-setup](https://tailwindcss.com/docs/installation), that might deter first-time users. Refactoring and optimizing from _Tachyons_ to _Tailwind_ should be relatively easy.
 
