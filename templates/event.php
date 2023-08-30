@@ -5,25 +5,32 @@
 ?>
 
 <article id="content" class="pv5">
-  <div class="f1">
-    <?php if ($page->speaker_name) { echo $page->speaker_name; echo ": ";} ?><?=$page->title?>
+<?php if ($page->speaker_name): ?>
+  <div class="f1 i">
+    <?=$page->speaker_name?>:
   </div>
-  <div class="f3 pb2 b">
+<?php endif; ?>
+<?php if ($page->title): ?>
+  <div class="f1">
+    <?=$page->title?>
+  </div>
+<?php endif; ?>
+  <div class="f2 pv4">
     <?=$page->event_date?> JST
   </div>
 <?php
   if ($page->featured_image):
     $featured_image = $page->featured_image->size(900, 600);
+    //print_r($page->featured_image);
 ?>
-    <div>
-      <img src="<?=$featured_image->url?>" />
-    </div>
-<?php endif; ?>
-
-  <div class="lh-copy">
-    <?php echo $page->content; ?>
+  <div>
+    <img src="<?=$featured_image->url?>" />
+    <div class=""><?=$page->featured_image->description?></div>
   </div>
-  
+<?php endif; ?>
+  <div class="lh-copy">
+<?php echo $page->content; ?>
+  </div>
 <?php
 /*
 
