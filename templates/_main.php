@@ -33,7 +33,7 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 <div class="bg-dark-red white pa1" id="message">
   This is a development site for the new <span class="i">BioClub Tokyo Community Website</span>.
   Please join the Design & Development at <a href="https://github.com/BioClub/labu">GitHub</a>.
-  Legacy Website → <a href="http://www.bioclub.org">www.bioclub.org</a> 
+  Old Website, currently not working → <a href="http://www.bioclub.org">www.bioclub.org</a> 
 </div>
 <!-- END Temporary Dev Message -->
 
@@ -41,29 +41,34 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
   
 <!-- navigation -->
 <nav class="dt w-100 border-box pt3 b">
-  <div class="f2">
+  <div class="f2 fl">
     BioClub Tokyo
   </div>
   <!-- Language Switcher -->
-  <div class="dtc v-mid w-50 tr">
+  <div class="dtc v-mid tr fr">
 <?php 
 foreach($languages as $language) : 
   // $active = ($user->language->id == $language->id) ? " bg-yellow" : "";
   $active = $user->language->id == $language->id;
   if ($active) continue;
 ?>
-    <a class="f6 f5-ns dib" href="<?=$page->localUrl($language)?>"><?=$language->title?></a>
+    <a class="f6 f5-ns" href="<?=$page->localUrl($language)?>"><?=$language->title?></a>
 <?php endforeach;?>
   </div>
   <!-- End Language Switcher -->
 </nav>
 <nav class="dt w-100 border-box pt3 b f4">
 <?php 
+
+  $upcomingEvents = $pages->get("template=events-overview")->children("event_date>today, sort=-date"); 
+  $nrOfUpcomingEvents = count($upcomingEvents);
+  
   $menuItems = $menu->getMenuItems('header-menu', 2); // 2 -> return Object
   foreach($menuItems as $item) {
     $class = "";
-    if ($item->isCurrent) $class .= "active bg-yellow";
+    if ($item->isCurrent) $class .= "active underline";
     echo "  <a href='$item->url' class='$class'>$item->title</a>";
+    if ($item->title == "Events" && $nrOfUpcomingEvents > 0) echo "<sup class='white ph1 br3 bg-red'>&nbsp;$nrOfUpcomingEvents&nbsp;</sup>";
     if (!$item->isLast) echo " | ";
     echo "\n";
   }

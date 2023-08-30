@@ -11,7 +11,6 @@
 function displayMenu($menu, $name) {
   $menuItems = $menu->getMenuItems($name, 2); // 2 -> return Object
   foreach($menuItems as $item) {
-    print_r($item);
     echo "<a href='$item->url' class=''>$item->title</a> | \n";
   }
 }
