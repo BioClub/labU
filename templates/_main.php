@@ -33,7 +33,7 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 <div class="bg-dark-red white pa1" id="message">
   This is a development site for the new <span class="i">BioClub Tokyo Community Website</span>.
   Please join the Design & Development at <a href="https://github.com/BioClub/labu">GitHub</a>.
-  Old Website, currently not working → <a href="http://www.bioclub.org">www.bioclub.org</a> 
+  Legacy → <a href="http://www.bioclub.org">www.bioclub.org</a> 
 </div>
 <!-- END Temporary Dev Message -->
 
