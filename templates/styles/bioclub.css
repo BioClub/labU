@@ -20,6 +20,29 @@ a:active {
   background: #ff00ff;
 }
 
+article a, article a:visited {
+  color: white;
+  background: #ff00ff;
+  text-decoration: none;
+  border: 0px solid black;
+  box-shadow: 3px 3px 0px black;
+  padding: 0 0.25em;
+}
+
+article a:hover {
+  color: white;
+  background: blue;
+  box-shadow: 4px 4px 0px black;
+  padding: 0 0.25em;
+}
+
+article a:active {
+  color: white;
+  background: blue;
+  box-shadow: 2px 2px 0px black;
+  padding: 0 0.25em;
+}
+
 
 
 #message a, #message a:visited, #message a:active {
