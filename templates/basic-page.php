@@ -12,7 +12,7 @@
    <div class="lh-copy">
  <?php echo $page->content; ?>
    </div>
-   <div id="byline" class="pb2">
+   <div id="byline" class="pb2 moon-gray">
      Author: <?php $createdUser = $page->createdUser; echo $createdUser->user_display_name; ?><br />
      Published: <?php echo date('l jS \of F Y h:i:s A', $page->published); ?>, 
      Last Update: <?php echo date('l jS \of F Y h:i:s A', $page->modified); ?>
