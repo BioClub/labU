@@ -23,9 +23,9 @@
     $featured_image = $page->featured_image->size(900, 600);
     //print_r($page->featured_image);
 ?>
-  <div>
+  <div class="tl">
     <img src="<?=$featured_image->url?>" />
-    <div class=""><?=$page->featured_image->description?></div>
+    <figcaption class="f6 silver"><?=$page->featured_image->description?></figcaption>
   </div>
 <?php endif; ?>
   <div class="lh-copy">
