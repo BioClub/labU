@@ -11,7 +11,7 @@
   <div>
 <?php 
 
-$page->children("event_date>today, sort=-date")->each(function($event) {
+$page->children("event_date>today, sort=date")->each(function($event) {
 
   // Featured Image
   $preview_image = false;
