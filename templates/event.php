@@ -19,13 +19,12 @@
     <?=$page->event_date?> JST
   </div>
 <?php
-  if ($page->featured_image):
-    $featured_image = $page->featured_image->size(900, 600);
-    //print_r($page->featured_image);
+  if ($page->images->first()):
+    $featured_image = $page->images->first();
 ?>
   <div class="tl">
     <img src="<?=$featured_image->url?>" />
-    <figcaption class="f6 silver"><?=$page->featured_image->description?></figcaption>
+    <figcaption class="f6 silver"><?=$featured_image->description?></figcaption>
   </div>
 <?php endif; ?>
   <div class="lh-copy">

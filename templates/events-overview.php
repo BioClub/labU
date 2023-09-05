@@ -5,18 +5,16 @@
 ?>
 
 <article id="content" class="pv5 ">
-
   <div class="f3 i pb3">Upcoming Events</div>
-  
   <div>
-<?php 
-
+<?php
+// Future Events
 $page->children("event_date>today, sort=date")->each(function($event) {
 
   // Featured Image
   $preview_image = false;
-  if ($event->featured_image) {
-    $preview_image = $event->featured_image->size(300, 200);
+  if ($event->images->first()) {
+    $preview_image = $event->images->first()->size(300, 200);
   }
 
   $event_date = str_replace(
@@ -27,7 +25,7 @@ $page->children("event_date>today, sort=date")->each(function($event) {
   
   
   ?>
-    <a href="<?=$event->url?>" class="link black db outline pa2 mb4" style="box-shadow: 10px 10px 0px black;">
+    <a href="<?=$event->url?>" class="no-underline black db outline pa2 mb4" style="box-shadow: 10px 10px 0px black;">
     <div class="f1">
       <?php if ($event->speaker_name) { echo $event->speaker_name; echo ": ";} ?><?=$event->title?>
     </div>
@@ -39,6 +37,30 @@ $page->children("event_date>today, sort=date")->each(function($event) {
       <img src="<?=$preview_image->url?>" />
     </div>
 <?php endif; ?>
+    <div>
+      <?=$event->event_abstract?>
+    </div>
+    </a>
+    
+<?php
+});
+?>
+  </div>
+  <div class="f3 i pb3">Past Events</div>
+  <div>
+<?php 
+// Past Events
+$page->children("event_date<today, sort=date")->each(function($event) {
+
+
+  ?>
+    <a href="<?=$event->url?>" class="link black db outline pa2 mb4" style="box-shadow: 10px 10px 0px black;">
+    <div class="f1">
+      <?php if ($event->speaker_name) { echo $event->speaker_name; echo ": ";} ?><?=$event->title?>
+    </div>
+    <div class="f3 pb2 b">
+      <?=$event->event_date?> JST
+    </div>
     <div>
       <?=$event->event_abstract?>
     </div>
