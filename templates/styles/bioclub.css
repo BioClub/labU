@@ -9,15 +9,21 @@ body {
 
 a, a:visited {
   color: black;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:hover {
   color: white;
   background: blue;
+  text-decoration: none;
 }
 a:active {
   color: white;
   background: #ff00ff;
+  text-decoration: none;
+}
+
+.active {
+  text-decoration: underline;
 }
 
 /*
@@ -46,18 +52,35 @@ article a:active {
 */
 
 
+#member li {
+  text-decoration: none;
+}
+
+#member li:hover {
+  color: blue;
+  background: #eee;
+  text-decoration: none;
+}
+#member li:active {
+  color: blue;
+  background: #ddd;
+  text-decoration: none;
+}
+
 
 #message a, #message a:visited, #message a:active {
   color: white;
-  text-decoration: none;
   background: blue;
+  text-decoration: none;
 }
 #message a:hover {
   color: blue;
   background: white;
+  text-decoration: none;
 }
 #message a:active {
   color: white;
   background: blue;
+  text-decoration: none;
 }
 
