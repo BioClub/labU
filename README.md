@@ -25,7 +25,7 @@ Site structure ideas/suggestion should go into the `\_structure` folder.
 
 # Design
 
-New Designs ideas/suggestion should go into the `\_design` folder.
+New Designs, Ideas & Suggestion should go into the `\_design` folder.
 
 ### Figma
 
@@ -71,8 +71,8 @@ What we need/want from a CMS/CMF:
 - [x] Make Developement Site at [https://bioclub.tokyo](https://bioclub.tokyo)
 - [x] Install ProcessWire at Developement Site
 - [x] Create Template/Fields Export/Import System
-- [ ] Make Basic Pages
-- [ ] Make Site Bi-lingual, Japanese/English
+- [x] Make Basic Pages
+- [x] Make Site Bi-lingual, Japanese/English
 - [ ] Make Accounts for BioClub Community Members
 - [ ] Add Contact Form!
 
