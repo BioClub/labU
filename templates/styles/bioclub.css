@@ -96,3 +96,16 @@ article a:active {
 #social a:active {
   color: #f0f;
 }
+
+
+
+
+tbody tr:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: blue;
+}
+tbody tr:active {
+  color: #fff;
+  background-color: #f0f;
+}

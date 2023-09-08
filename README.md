@@ -83,5 +83,11 @@ Please share your ideas, whishes and content at the [Google Docs](https://docs.g
 
 ### Inventory
 
-Fields: `title`, `content`, `inventory_id`, `images`, `owner`
+Fields: 
+`title`
+`content`
+`inventory_id`: TextArea
+`images`, image(s) showing inventory item
+`user_reference`, owner of inventory item
+
 Template: `inventory`, `inventory_overview`
