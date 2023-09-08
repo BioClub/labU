@@ -1,5 +1,7 @@
 html {
  /* font-family: "Helvetica Neue"; */
+
+ 
 }
 body {
   font-family:sans-serif;
@@ -84,3 +86,13 @@ article a:active {
   text-decoration: none;
 }
 
+#social a, #social a:visited, #social a:active {
+  color: black;
+  background: transparent;
+}
+#social a:hover {
+  color: blue;
+}
+#social a:active {
+  color: #f0f;
+}
