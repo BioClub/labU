@@ -78,3 +78,10 @@ What we need/want from a CMS/CMF:
 
 Please share your ideas, whishes and content at the [Google Docs](https://docs.google.com/document/d/1o2WTNjTxkZYKmCmdziS-a4XgKwddnrclsKorgtMeCUo/edit?usp=sharing) , and any more Development-related issues at [GitHub Issues](https://github.com/BioClub/BioClub-Wordpress-Theme/issues).
 
+
+## Features
+
+### Inventory
+
+Fields: `title`, `content`, `inventory_id`, `images`, `owner`
+Template: `inventory`, `inventory_overview`
