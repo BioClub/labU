@@ -2,11 +2,7 @@
 
 // Template file for pages using the “members-overview” template
 
-
-
 ?>
-
-
 <?php
 
 
