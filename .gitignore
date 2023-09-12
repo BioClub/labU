@@ -6,3 +6,4 @@ config.php
 templates/.htaccess
 .htaccess
 templates/node_modules
+templates/package-lock.json
