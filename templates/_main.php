@@ -19,10 +19,20 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 <html lang="en">
 <head id="html-head">
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title><?php echo $page->title; ?></title>
-<meta name="description" content="BioClub Tokyo">
-<meta name="author" content="@trembl">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title><?php echo $page->title; ?></title>
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="description" content="BioClub Tokyo">
+<meta property="og:title" content="Aeon | a world of ideas">
+<meta property="og:description" content="BioClub Tokyo">
+<meta property="og:url" content="https://bioclub.tokyo">
+<meta property="og:type" content="website">
+<!--
+<meta property="og:image" content="https://">
+-->
+<link rel="canonical" href="https://bioclub.tokyo">
+<meta name="theme-color" content="#00FF00">
+<meta name="author" content="@trembl">
 <link rel="stylesheet" type="text/css" href="<?php echo $config->urls->templates; ?>styles/main.css" />
 <script src="<?php echo $config->urls->templates; ?>scripts/main.js"></script>
 </head>
@@ -30,37 +40,55 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 <body id="html-body" class="w-100">
 
 <!-- Temporary Dev Message -->
-<div class="bg-dark-red white pa1" id="message">
+<div class="bg-yellow black pa1 tc dn" id="message">
   This is a development site for the new <span class="i">BioClub Tokyo Community Website</span>.
   Please join the Design & Development at <a href="https://github.com/BioClub/labu">GitHub</a>.
   Legacy → <a href="http://www.bioclub.org">www.bioclub.org</a> 
 </div>
 <!-- END Temporary Dev Message -->
 
-<main class="ph4">
+<header class="flex justify-between pt3">
+  <div class="w-25 f3 b pa2 pl3">
+    <a href="#">BioClub Tokyo</a>
+  </div>
+  <div class="w-50 tc">
+    <div class="f2 b">
+      <!-- <a href="<?=$pages->get(1)->httpUrl?>">BioClub Tokyo</a> -->
+    </div>
+    <img style="width:20vh;" src="<?= $urls->templates ?>images/android-chrome-192x192.png"/>
+  </div>
+  <div class="w-25 f3 b pa2 pr3 tr">
+    <!--
+    <svg viewBox="0 0 20 20" fill="currentColor" stroke="none" width="18" height="18" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-cy="icon-user"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z"></path>
+    </svg>
+    /
+      -->
+<!-- Language Switcher -->
+<?php 
+  $userPage = $input->urlSegmentStr;
+  foreach($languages as $language) : 
+    // $active = ($user->language->id == $language->id) ? " bg-yellow" : "";
+    $active = $user->language->id == $language->id;
+    if ($active) continue;
+?>
+    <a href="<?=$page->localUrl($language)?><?=$input->urlSegmentStr?>">
+      <span class="dn-m di-ns">Login / </span>
+      
+      <span class=""><?=$language->title?></span>
+    </a>
+<?php endforeach;?>
+
+      <!-- End Language Switcher -->
+
+  </div>
+</header>
+
+
+<main class="ph3">
   
 <!-- navigation -->
-<nav class="dt w-100 border-box pt3 b">
-  <div class="f2 fl">
-    <a href="<?=$pages->get(1)->httpUrl?>">BioClub Tokyo</a>
-  </div>
-  <!-- Language Switcher -->
-  <div class="dtc v-mid tr fr">
-<?php 
 
-$userPage = $input->urlSegmentStr;
-
-foreach($languages as $language) : 
-  // $active = ($user->language->id == $language->id) ? " bg-yellow" : "";
-  $active = $user->language->id == $language->id;
-  if ($active) continue;
-?>
-    <a class="f6 f5-ns" href="<?=$page->localUrl($language)?><?=$input->urlSegmentStr?>"><?=$language->title?></a>
-<?php endforeach;?>
-  </div>
-  <!-- End Language Switcher -->
-</nav>
-<nav class="dt w-100 border-box pt3 b f4">
+<nav class="dt w-100 border-box pt3 b f3-m f2">
 <?php 
 
   $upcomingEvents = $pages->get("template=events-overview")->children("event_date>today, sort=-date"); 
@@ -82,7 +110,6 @@ foreach($languages as $language) :
 <article id="content" class="pv5 ">
 
 </article>
-
 
 <!-- footer -->
 <footer class="pb2">
