@@ -5,3 +5,4 @@ assets/
 config.php
 templates/.htaccess
 .htaccess
+templates/node_modules
