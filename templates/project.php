@@ -11,8 +11,8 @@
   
   <div class="f3 lh-copy">
     Project Members: <?php
-foreach($page->user_test as $user) {
-  echo "<a href='$user->url'>$user->user_display_name</a>";
+foreach($page->user_reference as $u) {
+  echo "<a href='$u->url'>$u->user_display_name</a>";
 }
 ?>
   </div>
