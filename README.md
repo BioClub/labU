@@ -61,9 +61,12 @@ After evaluation other framesworks and alternatives like SSGs, we decided to bui
 
 What we need/want from a CMS/CMF:
 
+### Requirements
+
 - [x] [Free and Open-Source Software](https://github.com/processwire/processwire/blob/master/LICENSE.TXT)
 - [x] Must run on Apache on a Shared Server (LAMP)
-- [x] User Management & Roles
+- [x] User Management (Create new Users, change/update User Profile)
+- [x] Role-based Access Control (Admin, Editor, etc.)
 - [x] Bi-lingual JP/EN
 - [x] MarkDown
 - [x] Custom Post/Page Types (ie. Events, Inventory, News, etc)
