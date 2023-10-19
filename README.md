@@ -1,12 +1,12 @@
 # BioClub Tokyo Community Website
 
-Public Development for the  BioClub Tokyo Community Website. Theme for [BioClub Tokyo](http://www.bioclub.tokyo).
+Public Development Repository for the  BioClub Tokyo Community Website. Theme for [BioClub Tokyo](http://www.bioclub.tokyo).
 
-The [old BioClub](http://bioclub.org) Website at is a bit chaotic, it does not really reflect all the projects, events and experiments happening at BioClub.
+The [old BioClub](http://bioclub.org) Website is a bit chaotic, it does not really reflect all the projects, events, experiments and social activities that are happening at BioClub.
 
-Unfortunately it's not possible for the BioClub community to change/update the CMS and structure of the server, therefore we decided to make a new website - where we can implement the needs and requirements of the community.
+Unfortunately it's not possible for the BioClub community to change/update the old website and structure of the server, therefore we decided to make a new website - where we can implement the needs and requirements of the community.
 
-The website and it's theme should also be free and open-source.
+The website and it's theme also need be free and open-source.
 
 # Discussion & Content
 
@@ -39,20 +39,25 @@ We also have a shared XD Document, please ask in the [Discord](https://discord.b
 
 Turing the visual ideas into production-ready HTML is not the nicest work, but necessary.
 
-1. Use the [tachyons](http://tachyons.io) CSS Kit for creating the HMTL/CSS files. Tachyons is realatively simple and verbose, no need to install a dev-environment, anyone with a web-browser and text-editor can start using it. The CSS file is not optimzed.
+### Tachyons
 
-2. [TailwindCSS](https://tailwindcss.com) is another take on a utility-first CSS framework, the advantage of mix-ins and smaller file size, come with a slightly more [complex dev-setup](https://tailwindcss.com/docs/installation), that might deter first-time users. Refactoring and optimizing from _Tachyons_ to _Tailwind_ should be relatively easy.
+If you are new to CSS, use [Tachyons](http://tachyons.io). Tachyons is realatively simple and verbose, no need to install a dev-environment, anyone with a web-browser and text editor can start using it. The CSS file is not optimzed.
+
+### TailwindCSS
+
+[TailwindCSS](https://tailwindcss.com) is another take on a utility-first CSS framework, the advantage of mix-ins and smaller file size, come with a slightly more [complex dev-setup](https://tailwindcss.com/docs/installation), that might deter first-time users. Refactoring and optimizing from _Tachyons_ to _Tailwind_ should be relatively easy.
 
 See the Tachyons and Tailwind Exampels in the [\_html](https://github.com/BioClub/labu/_html) folder.
 
-Why don't we just use code exported from Figma/XD? Because the code is usually messy, slow and difficult to update. Exactly what we don't want.
-
+>Why don't we just use code exported from Figma or XD? Because the generate code is very messy, slow and difficult to update. Exactly what we don't want.
 
 # Development
 
-[Wordpress used to be the universal tool of choice](https://github.com/BioClub/labu/Wordpress_Installation_Guide.md), but in recent releases Wordpress went more into an Website-Builder direcetion, rather than strengthening the CMS aspects of it, to a point where it does not longer make sense to bend Wordpress to function as a CMS.
+Wordpress used to be the universal tool of choice, but in recent releases Wordpress went more into an Website-Builder direction, rather than strengthening the CMS aspects of it. (Looking at you, Block Editor). It came to a point where it does not longer make sense to bend and modify Wordpress to function as a CMS/CMF.
 
-After evaluation other framesworks and alternatives like SSGs, we decided to build the new BioClub Community Website using [ProcessWire](https://www.processwire.com).
+Also, recent the move of both ACF and WPML to go from perpetual license to a subscription fee makes Wordpress even less attractive.
+
+After evaluation other framesworks and alternatives like SSGs, we decided to build the new BioClub Community Website using [ProcessWire](https://www.processwire.com). (But if there are other solutions, please share them in #website on the [BioClub Discord](https://discord.bioclub.tokyo)).
 
 What we need/want from a CMS/CMF:
 
@@ -79,7 +84,7 @@ What we need/want from a CMS/CMF:
 Please share your ideas, whishes and content at the [Google Docs](https://docs.google.com/document/d/1o2WTNjTxkZYKmCmdziS-a4XgKwddnrclsKorgtMeCUo/edit?usp=sharing) , and any more Development-related issues at [GitHub Issues](https://github.com/BioClub/BioClub-Wordpress-Theme/issues).
 
 
-## Features
+## Notes
 
 ### Inventory
 
