@@ -74,6 +74,9 @@ What we need/want from a CMS/CMF:
 - [x] Server-side Image Resizing
 - [x] Security
 
+### ProcessWire Examples
+
+Screenshots with [ProcessWire Examples](_structure/ProcessWire.md).
 ### Nice to have
 - [ ] Announce Mailing List Management (subscribe/unsubscribe)
 
