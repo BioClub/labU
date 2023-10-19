@@ -74,6 +74,11 @@ What we need/want from a CMS/CMF:
 - [x] Server-side Image Resizing
 - [x] Security
 
+### ProcessWire Installation
+
+ProcessWire [Installation](INSTALLATION.md) Notes.
+
+
 ## TODO
 
 - [x] Add SSL Certificate via [Let's Encrypt](https://letsencrypt.org), so we can have https://bioclub.toyko
@@ -90,7 +95,8 @@ Please share your ideas, whishes and content at the [Google Docs](https://docs.g
 
 ## Notes
 
-### Inventory
+
+### Inventory Template
 
 Fields: 
 `title`
