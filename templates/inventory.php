@@ -25,6 +25,7 @@
     </thead>
     <tbody class="lh-copy">
 <?php
+
 // Future Events
 $page->children()->each(function($item) {
   $u = $item->user_reference->first();

@@ -10,3 +10,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Tailwind Additional Base Styles */
+
+@layer base {
+  a {
+    text-decoration: none;
+   
+  }
+  a:hover {
+   /* @apply text-white bg-red-500  */
+   text-decoration: underline;
+   @apply decoration-2 underline-offset-2;
+  }
+  a:active {
+    /* @apply text-white bg-red-500; */
+    text-decoration: underline;
+    @apply decoration-4 underline-offset-2 decoration-red-500;
+  }
+  a.active {
+    text-decoration: underline;
+    @apply decoration-2 underline-offset-2;
+  }
+}
+
