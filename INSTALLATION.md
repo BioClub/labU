@@ -2,7 +2,13 @@
 
 Installation Notes for [ProcessWire](https://www.processwire.com).
 
-## Why Processwire?
+## Why ProcessWire?
+ProcessWire ticks all the boxes we need from a CMS (or CMF).
+- [x] Free and Open Source
+- [x] Runs on Apache on a Shared Server
+- [x] User Management
+- [x] Build-in Custom Fields
+- [x] Integrated multi-language
 
 
 ## Tailwind CSS
@@ -22,7 +28,11 @@ https://tailwindcss.com/docs/optimizing-for-production
 - Apache
 
 
-## Resetting Passwords (Hard Way)
+## ProcessWire: Resetting Passwords
+On a production server, resetting via email works.
+
+## ProcessWire: Resetting Passwords (The Hard Way)
+On a dev server, email sending is usually not configured, we need to reset the password the _hard_ way. (Well, not really _that_ hard.)
 https://processwire.com/talk/topic/1736-forgot-backend-password-how-do-you-reset/
 
 >>> You can always reset your password just by pasting this temporarily into any one of your templates, and then viewing a page that uses the template:
@@ -34,8 +44,6 @@ $u->pass = 'your-new-password';
 $u->save();
 ```
 
-```
-$users->get("admin")->of(false)->set('pass', 'yo12345')->save();
-```
-
 >>> Passwords are in a table called field_password. They are hashed and salted, and not reversible, so no way to set or change them without going directly through the API.
+
+Ok, interesting & secure. In WP it's possible to change a password - if there is access to the DB.
