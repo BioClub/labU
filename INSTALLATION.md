@@ -28,6 +28,22 @@ https://tailwindcss.com/docs/optimizing-for-production
 - Apache
 
 
+## Templates
+
+In ProcessWire the atomic elements are `fields`, which can be used to assemble `templates`.
+
+### Inventory Template
+
+Fields: 
+`title`
+`content`
+`inventory_id`: TextArea
+`images`, image(s) showing inventory item
+`user_reference`, owner of inventory item
+
+Template: `inventory`, `inventory_overview`
+
+
 ## ProcessWire: Resetting Passwords
 On a production server, resetting via email works.
 
