@@ -2,8 +2,12 @@
 
 > Everything need to be Bi-lingual (Japanese/English)
 
+> All Descriptions & Abstracts are Markdown-enabled
+
 * Pages
-  - About
+  - Title
+  - Descriptions
+  - Image(s)
 
 * Posts
   - Tags
