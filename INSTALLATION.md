@@ -11,17 +11,6 @@ ProcessWire ticks all the boxes we need from a CMS (or CMF).
 - [x] Integrated multi-language
 
 
-## Tailwind CSS
-
-Using Tailwind CSS with Processwire:
-
-1. Install [Tailwind CLI](https://tailwindcss.com/docs/installation)
-2. Watch for changes `npx tailwindcss -i ./styles/main.css -o ./styles/tailwind_output.css --watch`
-3. Build & [Minify](https://tailwindcss.com/docs/optimizing-for-production) `npx tailwindcss -i ./styles/main.css -o ./styles/tailwind_output.css --minify`
-
-
-https://tailwindcss.com/docs/optimizing-for-production
-
 ## Prerequisits
 - MySQL/MariaDB
 - PHP 8?
