@@ -59,9 +59,22 @@ Also, recent the move of both ACF and WPML to go from perpetual license to a sub
 
 After evaluation other framesworks and alternatives like SSGs, we decided to build the new BioClub Community Website using [ProcessWire](https://www.processwire.com). (But if there are other solutions, please share them in #website on the [BioClub Discord](https://discord.bioclub.tokyo)).
 
-What we need/want from a CMS/CMF:
+
+# Use Cases
+
+## 1. Bi-Lingual Events
+
+- Create an `Event Page` with all the necessary event info.
+- Based on that data, create an `Event Overview Page`, showing all future events, ordered by date, includung resized image previews, title, and event abstract.
+- Once the event is finished - i.e. the `event date` is older than the current date, the event page moves to the `Event Archive Page`.
+- User can write `Event Reports`, which can be linked to the `Event Page`. Links to the `Event Reports` appear on the `Event Page.`
+
+## 2. BioClub Projects
+
 
 ### Requirements
+
+What we need/want from a CMS/CMF:
 
 - [x] [Free and Open-Source Software](https://github.com/processwire/processwire/blob/master/LICENSE.TXT)
 - [x] Must run on Apache on a Shared Server (LAMP)
@@ -70,20 +83,18 @@ What we need/want from a CMS/CMF:
 - [x] Bi-lingual JP/EN
 - [x] MarkDown
 - [x] Custom Post/Page Types (ie. Events, Inventory, News, etc)
-- [x] Strong Custom Fields Support
+- [x] Strong Custom Fields [Support](_structure/ProcessWire.md)
 - [x] Server-side Image Resizing
-- [x] Security
+- [x] HTTPS
 
-### ProcessWire Examples
 
-Screenshots with [ProcessWire Examples](_structure/ProcessWire.md).
 ### Nice to have
 - [ ] Announce Mailing List Management (subscribe/unsubscribe)
 
 ### ProcessWire Installation
 
-ProcessWire [Installation](INSTALLATION.md) Notes.
-
+- ProcessWire [Installation](INSTALLATION.md) Notes.
+- Screenshots with [ProcessWire Examples](_structure/ProcessWire.md).
 
 ## TODO
 
@@ -102,13 +113,3 @@ Please share your ideas, whishes and content at the [Google Docs](https://docs.g
 ## Notes
 
 
-### Inventory Template
-
-Fields: 
-`title`
-`content`
-`inventory_id`: TextArea
-`images`, image(s) showing inventory item
-`user_reference`, owner of inventory item
-
-Template: `inventory`, `inventory_overview`
