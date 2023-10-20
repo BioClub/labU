@@ -1,51 +1,56 @@
-Site Features
+# Site Structure & Requirements
 
-* Bi-lingual (Japanese/English)
+> Everything need to be Bi-lingual (Japanese/English)
 
 * Pages
+  - About
 
-* Blog Posts
+* Posts
   - Tags
+  - Category
   - People
+  - Link to Event/Project
 
 * Event Pages
   - Event Date
   - Description
   - Link to FB Event
-  - Key Image(s)
-  - Additional Images (Link to Flickr)
-  - Participants?
-  - Video?
-  - Comments? (Facebook Comments?)
+  - Image(s)
+  - Link to Recorded Video
+  - Linked Reports (-> Posts)
 
 * Projects
   - Description
-  - Key Image
+  - Image(s)
   - Project Members
-  - Project Updates
+  - Project Updates (-> Posts)
  
 * Protocols
   - Description
-  - Images
+  - Image(s)
   - Material List
 
+* Inventory
+  - Description
+  - Image(s)
+  - Inventory ID
+  - Owner (Link to User)
+  
 * User Pages
+  - Description
+  - Image(s)
   - Social Links
-  - Text
-  - User Image
   - Mentions
     - Projects
     - Events
   
 * Users
-  - Subscriber -> BioClub Affiliate (Lecturer, Advisor) (can: edit own page)
+  - Subscriber -> BioClub Affiliate (Lecturer, Advisor) (can: edit only own page)
   - Contributor -> BioClub Member (can: edit own page, write blog posts)
   - Editor -> (can: make/edit event, publish blog post, make/edit page)
   - Admin
 
 
-
-Site Structure != Design!
 
 
 
