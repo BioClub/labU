@@ -79,13 +79,15 @@ What we need/want from a CMS/CMF:
 - [x] [Free and Open-Source Software](https://github.com/processwire/processwire/blob/master/LICENSE.TXT)
 - [x] Needs to run on Apache on a Shared Server (LAMP)
 - [x] User Management (Create new Users, change/update User Profile)
+- [x] User Passwort Reset
 - [x] Role-based Access Control (Admin, Editor, etc.)
 - [x] Bi-lingual JP/EN
 - [x] MarkDown
 - [x] Custom Post/Page Types (ie. Events, Inventory, News, etc)
-- [x] Strong Custom Fields [Support](_structure/ProcessWire.md)
+- [x] Support for Custom Fields [Support](_structure/ProcessWire.md)
 - [x] Server-side Image Resizing
 - [x] HTTPS
+
 
 
 ### Nice to have
