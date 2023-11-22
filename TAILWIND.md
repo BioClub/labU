@@ -12,18 +12,21 @@ Using Tailwind CSS with Processwire:
 
 ## Running & Watching
 
-- Start watching: `npx tailwindcss -i ./styles/main.css -o ./styles/tailwind_output.css --watch`
+Start watching: 
+`npx tailwindcss -i ./styles/main.css -o ./styles/tailwind_output.css --watch`
 
 Example output:
 ```
-
-
+Rebuilding...
+Done in 292ms.
 ```
 
 
 ## Building for Production
 
-- Build & [Minify](https://tailwindcss.com/docs/optimizing-for-production) `npx tailwindcss -i ./styles/main.css -o ./styles/tailwind_output.css --minify`
+Build & [Minify](https://tailwindcss.com/docs/optimizing-for-production)
 
-https://tailwindcss.com/docs/optimizing-for-production
+`npx tailwindcss -i ./styles/main.css -o ./styles/tailwind_output.css --minify`
+
+
 
