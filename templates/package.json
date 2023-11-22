@@ -1,8 +1,5 @@
 {
   "devDependencies": {
     "tailwindcss": "^3.3.3"
-  },
-  "dependencies": {
-    "caniuse-lite": "^1.0.30001553"
   }
 }
