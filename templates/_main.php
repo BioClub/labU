@@ -43,15 +43,7 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 <script src="<?php echo $config->urls->templates; ?>scripts/main.js"></script>
 </head>
 
-<body id="html-body" class="">
-
-<!-- Temporary Dev Message -->
-<div class="hidden bg-red-500 text-white text-xs font-mono text-left p-2" id="message">
-  This is a development site for the new <span class="i">BioClub Tokyo Community Website</span>.
-  Please join the Design & Development at <a href="https://github.com/BioClub/labu">GitHub</a>.
-  Legacy → <a href="http://www.bioclub.org">www.bioclub.org</a> 
-</div>
-<!-- END Temporary Dev Message -->
+<body id="html-body">
 
 <header class="flex justify-between py-4 px-3">
   <div class="flex-none" style="width:50vh">

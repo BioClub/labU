@@ -7,30 +7,52 @@
 */
 
 /* Tailwind */
-@tailwind base;
+
 @tailwind components;
 @tailwind utilities;
+@tailwind base;
 
 /* Tailwind Additional Base Styles */
 
 @layer base {
-  a {
-    text-decoration: none;
-   
+  
+  /* Headers */
+  
+  h2 {
+    @apply text-4xl font-semibold;
   }
-  a:hover {
+  h3 {
+    @apply text-3xl font-semibold;
+  }
+  h4 {
+    @apply text-2xl font-semibold;
+  }
+  
+  /* Links */
+  
+  header a, nav a {
+    text-decoration: none;
+  }
+  header a:hover, nav a:hover {
    /* @apply text-white bg-red-500  */
    text-decoration: underline;
    @apply decoration-2 underline-offset-2;
   }
-  a:active {
+  header a:active, nav a:active {
     /* @apply text-white bg-red-500; */
     text-decoration: underline;
     @apply decoration-4 underline-offset-2 decoration-red-500;
   }
-  a.active {
+  header a.active, nav a.active {
     text-decoration: underline;
     @apply decoration-2 underline-offset-2;
   }
+
+  /* Shadows */
+  .box {
+    @apply border-solid border-2 border-black mb-4 p-2;
+    box-shadow: 5px 5px 0px black;
+  }
+  
 }
 
