@@ -13,6 +13,12 @@ module.exports = {
       xl: '1440px',
     },
     extend: {
+      colors: {
+        'pure-red': '#ff0000',
+        'pure-green': '#00ff00',
+        'pure-blue': '#0000ff',
+        'pure-yellow': '#ffff00',
+      },
     },
   },
   plugins: [],
