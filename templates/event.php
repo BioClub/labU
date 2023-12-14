@@ -4,28 +4,31 @@
 
 ?>
 
-<article id="content" class="pv5">
+<article id="content" class="">
 <?php if ($page->speaker_name): ?>
-  <div class="f1 i">
-    <?=$page->speaker_name?>:
-  </div>
+  <h2 class="italic"><?=$page->speaker_name?>: </h2>
 <?php endif; ?>
 <?php if ($page->title): ?>
-  <div class="f1">
-    <?=$page->title?>
-  </div>
+  <h2><?=$page->title?></h2>
 <?php endif; ?>
-  <div class="f2 pv4">
-    <?=$page->event_date?> JST
-  </div>
+  <span class="leading-8 mb-2">
+    <span class="text-ms bg-gray-200 rounded-full px-2 py-1"><?=$page->event_date?> JST</span>
+  </span>
+  <a 
+    class="text-ms bg-green-500 hover:bg-green-600 active:bg-green-700 text-white rounded-full ml-1 px-2 py-1"    
+    href="https://maps.app.goo.gl/xGpo5acrHNpescaX8"
+  >BioClub&nbsp;Tokyo</a>
+
 <?php
   if ($page->images->first()):
     $featured_image = $page->images->first();
 ?>
-  <div class="tl">
+  <div class="pb-4">
     <img src="<?=$featured_image->url?>" />
-    <figcaption class="f6 silver"><?=$featured_image->description?></figcaption>
+<?php if ($featured_image->description): ?>
+    <div class="text-sm p-1 bg-black text-white"><?=$featured_image->description?></div>
   </div>
+<?php endif; ?>
 <?php endif; ?>
   <div class="lh-copy">
 <?php echo $page->content; ?>
@@ -41,8 +44,8 @@
   
 ?>
 
-  <div id="byline" class="pv5 moon-gray">
-    Author: <?php $createdUser = $page->createdUser; echo $createdUser->user_display_name; ?><br />
+  <div id="byline" class="py-8 text-xs text-gray-300">
+    Author: <?php $createdUser = $page->createdUser; echo $createdUser->user_display_name; ?>, 
     Published: <?php echo date('l jS \of F Y h:i:s A', $page->published); ?>, 
     Last Update: <?php echo date('l jS \of F Y h:i:s A', $page->modified); ?>
     <?php if($page->editable()): ?><a href='<?php echo $page->editUrl(); ?>'>Edit</a></p><?php endif; ?>
