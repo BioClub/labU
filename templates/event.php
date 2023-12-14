@@ -30,7 +30,7 @@
   </div>
 <?php endif; ?>
 <?php endif; ?>
-  <div class="lh-copy">
+  <div class="">
 <?php echo $page->content; ?>
   </div>
 <?php

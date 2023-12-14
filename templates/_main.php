@@ -78,7 +78,7 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
         $class = "";
         if ($item->isCurrent) $class .= "active";
         echo "<a href='$item->url' class='p-1  rounded-md $class'>$item->title</a>";
-        if ($item->title == "Events" && $nrOfUpcomingEvents > 0) echo "<sup class='bg-red-500 text-white rounded-full'>&nbsp;$nrOfUpcomingEvents&nbsp;</sup>";
+        if (($item->title == "Events" OR $item->title == "イベント") && $nrOfUpcomingEvents > 0) echo "<sup class='bg-red-500 text-white rounded-full'>&nbsp;$nrOfUpcomingEvents&nbsp;</sup>";
         if (!$item->isLast) echo " ";
      //   echo "\n";
       }

@@ -18,6 +18,9 @@
   
   /* Headers */
   
+  h1 {
+    @apply text-6xl font-semibold;
+  }
   h2 {
     @apply text-4xl font-semibold;
   }
@@ -26,6 +29,18 @@
   }
   h4 {
     @apply text-2xl font-semibold;
+  }
+  
+  /* Content Markdown */
+  
+  #content p {
+    padding-bottom: 1em;
+  }
+  
+  #content li {
+    list-style-type: disc; 
+    list-style-position: inside;
+    margin-left: 1em;  
   }
   
   /* Links */
