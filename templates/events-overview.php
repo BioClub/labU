@@ -8,13 +8,16 @@ $future_events = $page->children("event_date>today, sort=date");
 ?>
 
 <article id="content" class="">
-  <div class="pb-8">
-    <h2 class="text-center"><?php _e("Upcoming Events"); ?></h2>
+  <h2 class="text-center pb-5"><?php _e("Upcoming Events"); ?></h2>
+    
 <?php if (count($future_events) == 0) { ?>
-      <div class="box mt-4 text-center">
-        <?php echo $page->content; ?>
-      </div>
+  <div class="box mt-4 text-center">
+    <?php echo $page->content; ?>
+  </div>
 <?php } ?>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
+
   
 <?php
 
@@ -34,35 +37,44 @@ $future_events->each(function($event) {
   
   
   ?>
-    <a href="<?=$event->url?>" class="" style="">
-    <div class="">
-      <?php if ($event->speaker_name) { echo $event->speaker_name; echo ": ";} ?><?=$event->title?>
-    </div>
-    <div class="">
-      <?=$event->event_date?> JST
-    </div>
-<?php if ($preview_image): ?>
-    <div>
-      <img src="<?=$preview_image->url?>" />
-    </div>
-<?php endif; ?>
-    <div>
-      <?=$event->event_abstract?>
-    </div>
+    <a class="box hover:bg-gray-100 active:bg-pure-yellow" href="<?=$event->url?>">
+  
+      <div class="leading-8 mb-2">
+        <span class="text-ms bg-gray-200 rounded-full px-2 py-1"><?=$event->event_date?> JST</span>
+      </div>
+  
+  <?php if ($event->images->first()):
+    $img = $event->images->first()->size(1000, 333);
+  ?>
+      <img src="<?=$img->url?>" class="w-full mb-3" />
+  <?php endif; ?>
+
+
+  
+      <h2 class="px-1">
+        <?php if ($event->speaker_name) { echo $event->speaker_name; echo ": ";} ?><?=$event->title?>
+      </h2>
+      <div class="leading-8 my-2">
+        <span class="text-ms bg-gray-200 rounded-full ml-1 px-2 py-1">BioClub&nbsp;Tokyo</span>
+      </div>
+      <div class="px-1">
+        <?=$event->event_abstract?>
+      </div>
     </a>
-    
+
 <?php
 });
 ?>
   </div>
   
   <h2 class="text-center pb-5"><?php _e("Recent Events"); ?></h2>
+  
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
 <?php 
 // Past Events
 $page->children("event_date<today, sort=date")->each(function($event) {
   ?>
-  <div class="box">
+  <a class="box hover:bg-gray-100 active:bg-pure-yellow" href="<?=$event->url?>">
     
     <div class="leading-8 mb-2">
       <span class="text-ms bg-gray-200 rounded-full px-2 py-1"><?=$event->event_date?> JST</span>
@@ -76,13 +88,12 @@ $page->children("event_date<today, sort=date")->each(function($event) {
 
  
     
-    <h2>
-      <a href="<?=$event->url?>">
+    <h2 class="px-1">
       <?php if ($event->speaker_name) { echo $event->speaker_name; echo ": ";} ?><?=$event->title?>
-      </a>
     </h2>
     <div class="leading-8 my-2">
-      <a class="text-ms bg-green-500 hover:bg-green-600 active:bg-green-700 text-white rounded-full ml-1 px-2 py-1" href="">BioClub&nbsp;Tokyo</a>
+      <span class="text-ms bg-gray-200 rounded-full ml-1 px-2 py-1">BioClub&nbsp;Tokyo</span>
+<?php /* 
       <a 
         class="text-ms bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white rounded-full ml-1 px-2 py-1"    
         href="https://zoom.bioclub.tokyo"
@@ -95,15 +106,12 @@ $page->children("event_date<today, sort=date")->each(function($event) {
         class="text-ms bg-red-500 hover:bg-red-600 active:bg-red-700 text-white rounded-full ml-1 px-2 py-1"    
         href="https://zoom.bioclub.tokyo"
       >Workshop</a>
-
+*/ ?>
     </div>
-    <div>
-      <a href="<?=$event->url?>" class="">
-        <?=$event->event_abstract?>
-      </a>
+    <div class="px-1">
+      <?=$event->event_abstract?>
     </div>
-    <!--</a>-->
-  </div>
+  </a>
     
 <?php
 });
