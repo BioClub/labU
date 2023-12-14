@@ -36,10 +36,6 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 
 <link rel="stylesheet" type="text/css" href="<?php echo $config->urls->templates; ?>styles/bioclub.css" />
 
-<!-- Tachyons
-<link rel="stylesheet" type="text/css" href="<?php echo $config->urls->templates; ?>styles/main.css" />
--->
-
 <script src="<?php echo $config->urls->templates; ?>scripts/main.js"></script>
 </head>
 
