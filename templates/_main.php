@@ -34,7 +34,7 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 <meta name="theme-color" content="#00FF00">
 <meta name="author" content="@trembl">
 
-<link rel="stylesheet" type="text/css" href="<?php echo $config->urls->templates; ?>styles/tailwind_output.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $config->urls->templates; ?>styles/bioclub.css" />
 
 <!-- Tachyons
 <link rel="stylesheet" type="text/css" href="<?php echo $config->urls->templates; ?>styles/main.css" />
@@ -156,7 +156,7 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
   </div>
 </footer>
 
-<div class="text-center p-2"><a href="https://github.com/BioClub/labu">Site Design</a> / Logo &copy;<?php echo date("Y"); ?> BioClub Tokyo, User Contributed Content by <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div>
+<div class="text-center p-2"><a href="https://github.com/BioClub/labU">Site Design</a> / Logo &copy;<?php echo date("Y"); ?> BioClub Tokyo, User Contributed Content by <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div>
 
 </body>
 </html>
