@@ -2,14 +2,23 @@
 
 // Template file for pages using the “event-overview” template
 
+// Future Events
+$future_events = $page->children("event_date>today, sort=date");
+
 ?>
 
 <article id="content" class="">
-  <h2 class="text-center">Upcoming Events</h2>
-  <div>
+  <div class="pb-8">
+    <h2 class="text-center"><?php _e("Upcoming Events"); ?></h2>
+<?php if (count($future_events) == 0) { ?>
+      <div class="box mt-4 text-center">
+        <?php echo $page->content; ?>
+      </div>
+<?php } ?>
+  
 <?php
-// Future Events
-$page->children("event_date>today, sort=date")->each(function($event) {
+
+$future_events->each(function($event) {
 
   // Featured Image
   $preview_image = false;
@@ -46,7 +55,8 @@ $page->children("event_date>today, sort=date")->each(function($event) {
 });
 ?>
   </div>
-  <h2 class="text-center pb-5">Recent Events</h2>
+  
+  <h2 class="text-center pb-5"><?php _e("Recent Events"); ?></h2>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
 <?php 
 // Past Events
