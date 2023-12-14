@@ -33,6 +33,23 @@ Fields:
 Template: `inventory`, `inventory_overview`
 
 
+## Setup
+
+### Templates
+
+- Add New Templates
+
+### Fields
+
+- Import
+
+
+## Install Language
+
+Module:ProcessLanguage
+
+
+
 ## ProcessWire: Resetting Passwords
 On a production server, resetting via email works.
 
