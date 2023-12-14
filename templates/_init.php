@@ -5,8 +5,9 @@
 // Use this to define shared variables, functions, classes, includes, etc. 
 
 
-
-
+function _e($str, $domain=null) {
+  echo __($str, $domain);
+}
 
 function displayMenu($menu, $name) {
   $menuItems = $menu->getMenuItems($name, 2); // 2 -> return Object
@@ -14,3 +15,4 @@ function displayMenu($menu, $name) {
     echo "<a href='$item->url' class=''>$item->title</a> | \n";
   }
 }
+
