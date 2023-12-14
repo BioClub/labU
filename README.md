@@ -1,4 +1,4 @@
-# labU - A nice CMS for labs, hackerspaces and universities
+# labU - A nice ProcessWire Setup for Labs & Hackerspaces
 
 ## labU - BioClub Tokyo
 
