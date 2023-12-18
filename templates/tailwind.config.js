@@ -18,6 +18,8 @@ module.exports = {
         'pure-green': '#00ff00',
         'pure-blue': '#0000ff',
         'pure-yellow': '#ffff00',
+        'pure-magenta': '#ff00ff',
+
       },
     },
   },
