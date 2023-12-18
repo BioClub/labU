@@ -94,11 +94,20 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 
 <!-- article -->
 <article id="content" class="p-1">
-
 </article>
 
 <!-- footer -->
-<footer class="p-2">
+<footer class="p-2 pt-20">
+<?php if($page->editable()): ?>
+    <div class="text-center py-8">
+      <a href='<?php echo $page->editUrl(); ?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
+        Edit Page
+      </a>
+    </div>
+<?php endif; ?>
+
+    
+    
   <div class="mw9 center pb4">
     <div class="cf ">
     <div class="fl w-100 w-third-ns b lh-copy">
@@ -150,10 +159,11 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
       <span class="f6 db">Discord</span>
     </a>
   </div>
+
+
+<div class="text-center p-4 ">Site built with <a href="https://github.com/BioClub/labU">LabU</a>, Logo &copy;<?php echo date("Y"); ?> BioClub Tokyo, User Contributed Content by <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div>
+
 </footer>
-
-<div class="text-center p-2"><a href="https://github.com/BioClub/labU">Site Design</a> / Logo &copy;<?php echo date("Y"); ?> BioClub Tokyo, User Contributed Content by <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div>
-
 </body>
 </html>
 

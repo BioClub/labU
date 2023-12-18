@@ -4,15 +4,6 @@
 // This is defined by $config->prependTemplateFile in /site/config.php.
 // Use this to define shared variables, functions, classes, includes, etc. 
 
-
-function _e($str, $domain=null) {
-  echo __($str, $domain);
-}
-
-function displayMenu($menu, $name) {
-  $menuItems = $menu->getMenuItems($name, 2); // 2 -> return Object
-  foreach($menuItems as $item) {
-    echo "<a href='$item->url' class=''>$item->title</a> | \n";
-  }
-}
+// Custom Functions should only be included once, or else a "Cannot redeclare function" error is triggered when invoking wire404() [see members-overview.php]
+include_once('_custom_functions.php');
 
