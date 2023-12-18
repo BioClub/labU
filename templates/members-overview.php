@@ -2,19 +2,15 @@
 
 // Template file for pages using the “members-overview” template
 
-?>
-<?php
-
-
 $userPage = $input->urlSegmentStr;
 if (!$userPage):
 ?>
 
 
-<article id="content" class="pv5">
-  <div class="f3 i pb3">BioClub Members</div>
+<article id="content" class="">
+  <p class="text-4xl">BioClub Members</p>
   
-  <ul class="list mt0 left pl0">
+  <ul class="">
 <?php
 
 foreach ($users->find("template=user,roles=editor") as $u){
@@ -25,14 +21,10 @@ foreach ($users->find("template=user,roles=editor") as $u){
     $image_path = "$base/site/assets/files/$u->id/$user_image";
   }
 ?>
-    <a href="<?=$u->user_nice_url?>" id="member">
-      <li class="flex items-center lh-copy pa3 ba b--black" style="box-shadow: 5px 5px 0px black;">
-        <img class="w3 h3 br-100" src="<?=$image_path?>" />
-        <div class="pl3">
-          <span class="f3 db black"><?=$u->user_display_name?></span>
-          <span class="f5 db black i"><?=$u->user_byline?></span>
-        </div>
-      </li>
+    <a href="<?=$u->user_nice_url?>" class="flex font-medium items-center box hover:bg-gray-100 active:bg-pure-yellow">
+      <img class="flex-none w-10 h-10 rounded-full" src="<?=$image_path?>" />
+      <div class="pl-4 flex-auto text-2xl"><?=$u->user_display_name?></div>
+      <div class="flex-auto text-xl italic"><?=$u->user_byline?></div>
     </a>
 
 <?php
@@ -42,38 +34,14 @@ foreach ($users->find("template=user,roles=editor") as $u){
 </article>
 <?
 else:
-  //
-?>
-<article id="content" class="pv5">
-
-<?php
   $u = $users->find("template=user,roles=editor,user_nice_url=$userPage")->first();
   if (!$u) {
-?>
-   <h1 class="f1">
-     404 Not Found
-   </h1>
-<?php
+    // throw 404 (see _init.php)
+    wire404();
   } else {
-    // Single User
-    $user_image = $u->images->first()->size(200, 200);
-    $base = $urls->httpRoot;
-    $image_path = "$base/site/assets/files/$u->id/$user_image";
-?>
-
-  <div class="f2 b black pb3"><?=$u->user_display_name?></div>
-  <div class="f3 i black pb3"><?=$u->user_byline?></div>
-  <img class="w3 h3 br-100" src="<?=$image_path?>" />
-  <div class="f4 lh-copy black"><?=$u->content?></div>
-  
-  
-    
-<?php
+    // include member.php (for better readability)
+    include('member.php');
   }
-?>
-
-</article>
-<?
 endif;
 ?>
 
