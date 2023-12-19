@@ -2,26 +2,30 @@
 
 // Template file for pages using the “project” template
 
-?>
-
-<article id="content" class="pv5">
-  <div class="f1 i">
-    Single BioClub Project
-  </div>
-  
-  <div class="f3 lh-copy">
-    Project Members: <?php
-foreach($page->user_reference as $u) {
-  echo "<a href='$u->url'>$u->user_display_name</a>";
+$img = false;
+if ($page->images->first()) {
+  $img = $page->images->first()->size(1000, 333);
 }
+
+
+
 ?>
-  </div>
 
-
-  <div id="byline" class="py-8 text-xs text-gray-300">
-    Author: <?php $createdUser = $page->createdUser; echo $createdUser->user_display_name; ?><br />
-    Published: <?php echo date('l jS \of F Y h:i:s A', $page->published); ?>, 
-    Last Update: <?php echo date('l jS \of F Y h:i:s A', $page->modified); ?>
-    <?php if($page->editable()): ?><a href='<?php echo $page->editUrl(); ?>'>Edit</a></p><?php endif; ?>
-  </div>
+<article id="content" class="">
+  <div class="text-4xl pb-4 text-center"><?=$page->title?></div>
+<?php if ($img): ?>
+  <img class="mx-auto" src="<?=$img->url?>" />
+<?php endif; ?>
+  <div class="text-2xl text-center">Project Description:</div>
+  <div class="text-lg"><?=$page->content?></div>
+  <div class="text-2xl text-center">Project Members:</div>
+  
+<?php
+$page->user_reference->each(function($u) {
+?>
+  <a href="" class="rounded-full bg-gray-200 px-2 py-1"><?=$u->user_display_name?></a>
+<?php
+});
+?>
+  
 </article>
