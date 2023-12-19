@@ -6,11 +6,9 @@ $userPage = $input->urlSegmentStr;
 if (!$userPage):
 ?>
 
-
 <article id="content" class="">
   <p class="text-4xl">BioClub Members</p>
-  
-  <ul class="">
+  <ul>
 <?php
 
 foreach ($users->find("template=user,roles=editor") as $u){
