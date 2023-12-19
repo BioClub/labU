@@ -5,7 +5,8 @@
 
 // Translation Helper
 function _e($str, $domain=null) {
-  echo __($str, $domain);
+  // echo __($str, $domain); NG, creates error
+  echo _($str);
 }
 
 // Menu
