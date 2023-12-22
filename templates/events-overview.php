@@ -3,7 +3,7 @@
 // Template file for pages using the “event-overview” template
 
 // Future Events
-$future_events = $page->children("event_date>today, sort=date");
+$future_events = $page->children("event_date>today, sort=-date");
 
 ?>
 
@@ -48,8 +48,6 @@ $future_events->each(function($event) {
   ?>
       <img src="<?=$img->url?>" class="w-full mb-3" />
   <?php endif; ?>
-
-
   
       <h2 class="px-1">
         <?php if ($event->speaker_name) { echo $event->speaker_name; echo ": ";} ?><?=$event->title?>
