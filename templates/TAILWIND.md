@@ -13,7 +13,7 @@ Using Tailwind CSS with Processwire:
 ## Running & Watching
 
 Start watching: 
-`npx tailwindcss -i ./styles/main.css -o ./styles/tailwind_output.css --watch`
+`npx tailwindcss -i ./styles/main.css -o ./styles/bioclub.css --watch`
 
 Example output:
 ```

@@ -62,6 +62,19 @@
     text-decoration: underline;
     @apply decoration-2 underline-offset-2;
   }
+  
+  article a {
+    text-decoration: underline;
+  }
+  article a:hover {
+    text-decoration: underline;
+    @apply decoration-2 underline-offset-2;
+  }
+  article a:active {
+    text-decoration: none;
+    color: #fff;
+    background: #000;
+  }
 
   /* Shadows */
   .box {
