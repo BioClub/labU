@@ -4,7 +4,7 @@
 
 ?>
 
-<article id="content" class="font-medium max-w-screen-md mx-auto">
+<article id="content" class="event font-medium max-w-screen-md mx-auto">
   <h1 class="mb-8 text-center">
     <?=$page->title?>
   </h1>
@@ -42,6 +42,13 @@
   <?php echo $page->content; ?>
     </div>
   
+  </div>
+  
+  <div class="box">
+    <ul>
+      <li><a href="jnnkh">↗︎ Blog Post by refnwrf</a></li>
+      <li><a href="jnnkh">↗︎ Images</a></li>
+      <li><a href="jnnkh">↗︎ More Images</a></li>
   </div>
 
 <!--

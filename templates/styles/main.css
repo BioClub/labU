@@ -63,14 +63,14 @@
     @apply decoration-2 underline-offset-2;
   }
   
-  article a {
+  .event a {
     text-decoration: underline;
   }
-  article a:hover {
+  .event a:hover {
     text-decoration: underline;
     @apply decoration-2 underline-offset-2;
   }
-  article a:active {
+  .event a:active {
     text-decoration: none;
     color: #fff;
     background: #000;
@@ -82,5 +82,31 @@
     box-shadow: 5px 5px 0px black;
   }
   
+  /* Pills */
+  .pill {
+    @apply text-black bg-gray-200 rounded-full px-1.5 py-0.5;
+  }
+  .pill-ok {
+    @apply text-white bg-green-500 rounded-full px-1.5 py-0.5;
+  }
+  .pill-ng {
+    @apply text-white bg-red-500 rounded-full px-1.5 py-0.5;
+  }
+  
+  /* */
+  
+  @media (min-width: 640px) {
+    .inventory_item_grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .inventory_item_grid {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+    }
+  }
 }
 

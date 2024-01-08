@@ -7,28 +7,31 @@
 
 ?>
 
-<article id="content" class="pv5">
-  <div class="f1">
+<article id="content" class="event font-medium text-xl max-w-screen-md mx-auto">
+  <h1 class="mb-8 text-center">
     <?=$page->title?>
-  </div>
-  <div class="f3 lh-copy">
-    <?=$page->content?>
-  </div>
-  <div class="f4 lh-copy">
-    <?=$page->user_reference->first()->user_display_name?>
-  </div>
-  <div class="f4 lh-copy">
-    <?=$page->inventory_usage->title?>
-  </div>
-  
-  
-  
+    (<?=$page->inventory_id?>)
+  </h1>
+  <div class="inventory_item_grid">
+    <div>Contact Person:</div>
+    <div><a href=""><?=$page->user_reference->first()->user_display_name?></a></div>
+    <div class="">Usage:</div>
+    <div><span class="pill-ok"><?=$page->inventory_usage->title?></span></div>
+    <div class="">Description:</div>
+    <div><?=$page->content?>vrevrvrv vrevrvrv vrevrvrv vrevrvrv vrevrvrv vrevrvrv vrevrvrv vrevrvrv vrevrvrv vrevrvrv </div>
+    <div class="">Image:</div>
+    <div>
 <?php if ($page->images->first()):
     $img = $page->images->first();
 ?>
-    <div class="tl">
       <img src="<?=$img->url?>" />
-      <figcaption class="f6 silver"><?=$img->description?></figcaption>
-    </div>
+      <figcaption class=""><?=$img->description?></figcaption>
+       
 <?php endif; ?>
+    </div>
+  </div>
+
+  
+  
+  
 </article>

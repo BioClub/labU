@@ -75,8 +75,12 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 
       $menuItems = $menu->getMenuItems('header-menu', 2); // 2 -> return Object
       foreach($menuItems as $item) {
+
         $class = "";
         if ($item->isCurrent) $class .= "active";
+        
+        if (($page->template->name == 'event') && ($item->title == "Events" OR $item->title == "イベント")) $class .= "active";
+          
         echo "<a href='$item->url' class='p-1  rounded-md $class'>$item->title</a>";
         if (($item->title == "Events" OR $item->title == "イベント") && $nrOfUpcomingEvents > 0) echo "<sup class='bg-red-500 text-white rounded-full'>&nbsp;$nrOfUpcomingEvents&nbsp;</sup>";
         if (!$item->isLast) echo " ";
@@ -101,7 +105,7 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 <?php if($page->editable()): ?>
     <div class="text-center py-8">
       <a href='<?php echo $page->editUrl(); ?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
-        Edit Page
+        Edit
       </a>
     </div>
 <?php endif; ?>
