@@ -2,11 +2,9 @@
 
 // Custom Functions should only be included once, or else a "Cannot redeclare function" error is triggered when invoking wire404() [see members-overview.php]
 
-
 // Translation Helper
 function _e($str, $domain=null) {
-  // echo __($str, $domain); NG, creates error
-  echo _($str);
+  echo __($str, $domain);
 }
 
 // Menu

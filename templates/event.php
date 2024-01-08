@@ -13,17 +13,19 @@
   <div class="mb-8 box text-xl leading-8">
     <?php if ($page->speaker_name): ?>
     <div>
-      Speaker: <?=$page->speaker_name?>
+      <?= __("Speaker:") ?> <?= $page->speaker_name ?>
     <div>
     <?php endif; ?>
-    <div>Date: <?=$page->event_date?> JST</div>
-    <div>Location: 
+    <div><?= __("Date:") ?> <?= $page->event_date ?> JST</div>
+    <div><?= __("Location:") ?>
       <a href="https://maps.app.goo.gl/xGpo5acrHNpescaX8">BioClub&nbsp;Tokyo</a>
       &
       <a href="https://zoom.bioclub.tokyo">https://zoom.bioclub.tokyo</a>
     </div>
+    <!--
     <div>This is a <em>Free Event</em></div>
     <div>Language: English & Japanese</div>
+      -->
   </div>
 
   <div class="text-lg ">
@@ -44,13 +46,14 @@
   
   </div>
   
+  <!--
   <div class="box">
-    <ul>
-      <li><a href="jnnkh">↗︎ Blog Post by refnwrf</a></li>
-      <li><a href="jnnkh">↗︎ Images</a></li>
-      <li><a href="jnnkh">↗︎ More Images</a></li>
+    <h5>Related</h5>
+    <div><a href="jnnkh">Testing Blog Post by refnwrf</a></div>
+    <div><a href="jnnkh">Images</a></div>
+    <div><a href="jnnkh">More Images</a></div>
   </div>
-
+ -->
 <!--
   <div id="byline" class="py-8 text-xs text-gray-300">
     Author: <?php $createdUser = $page->createdUser; echo $createdUser->user_display_name; ?>, 

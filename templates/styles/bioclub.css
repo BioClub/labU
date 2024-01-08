@@ -13,6 +13,10 @@
   margin: 0.25rem;
 }
 
+.m-8 {
+  margin: 2rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -216,6 +220,10 @@
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-8 {
+  padding: 2rem;
 }
 
 .px-1 {
@@ -799,26 +807,42 @@ video {
 /* Headers */
 
 h1 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-size: 3.75rem;
   line-height: 1;
   font-weight: 600;
 }
 
 h2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-size: 2.25rem;
   line-height: 2.5rem;
   font-weight: 600;
 }
 
 h3 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-size: 1.875rem;
   line-height: 2.25rem;
   font-weight: 600;
 }
 
 h4 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   font-size: 1.5rem;
   line-height: 2rem;
+  font-weight: 600;
+}
+
+h5 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
   font-weight: 600;
 }
 
@@ -880,7 +904,8 @@ header a.active, nav a.active {
 /* Shadows */
 
 .box {
-  margin-bottom: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   border-width: 2px;
   border-style: solid;
   --tw-border-opacity: 1;
