@@ -9,8 +9,8 @@ https://processwire.com/api/ref/functions/_x/
 
 
 __('Event:');
+__('Events');
 __('Location:');
 __('Speaker:');
-_x('Events', 'BioClub);
-
+__('Test');
 *******************************************/
