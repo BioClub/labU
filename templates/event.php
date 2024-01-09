@@ -16,7 +16,7 @@
       <?= __("Speaker:") ?> <?= $page->speaker_name ?>
     <div>
     <?php endif; ?>
-    <div><?= __("Date:") ?> <?= $page->event_date ?> JST</div>
+    <div><?= __("Date:", $ferry) ?> <?= $page->event_date ?> JST</div>
     <div><?= __("Location:") ?>
       <a href="https://maps.app.goo.gl/xGpo5acrHNpescaX8">BioClub&nbsp;Tokyo</a>
       &
