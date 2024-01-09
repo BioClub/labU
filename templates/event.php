@@ -11,12 +11,6 @@
 
   <?php /* Info Box */ ?>
   <div class="mb-8 box text-xl leading-8">
-
-    <?= _t("Test") ?>
-          
-    <?= _t('Events') ?>
-     
-
     <?php if ($page->speaker_name): ?>
     <div>
       <?= __("Speaker:") ?> <?= $page->speaker_name ?>
