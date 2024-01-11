@@ -13,6 +13,14 @@
   margin: 0.25rem;
 }
 
+.m-8 {
+  margin: 2rem;
+}
+
+.m-6 {
+  margin: 1.5rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -21,6 +29,11 @@
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.mx-16 {
+  margin-left: 4rem;
+  margin-right: 4rem;
 }
 
 .mb-0 {
@@ -55,6 +68,22 @@
   margin-top: 1rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.ml-8 {
+  margin-left: 2rem;
+}
+
+.mr-8 {
+  margin-right: 2rem;
+}
+
 .inline-block {
   display: inline-block;
 }
@@ -83,6 +112,34 @@
   height: 1rem;
 }
 
+.h-20 {
+  height: 5rem;
+}
+
+.h-14 {
+  height: 3.5rem;
+}
+
+.h-12 {
+  height: 3rem;
+}
+
+.h-40 {
+  height: 10rem;
+}
+
+.h-32 {
+  height: 8rem;
+}
+
+.h-48 {
+  height: 12rem;
+}
+
+.h-52 {
+  height: 13rem;
+}
+
 .w-10 {
   width: 2.5rem;
 }
@@ -99,6 +156,42 @@
   width: 100%;
 }
 
+.w-20 {
+  width: 5rem;
+}
+
+.w-14 {
+  width: 3.5rem;
+}
+
+.w-12 {
+  width: 3rem;
+}
+
+.w-40 {
+  width: 10rem;
+}
+
+.w-32 {
+  width: 8rem;
+}
+
+.w-48 {
+  width: 12rem;
+}
+
+.w-52 {
+  width: 13rem;
+}
+
+.w-64 {
+  width: 16rem;
+}
+
+.w-3\/4 {
+  width: 75%;
+}
+
 .max-w-screen-md {
   max-width: 768px;
 }
@@ -111,6 +204,14 @@
   flex: none;
 }
 
+.flex-initial {
+  flex: 0 1 auto;
+}
+
+.basis-1\/2 {
+  flex-basis: 50%;
+}
+
 .caption-top {
   caption-side: top;
 }
@@ -121,6 +222,10 @@
 
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.flex-row {
+  flex-direction: row;
 }
 
 .items-center {
@@ -202,6 +307,26 @@
   background-color: rgb(254 240 138 / var(--tw-bg-opacity));
 }
 
+.bg-slate-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+}
+
+.bg-slate-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(248 250 252 / var(--tw-bg-opacity));
+}
+
+.bg-gray-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
+.bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+
 .p-1 {
   padding: 0.25rem;
 }
@@ -216,6 +341,14 @@
 
 .p-4 {
   padding: 1rem;
+}
+
+.p-16 {
+  padding: 4rem;
+}
+
+.p-6 {
+  padding: 1.5rem;
 }
 
 .px-1 {
@@ -277,6 +410,22 @@
 
 .pt-20 {
   padding-top: 5rem;
+}
+
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+
+.pt-6 {
+  padding-top: 1.5rem;
+}
+
+.pl-6 {
+  padding-left: 1.5rem;
 }
 
 .text-center {
@@ -360,6 +509,10 @@
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.underline {
+  text-decoration-line: underline;
 }
 
 /* ! tailwindcss v3.3.3 | MIT License | https://tailwindcss.com */

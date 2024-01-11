@@ -7,8 +7,13 @@ if (!$userPage):
 ?>
 
 <article id="content" class="">
-  <p class="text-4xl">BioClub Members</p>
-  <ul>
+  <h1 class="mb-8 text-center">
+    <?= __("BioClub Members") ?>
+  </h1>
+  <div class="flex w-3/4 p-6 mx-auto text-lg font-medium">
+    <?= $page->content ?>
+  </div>
+
 <?php
 
 foreach ($users->find("template=user,roles=editor") as $u){
@@ -19,16 +24,24 @@ foreach ($users->find("template=user,roles=editor") as $u){
     $image_path = "$base/site/assets/files/$u->id/$user_image";
   }
 ?>
-    <a href="<?=$u->user_nice_url?>" class="flex font-medium items-center box hover:bg-gray-100 active:bg-pure-yellow">
-      <img class="flex-none w-10 h-10 rounded-full" src="<?=$image_path?>" />
-      <div class="pl-4 flex-auto text-2xl"><?=$u->user_display_name?></div>
-      <div class="flex-auto text-xl italic"><?=$u->user_byline?></div>
-    </a>
-
+    <div class="flex w-3/4 p-6 mx-auto">
+      <img class="flex-none w-16 h-16 rounded-full" src="<?=$image_path?>" />
+      <div class="flex-auto pl-6">
+        <div class="text-2xl font-medium underline"><a href="<?=$u->user_nice_url?>"><?=$u->user_display_name?></a></div>
+        <div class="text-lg"><?=$u->user_byline?></div>
+      </div>
+    </div>
+<!--
+    <div class="flex items-center p-6 bg-gray-200">
+      <img class="flex-none w-16 h-16 rounded-full" src="<?=$image_path?>" />
+      <div class="pl-4 flex-auto text-2xl font-medium"><a href="<?=$u->user_nice_url?>"><?=$u->user_display_name?></a></div>
+      <div class="flex-auto text-lg"><?=$u->user_byline?></div>
+    </div>
+-->
 <?php
 }
 ?>
-  </ul>
+
 </article>
 <?
 else:
