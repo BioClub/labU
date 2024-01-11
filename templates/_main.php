@@ -23,7 +23,7 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 <title>BioClub Tokyo - <?php echo $page->title; ?></title>
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="description" content="BioClub Tokyo">
-<meta property="og:title" content="Aeon | a world of ideas">
+<meta property="og:title" content="BioClub Tokyo - Japan's Nicest BioCommunity and BioHackerSpace">
 <meta property="og:description" content="BioClub Tokyo">
 <meta property="og:url" content="https://bioclub.tokyo">
 <meta property="og:type" content="website">
