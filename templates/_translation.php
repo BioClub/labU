@@ -11,6 +11,8 @@ Global Translation Files
 
 __('Event:');
 __('Events');
+__('Upcoming Events');
+__('Recent Events');
 __('Location:');
 __('Speaker:');
 __('BioClub Members');
