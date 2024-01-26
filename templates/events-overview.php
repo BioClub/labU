@@ -8,7 +8,7 @@ $future_events = $page->children("event_date>today, sort=date");
 ?>
 
 <article id="content" class="">
-  <h2 class="text-center pb-10"><?php _t("Upcoming Events"); ?></h2>
+  <h2 class="text-center pb-10"><?= _t("Upcoming Events") ?></h2>
     
 <?php if (count($future_events) == 0) { ?>
   <div class="box mt-4 text-center">
@@ -37,7 +37,7 @@ $future_events->each(function($event) {
   
   
   ?>
-    <a class="box hover:bg-gray-100 active:bg-pure-yellow" href="<?=$event->url?>">
+    <a class="box hover:bg-gray-100 active:bg-pure-yellow" href="<?= $event->url ?>">
   
       <div class="leading-8 mb-2">
         <span class="text-ms bg-gray-200 rounded-full px-2 py-1"><?=$event->event_date?> JST</span>
@@ -65,7 +65,7 @@ $future_events->each(function($event) {
 ?>
   </div>
   
-  <h2 class="text-center py-10"><?php _t("Recent Events"); ?></h2>
+  <h2 class="text-center py-10"><?= _t("Recent Events") ?></h2>
   
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
 <?php 
