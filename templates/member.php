@@ -1,15 +1,25 @@
 <?php
   
-// Single User
-$user_image = $u->images->first()->size(200, 200);
-$base = $urls->httpRoot;
-$image_path = "$base/site/assets/files/$u->id/$user_image";
+// $u is declared in members-overview.php
+
+// User Image
+$user_image = false;
+if ($u->images->first()) {
+  $user_image = $u->images->first()->size(200, 200);
+  $base = $urls->httpRoot;
+  $user_image = "$base/site/assets/files/$u->id/$user_image";
+}
 
 ?>
 
 <article id="content">
   <div class="pt-6 text-center">
-    <img class="w-32 h-32 rounded-full mx-auto" src="<?=$image_path?>" />
+<?php if($user_image): ?>
+    <img class="w-32 h-32 rounded-full mx-auto" src="<?=$user_image?>" />
+<?php else: ?>
+    <div class="w-32 h-32 rounded-full mx-auto rounded-full bg-slate-200"></div>
+<?php endif; ?>
+
     <div class="text-4xl font-bold pt-6"><?=$u->user_display_name?></div>
     <div class="text-3xl py-4"><?=$u->user_byline?></div>
   </div>
@@ -20,8 +30,17 @@ $image_path = "$base/site/assets/files/$u->id/$user_image";
   </div>
     
   -->
-  <div class="w-3/4 text-lg mx-auto bg-slate-50">
+  <div class="w-3/4 text-lg mx-auto">
     <?=$u->content?>
+    <?=$u->id?>
+    
   </div>
   
+<?php if($page->editable()): ?>
+  <div class="text-center py-8">
+    <a href='<?php echo $page->editUrl(); ?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
+      Edit Profile
+    </a>
+  </div>
+<?php endif; ?>
 </article>
