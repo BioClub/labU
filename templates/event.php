@@ -35,10 +35,10 @@
   ?>
     <div class="pb-4">
       <img src="<?=$featured_image->url?>" />
-  <?php if ($featured_image->description): ?>
-      <div class="text-sm p-1 bg-black text-white"><?=$featured_image->description?></div>
+<?php if ($featured_image->description): ?>
+      <div class="text-sm p-1"><?=$featured_image->description?></div>
+<?php endif; ?>
     </div>
-  <?php endif; ?>
   <?php endif; ?>
     <div class="">
   <?php echo $page->content; ?>
