@@ -40,7 +40,14 @@ $future_events->each(function($event) {
     <a class="box hover:bg-gray-100 active:bg-pure-yellow" href="<?= $event->url ?>">
   
       <div class="leading-8 mb-2">
-        <span class="text-ms bg-gray-200 rounded-full px-2 py-1"><?=$event->event_date?> JST</span>
+        <span class="text-ms bg-gray-200 rounded-full px-2 py-1">
+<?php if($event->event_end_date): ?>
+          <?=date("F j, Y", $event->getUnformatted("event_date"))?> - 
+          <?=date("F j, Y", $event->getUnformatted("event_end_date"))?>
+<?php else: ?>
+          <?=$event->event_date?> JST
+<?php endif; ?>
+        </span>
       </div>
   
   <?php if ($event->images->first()):
