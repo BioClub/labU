@@ -3,7 +3,8 @@
 // Template file for pages using the “event-overview” template
 
 // Future Events
-$future_events = $page->children("event_date>today, sort=date");
+// Events that have either "event_date" or "event_end_date" in the Future
+$future_events = $page->children("event_date|event_end_date>today, sort=date");
 
 ?>
 
