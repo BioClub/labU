@@ -10,7 +10,7 @@
   </h1>
 
   <?php /* Info Box */ ?>
-  <div class="mb-8 box text-xl leading-8">
+  <div class="pb-8 box text-xl leading-8">
     <?php if ($page->speaker_name): ?>
     <div>
       <?= __("Speaker:") ?> <?= $page->speaker_name ?>
@@ -33,7 +33,7 @@
     if ($page->images->first()):
       $featured_image = $page->images->first();
   ?>
-    <div class="pb-4">
+    <div class="py-4">
       <img src="<?=$featured_image->url?>" />
 <?php if ($featured_image->description): ?>
       <div class="text-sm p-1"><?=$featured_image->description?></div>
