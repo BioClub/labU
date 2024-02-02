@@ -12,7 +12,6 @@
  <?php if($page->editable()): ?><a href='<?php echo $page->editUrl(); ?>'>&nbsp;&nbsp;&nbsp;</a></p><?php endif; ?>
    </h1>
    <div class="lh-copy">
-     <em>teleet</em>
  <?php echo $page->content; ?>
    </div>
    <div id="byline" class="py-8 text-xs text-gray-300">
