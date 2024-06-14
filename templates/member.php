@@ -36,11 +36,28 @@ if ($u->images->first()) {
     
   </div>
   
-<?php if($page->editable()): ?>
+<?php 
+if($user->hasRole('editor')): 
+  $userProfileUrl = $urls->httpRoot . "edit/access/users/edit/?id=" . $u->id; // edit/access/users/edit/?id=111111
+?>
   <div class="text-center py-8">
-    <a href='<?php echo $page->editUrl(); ?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
-      Edit Profile
+    <a href='<?=$userProfileUrl?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
+<?php if($user->id == $u->id): ?>
+      Edit My Profile
+<?php else: ?>
+      Edit Profile of <?=$u->user_display_name?>
+<?php endif; ?>
+    </a>
+  </div>
+<?php
+elseif($user->hasRole('member') AND ($user->id == $u->id)):
+  $userProfileUrl = $urls->httpRoot . "edit/access/users/edit/?id=" . $u->id; // edit/access/users/edit/?id=111111
+?>
+  <div class="text-center py-8">
+    <a href='<?=$userProfileUrl?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
+      Edit My Profile (Member)
     </a>
   </div>
 <?php endif; ?>
+
 </article>
