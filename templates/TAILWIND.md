@@ -43,6 +43,6 @@ Build & [Minify](https://tailwindcss.com/docs/optimizing-for-production)
 `cd site/templates/`  
 `npx tailwindcss -i ./styles/additional.css -o ./styles/bioclub.css --minify`
 
-`-m ... _--minify_, Minify the output
+`-m` ... _--minify_, Minify the output
 
 
