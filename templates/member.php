@@ -32,11 +32,11 @@ if ($u->images->first()) {
   -->
   <div class="w-3/4 text-lg mx-auto">
     <?=$u->content?>
-    <?=$u->id?>
     
   </div>
   
 <?php 
+/*
 if($user->hasRole('editor')): 
   $userProfileUrl = $urls->httpRoot . "edit/access/users/edit/?id=" . $u->id; // edit/access/users/edit/?id=111111
 ?>
@@ -58,6 +58,7 @@ elseif($user->hasRole('member') AND ($user->id == $u->id)):
       Edit My Profile (Member)
     </a>
   </div>
-<?php endif; ?>
+<?php endif; 
+*/?>
 
 </article>
