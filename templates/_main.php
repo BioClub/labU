@@ -102,10 +102,66 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
 
 <!-- footer -->
 <footer class="p-2 pt-20">
-<?php if($page->editable()): ?>
+  
+<? /* Edit Button */ ?>
+
+<?php 
+/*
+if($user->hasRole('editor')): 
+  $userProfileUrl = $urls->httpRoot . "edit/access/users/edit/?id=" . $u->id; // edit/access/users/edit/?id=111111
+?>
+  <div class="text-center py-8">
+    <a href='<?=$userProfileUrl?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
+<?php if($user->id == $u->id): ?>
+      Edit My Profile
+<?php else: ?>
+      Edit Profile of <?=$u->user_display_name?>
+<?php endif; ?>
+    </a>
+  </div>
+<?php
+elseif($user->hasRole('member') AND ($user->id == $u->id)):
+  $userProfileUrl = $urls->httpRoot . "edit/access/users/edit/?id=" . $u->id; // edit/access/users/edit/?id=111111
+?>
+  <div class="text-center py-8">
+    <a href='<?=$userProfileUrl?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
+      Edit My Profile (Member)
+    </a>
+  </div>
+<?php endif; 
+*/?>
+
+
+<?php 
+
+// If current page is editable by current logged-in user, show Edit Link
+
+$editURL = false;
+$userPage = $input->urlSegmentStr;
+$u = $users->find("template=user,roles=member,user_nice_url=$userPage")->first();
+
+if(is_object($u) AND $user->hasRole('member') AND ($user->id == $u->id)):
+  // case: My Profile Page
+  $editURL = $urls->admin . "profile/";
+  $editLabel = "Edit My Profile";
+elseif(is_object($u) AND $user->hasRole('superuser') AND ($user->id != $u->id)):
+  // case: Admin, other Profile Page
+  print_r("Edit Profile");
+  $editURL = $page->editUrl();
+  $userProfileUrl = $urls->admin . "access/users/edit/?id=" . $u->id;
+  $editLabel = "Edit Profile of " . $u->user_display_name;
+elseif($page->editable()):
+  // case: has Page Edit Permission
+  $editURL = $page->editUrl();
+  $editLabel = "Edit " . $page->title;
+endif;
+
+
+
+if($editURL): ?>
     <div class="text-center py-8">
-      <a href='<?php echo $page->editUrl(); ?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
-        Edit
+      <a href='<?=$editURL?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
+        <?=$editLabel?>
       </a>
     </div>
 <?php endif; ?>

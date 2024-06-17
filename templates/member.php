@@ -1,6 +1,9 @@
 <?php
-  
+
+// this file (member.php) is include via members-overview.php
 // $u is declared in members-overview.php
+
+// Edit defaults to members-overview.php, need special check for that in _main.php
 
 // User Image
 $user_image = false;
@@ -23,42 +26,7 @@ if ($u->images->first()) {
     <div class="text-4xl font-bold pt-6"><?=$u->user_display_name?></div>
     <div class="text-3xl py-4"><?=$u->user_byline?></div>
   </div>
-  <!--
-  <div class="flex flex-row w-3/4 mx-auto">
-    <div class="basis-1/2 text-lg bg-slate-50"><?=$u->user_display_name?></div>
-    <div class="basis-1/2 text-lg bg-slate-100 "><?=$u->content?></div>
-  </div>
-    
-  -->
   <div class="w-3/4 text-lg mx-auto">
     <?=$u->content?>
-    
   </div>
-  
-<?php 
-/*
-if($user->hasRole('editor')): 
-  $userProfileUrl = $urls->httpRoot . "edit/access/users/edit/?id=" . $u->id; // edit/access/users/edit/?id=111111
-?>
-  <div class="text-center py-8">
-    <a href='<?=$userProfileUrl?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
-<?php if($user->id == $u->id): ?>
-      Edit My Profile
-<?php else: ?>
-      Edit Profile of <?=$u->user_display_name?>
-<?php endif; ?>
-    </a>
-  </div>
-<?php
-elseif($user->hasRole('member') AND ($user->id == $u->id)):
-  $userProfileUrl = $urls->httpRoot . "edit/access/users/edit/?id=" . $u->id; // edit/access/users/edit/?id=111111
-?>
-  <div class="text-center py-8">
-    <a href='<?=$userProfileUrl?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
-      Edit My Profile (Member)
-    </a>
-  </div>
-<?php endif; 
-*/?>
-
 </article>
