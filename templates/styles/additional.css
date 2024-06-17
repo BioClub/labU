@@ -1,0 +1,140 @@
+/* Example CSS file */ 
+
+/* Tachyons */
+/*
+@import url('tachyons.min.css');
+@import url('bioclub.css');
+*/
+
+/* Tailwind */
+
+@tailwind components;
+@tailwind utilities;
+@tailwind base;
+
+/* Tailwind Additional Base Styles */
+
+@layer base {
+  
+  /* Headers */
+  
+  h1 {
+    @apply text-6xl font-semibold py-2;
+  }
+  h2 {
+    @apply text-4xl font-semibold py-2;
+  }
+  h3 {
+    @apply text-3xl font-semibold py-2;
+  }
+  h4 {
+    @apply text-2xl font-semibold py-2;
+  }
+  h5 {
+    @apply text-xl font-semibold py-2;
+  }
+  
+  /* Content Markdown */
+  
+  #content p {
+    padding-bottom: 1em;
+  }
+  
+  #content li {
+    list-style-type: disc; 
+    list-style-position: inside;
+    margin-left: 1em;  
+  }
+  
+  #content a, #content a:visited {
+    @apply text-white bg-pure-magenta;
+  }
+  
+  #content a:hover {
+    @apply text-white bg-pure-blue;
+  }
+  
+  #content a:active {
+    @apply text-pure-blue bg-white;
+  }
+  
+  
+  #content #members a, #content #members a:visited {
+    @apply text-black bg-white;
+  }
+  #content #members a:hover {
+    @apply text-black bg-gray-100;
+    @apply rounded-lg;
+  }
+  #content #members a:active {
+    @apply text-white bg-pure-magenta;
+  }
+  
+  
+  /* Header */
+  
+  header a, nav a {
+    text-decoration: none;
+  }
+  header a:hover, nav a:hover {
+   /* @apply text-white bg-red-500  */
+   text-decoration: underline;
+   @apply decoration-2 underline-offset-2;
+  }
+  header a:active, nav a:active {
+    /* @apply text-white bg-red-500; */
+    text-decoration: underline;
+    @apply decoration-4 underline-offset-2 decoration-red-500;
+  }
+  header a.active, nav a.active {
+    text-decoration: underline;
+    @apply decoration-2 underline-offset-2;
+  }
+  
+  .event a {
+    text-decoration: underline;
+  }
+  .event a:hover {
+    text-decoration: underline;
+    @apply decoration-2 underline-offset-2;
+  }
+  .event a:active {
+    text-decoration: none;
+    color: #fff;
+    background: #000;
+  }
+
+  /* Shadows */
+  .box {
+    @apply border-solid border-2 border-black my-8 p-2;
+    box-shadow: 5px 5px 0px black;
+  }
+  
+  /* Pills */
+  .pill {
+    @apply text-black bg-gray-200 rounded-full px-1.5 py-0.5;
+  }
+  .pill-ok {
+    @apply text-white bg-green-500 rounded-full px-1.5 py-0.5;
+  }
+  .pill-ng {
+    @apply text-white bg-red-500 rounded-full px-1.5 py-0.5;
+  }
+  
+  /* */
+  
+  @media (min-width: 640px) {
+    .inventory_item_grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .inventory_item_grid {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+    }
+  }
+}
+
