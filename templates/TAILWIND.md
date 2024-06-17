@@ -18,7 +18,7 @@ During development we need to watch for changes in the template files and update
 
 #### Start watching for changes
 
-`cd site/templates/`
+`cd site/templates/`  
 `npx tailwindcss -i ./styles/additional.css -o ./styles/bioclub.css -w`
 
 `-i` ... _--input_, Input file
