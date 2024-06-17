@@ -14,6 +14,7 @@ if (!$userPage):
     <?= $page->content ?>
   </div>
 
+  <div id="members">
 <?php
 
 foreach ($users->find("template=user,roles=member") as $u){
@@ -24,21 +25,22 @@ foreach ($users->find("template=user,roles=member") as $u){
     $user_image = "$base/site/assets/files/$u->id/$user_image";
   }
 ?>
-    <div class="flex w-3/4 p-6 mx-auto">
+    <a href="<?=$u->user_nice_url?>" class="user flex w-3/4 p-6 mx-auto">
 <?php if ($user_image): ?>
       <img class="flex-none w-16 h-16 rounded-full" src="<?=$user_image?>" />
 <?php else: ?>
       <div class="flex-none w-16 h-16 rounded-full bg-slate-200"></div>
 <?php endif; ?>
-      <div class="flex-auto pl-6">
-        <div class="text-2xl font-medium underline"><a href="<?=$u->user_nice_url?>"><?=$u->user_display_name?></a></div>
+      <div href="<?=$u->user_nice_url?>" class="flex-auto pl-6">
+        <div class="text-2xl font-medium"><?=$u->user_display_name?></div>
         <div class="text-lg"><?=$u->user_byline?></div>
       </div>
-    </div>
+    </a>
 
 <?php
 }
 ?>
+  </div>
 
 </article>
 <?
