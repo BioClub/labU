@@ -171,7 +171,7 @@ if($editURL): ?>
     
   <div class="mw9 center pb4">
     <div class="cf ">
-    <div class="fl w-100 w-third-ns b lh-copy">
+    <div class="fl w-100 w-75 w-50 w-third-ns b lh-copy">
       <!-- Footer Left -->
 
     </div>
