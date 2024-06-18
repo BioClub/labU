@@ -14,6 +14,7 @@
 
 $home = $pages->get('/');                     // homepage
 $menu = $modules->get('MarkupMenuBuilder');   // get menues
+$profileURL = $urls->admin . "profile/";
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -48,25 +49,25 @@ $menu = $modules->get('MarkupMenuBuilder');   // get menues
     </a>
   </div>
 
-  <div class="font-mono text-lg font-bold text-right">
 
-    <!--
-    <svg viewBox="0 0 20 20" fill="currentColor" stroke="none" width="18" height="18" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-cy="icon-user"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z"></path>
-    </svg>
-    /
-      -->
+  <div class="font-mono text-sm font-bold text-right">
+    
 <!-- Language Switcher -->
 <?php 
   $userPage = $input->urlSegmentStr;
   foreach($languages as $language) : 
     $active = $user->language->id == $language->id;
     //if ($active) continue;
-?><a href="<?=$page->localUrl($language)?><?=$input->urlSegmentStr?>" class="p-1 m-1 rounded-md <?=$active ? 'active' : ''?>"><?=$language->title?></a><?php endforeach;?>
+?>  <a href="<?=$page->localUrl($language)?><?=$input->urlSegmentStr?>" class="<?=$active ? 'active' : ''?>"><?=$language->title?></a><?php endforeach;?>
 
       <!-- End Language Switcher -->
-
+<?php if ($user->isLoggedin()): ?>
+      <a href="<?=$profileURL?>" class="signin-button">Hello, <?=$user->user_display_name?></a>
+<?php else: ?>
+      <a href="<?=$urls->admin?>" class="signin-button">Sign In</a>
+<?php endif; ?>
   </div>
-  
+ 
 </header>
   <nav class="font-mono text-xl font-bold px-4 py-2">
     <?php 
@@ -142,7 +143,7 @@ $u = $users->find("template=user,roles=member,user_nice_url=$userPage")->first()
 
 if(is_object($u) AND $user->hasRole('member') AND ($user->id == $u->id)):
   // case: My Profile Page
-  $editURL = $urls->admin . "profile/";
+  $editURL = $profileURL;
   $editLabel = "Edit My Profile";
 elseif(is_object($u) AND $user->hasRole('superuser') AND ($user->id != $u->id)):
   // case: Admin, other Profile Page
@@ -160,7 +161,7 @@ endif;
 
 if($editURL): ?>
     <div class="text-center py-8">
-      <a href='<?=$editURL?>' class="bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full">
+      <a href='<?=$editURL?>' class="edit-button">
         <?=$editLabel?>
       </a>
     </div>

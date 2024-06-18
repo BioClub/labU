@@ -121,6 +121,15 @@
     @apply text-white bg-red-500 rounded-full px-1.5 py-0.5;
   }
   
+  /* Edit Button */
+  .edit-button {
+    @apply bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full;
+  }
+  
+  /* Login Button */
+  .signin-button {
+    @apply bg-white hover:bg-black text-black hover:text-white font-semibold py-1 px-2 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full;
+  }
   /* */
   
   @media (min-width: 640px) {
