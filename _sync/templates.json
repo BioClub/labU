@@ -1,4 +1,92 @@
 {
+    "basic-member-page": {
+        "id": 54,
+        "name": "basic-member-page",
+        "fieldgroups_id": "basic-member-page",
+        "flags": 0,
+        "cache_time": 0,
+        "useRoles": 1,
+        "editRoles": [
+            "editor",
+            "member"
+        ],
+        "addRoles": [
+            "editor",
+            "member"
+        ],
+        "createRoles": [
+            "editor",
+            "member"
+        ],
+        "rolesPermissions": [],
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": "",
+        "noParents": "",
+        "childTemplates": [],
+        "parentTemplates": [],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "",
+        "childNameFormat": "",
+        "pageLabelField": "fa-file-o title",
+        "noGlobal": 0,
+        "noMove": 0,
+        "noTrash": 0,
+        "noSettings": 0,
+        "noChangeTemplate": 0,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 0,
+        "nameContentTab": 0,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "Basic Member Page",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "ProcessWire",
+        "label1026": "Basic Member Page",
+        "roles": [
+            "guest",
+            "editor",
+            "member"
+        ],
+        "fieldgroupFields": [
+            "title",
+            "content",
+            "images"
+        ],
+        "fieldgroupContexts": {
+            "title": [],
+            "content": [],
+            "images": []
+        }
+    },
     "basic-page": {
         "id": 29,
         "name": "basic-page",
@@ -42,7 +130,7 @@
         "cacheExpire": 0,
         "cacheExpirePages": [],
         "cacheExpireSelector": "",
-        "label": "",
+        "label": "Basic Page",
         "tags": "",
         "titleNames": 0,
         "noPrependTemplateFile": 0,
@@ -57,13 +145,16 @@
         "errorAction": 0,
         "connectedFieldID": null,
         "ns": "ProcessWire",
+        "label1026": "Basic Page",
         "fieldgroupFields": [
             "title",
-            "content"
+            "content",
+            "images"
         ],
         "fieldgroupContexts": {
             "title": [],
-            "content": []
+            "content": [],
+            "images": []
         }
     },
     "event": {
@@ -92,7 +183,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "",
+        "pageLabelField": "fa-clock-o title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -109,7 +200,7 @@
         "cacheExpire": 0,
         "cacheExpirePages": [],
         "cacheExpireSelector": "",
-        "label": "",
+        "label": "Event",
         "tags": "",
         "titleNames": 0,
         "noPrependTemplateFile": 0,
@@ -124,18 +215,20 @@
         "errorAction": 0,
         "connectedFieldID": null,
         "ns": "ProcessWire",
+        "label1026": "Event",
         "fieldgroupFields": [
             "speaker_name",
             "title",
             "event_date",
+            "event_end_date",
             "event_abstract",
             "content",
-            "images"
+            "images",
+            "project_reference"
         ],
         "fieldgroupContexts": {
             "speaker_name": {
-                "columnWidth": 50,
-                "maxlength": 2048
+                "columnWidth": 50
             },
             "title": {
                 "columnWidth": 50
@@ -143,9 +236,13 @@
             "event_date": {
                 "columnWidth": 50
             },
+            "event_end_date": {
+                "columnWidth": 50
+            },
             "event_abstract": [],
             "content": [],
-            "images": []
+            "images": [],
+            "project_reference": []
         }
     },
     "events-overview": {
@@ -209,10 +306,251 @@
         "connectedFieldID": null,
         "ns": "ProcessWire",
         "fieldgroupFields": [
-            "title"
+            "title",
+            "content"
         ],
         "fieldgroupContexts": {
-            "title": []
+            "title": [],
+            "content": []
+        }
+    },
+    "home": {
+        "id": 1,
+        "name": "home",
+        "fieldgroups_id": "home",
+        "flags": 0,
+        "cache_time": 0,
+        "useRoles": 1,
+        "editRoles": [
+            "editor"
+        ],
+        "addRoles": [
+            "editor"
+        ],
+        "createRoles": [
+            "editor"
+        ],
+        "rolesPermissions": [],
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": "",
+        "noParents": 1,
+        "childTemplates": [],
+        "parentTemplates": [],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "",
+        "childNameFormat": "",
+        "pageLabelField": "fa-home title",
+        "noGlobal": 0,
+        "noMove": 0,
+        "noTrash": 0,
+        "noSettings": 0,
+        "noChangeTemplate": 0,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 0,
+        "nameContentTab": 0,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "ProcessWire",
+        "roles": [
+            "guest",
+            "editor",
+            "member"
+        ],
+        "fieldgroupFields": [
+            "title",
+            "content",
+            "images"
+        ],
+        "fieldgroupContexts": {
+            "title": [],
+            "content": [],
+            "images": []
+        }
+    },
+    "inventory": {
+        "id": 52,
+        "name": "inventory",
+        "fieldgroups_id": "inventory",
+        "flags": 0,
+        "cache_time": 0,
+        "useRoles": 0,
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": "",
+        "noParents": -1,
+        "childTemplates": [
+            "inventory-item"
+        ],
+        "parentTemplates": [],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "",
+        "childNameFormat": "",
+        "pageLabelField": "",
+        "noGlobal": 0,
+        "noMove": 0,
+        "noTrash": 0,
+        "noSettings": 0,
+        "noChangeTemplate": 0,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 0,
+        "nameContentTab": 0,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "ProcessWire",
+        "fieldgroupFields": [
+            "title",
+            "content"
+        ],
+        "fieldgroupContexts": {
+            "title": [],
+            "content": []
+        }
+    },
+    "inventory-item": {
+        "id": 53,
+        "name": "inventory-item",
+        "fieldgroups_id": "inventory-item",
+        "flags": 0,
+        "cache_time": 0,
+        "useRoles": 0,
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": 1,
+        "noParents": "",
+        "childTemplates": [],
+        "parentTemplates": [
+            "inventory"
+        ],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "",
+        "childNameFormat": "",
+        "pageLabelField": "",
+        "noGlobal": 0,
+        "noMove": 0,
+        "noTrash": 0,
+        "noSettings": 0,
+        "noChangeTemplate": 0,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 0,
+        "nameContentTab": 0,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "ProcessWire",
+        "fieldgroupFields": [
+            "title",
+            "inventory_id",
+            "user_reference",
+            "inventory_usage",
+            "content",
+            "images"
+        ],
+        "fieldgroupContexts": {
+            "title": [],
+            "inventory_id": {
+                "columnWidth": 33,
+                "rows": 1
+            },
+            "user_reference": {
+                "columnWidth": 33
+            },
+            "inventory_usage": {
+                "columnWidth": 33
+            },
+            "content": {
+                "rows": 5
+            },
+            "images": []
         }
     },
     "member": {
@@ -272,7 +610,7 @@
         "contentType": "",
         "errorAction": 0,
         "connectedFieldID": null,
-        "ns": "ProcessWire",
+        "ns": "\\",
         "fieldgroupFields": [
             "title"
         ],
@@ -339,10 +677,12 @@
         "connectedFieldID": null,
         "ns": "ProcessWire",
         "fieldgroupFields": [
-            "title"
+            "title",
+            "content"
         ],
         "fieldgroupContexts": {
-            "title": []
+            "title": [],
+            "content": []
         }
     },
     "post": {
@@ -408,13 +748,13 @@
             "title",
             "content",
             "images",
-            "event_reference"
+            "project_reference"
         ],
         "fieldgroupContexts": {
             "title": [],
             "content": [],
             "images": [],
-            "event_reference": []
+            "project_reference": []
         }
     },
     "project": {
@@ -429,7 +769,9 @@
         "sortfield": "",
         "noChildren": "",
         "noParents": "",
-        "childTemplates": [],
+        "childTemplates": [
+            "basic-member-page"
+        ],
         "parentTemplates": [
             "projects-overview"
         ],
@@ -445,7 +787,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "",
+        "pageLabelField": "fa-book title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -462,7 +804,7 @@
         "cacheExpire": 0,
         "cacheExpirePages": [],
         "cacheExpireSelector": "",
-        "label": "",
+        "label": "Project",
         "tags": "",
         "titleNames": 0,
         "noPrependTemplateFile": 0,
@@ -477,6 +819,7 @@
         "errorAction": 0,
         "connectedFieldID": null,
         "ns": "ProcessWire",
+        "label1026": "Project",
         "fieldgroupFields": [
             "title",
             "content",
@@ -496,13 +839,25 @@
         "fieldgroups_id": "projects-overview",
         "flags": 0,
         "cache_time": 0,
-        "useRoles": 0,
+        "useRoles": 1,
+        "editRoles": [
+            "editor"
+        ],
+        "addRoles": [
+            "editor"
+        ],
+        "createRoles": [
+            "editor"
+        ],
+        "rolesPermissions": [],
         "noInherit": 0,
         "childrenTemplatesID": 0,
         "sortfield": "",
         "noChildren": "",
-        "noParents": "",
-        "childTemplates": [],
+        "noParents": -1,
+        "childTemplates": [
+            "project"
+        ],
         "parentTemplates": [],
         "allowPageNum": 0,
         "allowChangeUser": 0,
@@ -516,7 +871,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "",
+        "pageLabelField": "fa-clone title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -525,7 +880,7 @@
         "noShortcut": 0,
         "noUnpublish": 0,
         "noLang": 0,
-        "compile": 3,
+        "compile": 0,
         "nameContentTab": 0,
         "noCacheGetVars": "",
         "noCachePostVars": "",
@@ -533,7 +888,7 @@
         "cacheExpire": 0,
         "cacheExpirePages": [],
         "cacheExpireSelector": "",
-        "label": "",
+        "label": "Projects Overview",
         "tags": "",
         "titleNames": 0,
         "noPrependTemplateFile": 0,
@@ -548,6 +903,12 @@
         "errorAction": 0,
         "connectedFieldID": null,
         "ns": "ProcessWire",
+        "label1026": "Projects Overview",
+        "roles": [
+            "guest",
+            "editor",
+            "member"
+        ],
         "fieldgroupFields": [
             "title"
         ],
