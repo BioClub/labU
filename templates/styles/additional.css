@@ -127,9 +127,16 @@
   }
   
   /* Login Button */
-  .signin-button {
-    @apply bg-white hover:bg-black text-black hover:text-white font-semibold py-1 px-2 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full;
+  a.login-button {
+    @apply ml-4 no-underline bg-pure-magenta text-white font-semibold py-1 px-2 rounded-full;
   }
+  a.login-button:hover {
+    @apply no-underline bg-pure-blue;
+  }
+  a.login-button:active {
+    @apply no-underline bg-white text-pure-blue;
+  }
+  
   
   /* Helper Classes for Image Markdown w-3/4 is NG*/
   .w-100 {

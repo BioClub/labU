@@ -59,12 +59,11 @@ $profileURL = $urls->admin . "profile/";
     $active = $user->language->id == $language->id;
     //if ($active) continue;
 ?>  <a href="<?=$page->localUrl($language)?><?=$input->urlSegmentStr?>" class="<?=$active ? 'active' : ''?>"><?=$language->title?></a><?php endforeach;?>
-
       <!-- End Language Switcher -->
 <?php if ($user->isLoggedin()): ?>
-      <a href="<?=$profileURL?>" class="signin-button">Hello, <?=$user->user_display_name?></a>
+      <a href="<?=$profileURL?>" class="login-button">Hello, <?=$user->user_display_name?></a>
 <?php else: ?>
-      <a href="<?=$urls->admin?>" class="signin-button">Sign In</a>
+      <a href="<?=$urls->admin?>" class="login-button">Sign In</a>
 <?php endif; ?>
   </div>
  
