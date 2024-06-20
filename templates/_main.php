@@ -79,12 +79,20 @@ $profileURL = $urls->admin . "profile/";
         $class = "";
         if ($item->isCurrent) $class .= "active";
         
-        if (($page->template->name == 'event') && ($item->title == "Events" OR $item->title == "イベント")) $class .= "active";
-          
+        // get template parent name
+        $templateParent = $pages->getByIDs([$item->pagesID]);
+        $templateParentName = $templateParent[0]->template->name;
+        
+        // compare if parent is in menu
+        if (($page->template->name == 'event') && ($templateParentName == "events-overview")) $class .= "active";
+        if (($page->template->name == 'news') && ($templateParentName == "news-overview")) $class .= "active";
+        
+        // show menu item
         echo "<a href='$item->url' class='p-1  rounded-md $class'>$item->title</a>";
+        
         if (($item->title == "Events" OR $item->title == "イベント") && $nrOfUpcomingEvents > 0) echo "<sup class='bg-red-500 text-white rounded-full'>&nbsp;$nrOfUpcomingEvents&nbsp;</sup>";
         if (!$item->isLast) echo " ";
-     //   echo "\n";
+
       }
     ?>
 
