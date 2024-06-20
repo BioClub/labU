@@ -16,5 +16,11 @@ __('Recent Events');
 __('Location:');
 __('Speaker:');
 __('BioClub Members');
+__('News');
+
+
+Tranlate at PW/Admin
+
+Usage: <?= _t("Upcoming Events") ?>
 
 *******************************************/
