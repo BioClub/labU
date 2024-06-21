@@ -16,24 +16,10 @@ if (!$userPage):
 
   <div id="members" class="grid gap-3 grid-cols-1 lg:grid-cols-2">
 <?php
-foreach ($users->find("template=user,roles=member") as $u){
-  $user_image = false;
-  if ($u->images->first()) {
-    $user_image = $u->images->first()->size(200, 200);
-    $base = $urls->httpRoot;
-    $user_image = "$base/site/assets/files/$u->id/$user_image";
-  }
-  $background_color = ""; // default
-  if ($u->color) {
-    $background_color =  "style=\"background-color:$u->color\"";
-  }
-?>
+foreach ($users->find("template=user,roles=member") as $u) {
+  ?>
     <a href="<?=$u->user_nice_url?>" class="flex p-4">
-<?php if ($user_image): ?>
-      <img class="flex-none w-16 h-16 rounded-full" src="<?=$user_image?>" />
-<?php else: ?>
-      <div class="flex-none w-16 h-16 rounded-full bg-slate-200"<?=$background_color?>></div>
-<?php endif; ?>
+<?php showUserIcon($u, 16); ?>
       <div href="<?=$u->user_nice_url?>" class="flex-auto pl-6">
         <div class="text-2xl font-medium"><?=$u->user_display_name?></div>
         <div class="text-lg"><?=$u->user_byline?></div>
@@ -55,7 +41,12 @@ else:
     wire404();
   } else {
     // include member.php (for better readability)
-    include('member.php');
+    $member = new TemplateFile(wire('config')->paths->templates . 'member.php');
+    $member->set('u', $u);
+    $member->set('userIcon', getUserIcon($u, 32));
+    echo $member->render();
+
+    //include('member.php');
   }
 endif;
 ?>

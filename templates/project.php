@@ -7,8 +7,6 @@ if ($page->images->first()) {
   $img = $page->images->first()->size(1000, 333);
 }
 
-
-
 ?>
 
 <article id="content" class="">

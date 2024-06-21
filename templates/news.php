@@ -4,7 +4,7 @@
 
 ?>
 
-<article id="content" class="font-medium max-w-screen-md mx-auto">
+<article id="content" class="font-medium max-w-4xl mx-auto">
   <h1 class="mb-8 text-center"><?=$page->title?></h1>
   <div class="text-xl"><?= $page->event_date ?> JST</div>
 <?php
