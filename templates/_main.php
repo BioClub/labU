@@ -154,7 +154,6 @@ if(is_object($u) AND $user->hasRole('member') AND ($user->id == $u->id)):
   $editLabel = "Edit My Profile";
 elseif(is_object($u) AND $user->hasRole('superuser') AND ($user->id != $u->id)):
   // case: Admin, other Profile Page
-  print_r("Edit Profile");
   $editURL = $page->editUrl();
   $userProfileUrl = $urls->admin . "access/users/edit/?id=" . $u->id;
   $editLabel = "Edit Profile of " . $u->user_display_name;
