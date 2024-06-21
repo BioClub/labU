@@ -36,6 +36,10 @@
   
   /* Content Markdown */
   
+  #content {
+    @apply font-medium;
+    @apply max-w-4xl mx-auto;
+  }
   #content p {
     padding-bottom: 1em;
   }
