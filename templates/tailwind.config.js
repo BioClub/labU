@@ -24,5 +24,9 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    'w-16', 'h-16',
+    'w-32', 'h-32',
+  ]
 }
 
