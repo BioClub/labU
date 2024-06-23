@@ -108,6 +108,18 @@
     color: #fff;
     background: #000;
   }
+  
+  #content a.events, #content a.events:visited {
+    @apply text-black bg-white;
+  }
+
+  #content a.events:hover {
+    @apply text-white bg-pure-blue;
+  }
+
+  #content a.events:active {
+    @apply text-pure-blue bg-white;
+  }
 
   /* Shadows */
   .box {

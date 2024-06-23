@@ -8,7 +8,7 @@ $future_events = $page->children("event_date|event_end_date>today, sort=date");
 
 ?>
 
-<article id="content" class="">
+<article id="content">
   <h2 class="text-center pb-10"><?= _t("Upcoming Events") ?></h2>
     
   <div class="box mt-4 text-center">
@@ -33,7 +33,7 @@ $future_events->each(function($event) {
   );
   
   ?>
-    <a class="box" href="<?= $event->url ?>">
+    <a class="box events" href="<?= $event->url ?>">
   
       <div class="leading-8 mb-2">
         <span class="text-ms bg-gray-200 rounded-full px-2 py-1">
@@ -72,12 +72,12 @@ $future_events->each(function($event) {
   
   <h2 class="text-center py-10"><?= _t("Recent Events") ?></h2>
   
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 <?php 
 // Past Events
 $page->children("event_date<today, sort=-event_date")->each(function($event) {
   ?>
-  <a class="box hover:bg-gray-100 active:bg-pure-yellow" href="<?=$event->url?>">
+  <a class="box events" href="<?=$event->url?>">
     
     <div class="leading-8 mb-2">
       <span class="text-ms bg-gray-200 rounded-full px-2 py-1"><?=$event->event_date?> JST</span>
