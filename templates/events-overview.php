@@ -11,15 +11,11 @@ $future_events = $page->children("event_date|event_end_date>today, sort=date");
 <article id="content" class="">
   <h2 class="text-center pb-10"><?= _t("Upcoming Events") ?></h2>
     
-<?php if (count($future_events) == 0) { ?>
   <div class="box mt-4 text-center">
     <?php echo $page->content; ?>
   </div>
-<?php } ?>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
-
-  
 <?php
 
 $future_events->each(function($event) {
@@ -36,9 +32,8 @@ $future_events->each(function($event) {
   $event->event_date
   );
   
-  
   ?>
-    <a class="box hover:bg-gray-100 active:bg-pure-yellow" href="<?= $event->url ?>">
+    <a class="box" href="<?= $event->url ?>">
   
       <div class="leading-8 mb-2">
         <span class="text-ms bg-gray-200 rounded-full px-2 py-1">
@@ -48,17 +43,19 @@ $future_events->each(function($event) {
 <?php else: ?>
           <?=$event->event_date?> JST
 <?php endif; ?>
+        
         </span>
       </div>
   
-  <?php if ($event->images->first()):
-    $img = $event->images->first()->size(1000, 333);
-  ?>
+<?php if ($event->images->first()):
+  $img = $event->images->first()->size(1000, 333);
+?>
       <img src="<?=$img->url?>" class="w-full mb-3" />
-  <?php endif; ?>
+<?php endif; ?>
   
       <h2 class="px-1">
         <?php if ($event->speaker_name) { echo $event->speaker_name; echo ": ";} ?><?=$event->title?>
+      
       </h2>
       <div class="leading-8 my-2">
         <span class="text-ms bg-gray-200 rounded-full ml-1 px-2 py-1">BioClub&nbsp;Tokyo</span>
