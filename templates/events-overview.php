@@ -11,7 +11,7 @@ $future_events = $page->children("event_date|event_end_date>today, sort=event_da
 <article id="content">
   <h2 class="text-center pb-10"><?= _t("Upcoming Events") ?></h2>
     
-  <div class="box mt-4 text-center">
+  <div class="text-lg font-medium">
     <?php echo $page->content; ?>
   </div>
 
