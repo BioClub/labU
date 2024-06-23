@@ -4,7 +4,7 @@
 
 // Future Events
 // Events that have either "event_date" or "event_end_date" in the Future
-$future_events = $page->children("event_date|event_end_date>today, sort=date");
+$future_events = $page->children("event_date|event_end_date>today, sort=event_date");
 
 ?>
 
@@ -38,8 +38,7 @@ $future_events->each(function($event) {
       <div class="leading-8 mb-2">
         <span class="text-ms bg-gray-200 rounded-full px-2 py-1">
 <?php if($event->event_end_date): ?>
-          <?=date("F j, Y", $event->getUnformatted("event_date"))?> - 
-          <?=date("F j, Y", $event->getUnformatted("event_end_date"))?>
+          <?=date("F j, Y", $event->getUnformatted("event_date"))?> - <?=date("F j, Y", $event->getUnformatted("event_end_date"))?>
 <?php else: ?>
           <?=$event->event_date?> JST
 <?php endif; ?>
