@@ -16,13 +16,13 @@ if (!$userPage):
 
   <div id="members" class="grid gap-3 grid-cols-1 lg:grid-cols-2">
 <?php
-foreach ($users->find("template=user,roles=member") as $u) {
+foreach ($users->find("template=user,roles=member,sort=user_display_name") as $u) {
   ?>
     <a href="<?=$u->user_nice_url?>" class="flex p-4">
-<?php showUserIcon($u, 16); ?>
+<?php showUserIcon($u, 12); ?>
       <div href="<?=$u->user_nice_url?>" class="flex-auto pl-6">
-        <div class="text-2xl font-medium"><?=$u->user_display_name?></div>
-        <div class="text-lg"><?=$u->user_byline?></div>
+        <div class="text-xl font-medium"><?=$u->user_display_name?></div>
+        <div class="text-md"><?=$u->user_byline?></div>
       </div>
     </a>
 
