@@ -62,14 +62,12 @@
     @apply text-pure-blue bg-white;
   }
   
-  
   #content #members a, #content #members a:visited {
     @apply text-black bg-white;
-    @apply rounded-full;
+    @apply rounded-lg;
   }
   #content #members a:hover {
     @apply text-black bg-gray-100;
-    @apply rounded-full;
   }
   #content #members a:active {
     @apply text-white bg-pure-magenta;
