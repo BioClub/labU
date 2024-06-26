@@ -142,13 +142,13 @@ if($editURL): ?>
 
   <div class="grid grid-cols-3 gap-4 font-medium">
     <div class="pl-1">
-<?php showFooterMenu($menu, 'bottom-left'); ?>
+<?php showFooterMenu($menu, 'footer-left'); ?>
     </div>
     <div>
-<?php showFooterMenu($menu, 'bottom-center'); ?>
+<?php showFooterMenu($menu, 'footer-center'); ?>
     </div>
     <div class="pr-1">
-<?php showFooterMenu($menu, 'bottom-right'); ?>
+<?php showFooterMenu($menu, 'footer-right'); ?>
     </div>
   </div>
 
