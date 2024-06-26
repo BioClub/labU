@@ -52,6 +52,19 @@ function showUserIcon($user, $size=16) {
   echo getUserIcon($user, $size);
 }
   
+function showFooterMenu($menu, $location) {
+  try {
+    $menuObjects = $menu->getMenuItems($location, 2); // 2 -> return Object
+  } catch (Exception $e){
+    // do nothing
+  }
+  if (is_object($menuObjects)) {
+    foreach($menuObjects as $item) {
+      echo "      <div><a href='$item->url'>$item->title</a></div>\n";
+    }
+  }
+}
+
 
 
 ?>

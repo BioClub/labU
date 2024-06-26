@@ -40,6 +40,7 @@
     @apply font-medium;
     @apply max-w-4xl mx-auto;
   }
+  
   #content p {
     padding-bottom: 1em;
   }
@@ -107,18 +108,23 @@
     background: #000;
   }
   
-  #content a.events, #content a.events:visited {
-    @apply text-black bg-white;
+  #content a.events, #content a.events:visited, footer .grid a, footer .grid a:visited {
+    @apply text-black bg-transparent;
   }
 
-  #content a.events:hover {
+  #content a.events:hover, footer .grid a:hover {
     @apply text-white bg-pure-blue;
   }
 
-  #content a.events:active {
+  #content a.events:active, footer .grid a:active {
     @apply text-pure-blue bg-white;
   }
 
+  footer #attribution a {
+    text-decoration: underline;
+  }
+  
+  
   /* Shadows */
   .box {
     @apply border-solid border-2 border-black my-8 p-2;
