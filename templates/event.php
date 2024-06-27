@@ -12,7 +12,7 @@
   <?php /* Info Box */ ?>
   <div class="pb-8 box text-xl leading-8">
 <?php if ($page->speaker_name): ?>
-    <div><?= __("Speaker:") ?> <?= $page->speaker_name ?><div>
+    <div><?= __("Speaker:") ?> <?= $page->speaker_name ?></div>
 <?php endif; ?>
     <div><?= __("Date:") ?> <?= $page->event_date ?> JST</div>
     <div><?= __("Location:") ?>
