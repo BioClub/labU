@@ -16,8 +16,13 @@
 
 @layer base {
   
-  /* Headers */
+  /* Text Selection */
+  ::selection {
+    color: white;
+    background-color: #0000ff;
+  }
   
+  /* Headers */
   h1 {
     @apply text-6xl font-semibold py-2;
   }
