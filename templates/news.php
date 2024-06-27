@@ -8,8 +8,10 @@
   <h1 class="mb-8 text-center"><?=$page->title?></h1>
   <div class="text-sm pb-4">
     <span class="rounded-full bg-slate-100 border-solid border border-slate-500 py-1 px-3">
-    <?= _t("Posted by:") ?> <?=$page->createdUser->user_display_name?>
-    <?= _t("on") ?> <?=$page->date?> JST
+
+      <?= _t("Posted by:") ?> <?=$page->createdUser->user_display_name?>,
+      <?=$page->date?> JST
+
     </span>
   </div>
 <?php /*
