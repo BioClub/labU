@@ -197,6 +197,9 @@
     @apply bg-gradient-to-tr from-indigo-500 via-purple-500 via-green-500 via-yellow-500 to-pink-500;
     @apply border-none;
   }
+  #content ul {
+    @apply pb-2;
+  }
   
   
   @media (min-width: 640px) {
