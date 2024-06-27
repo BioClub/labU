@@ -1,13 +1,7 @@
-/* Example CSS file */ 
-
-/* Tachyons */
-/*
-@import url('tachyons.min.css');
-@import url('bioclub.css');
-*/
+/* Tailwind */
+@import url('prism.css');
 
 /* Tailwind */
-
 @tailwind components;
 @tailwind utilities;
 @tailwind base;
