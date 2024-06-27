@@ -1,0 +1,169 @@
+<?php namespace ProcessWire;
+
+
+class TextformatterPrism extends Textformatter
+{
+    private $baseUrl = '';
+    private $basePath = '';
+
+    public function getModuleInfo()
+    {
+        $infoJson = file_get_contents(dirname(__FILE__) . '/TextformatterPrism.info.json');
+        return wireDecodeJSON($infoJson);
+    }
+
+    public function format(&$str)
+    {
+        // nothing to do if string is empty
+        if (empty($str)) return;
+
+        $dom = new \DOMDocument();
+
+
+        $dom->loadHTML(mb_convert_encoding($str, 'HTML-ENTITIES', 'UTF-8'));
+        $codes = $dom->getElementsByTagName('code');
+
+        // check if there's code elements
+        if (!$codes->length) return;
+
+        // extract languages from code elements with language-xxx class
+        /* @var $code \DOMElement */
+        $langs = [];
+        foreach ($codes as $code) {
+            $codeClass = $code->getAttribute('class');
+            $langs = array_merge($langs, $this->parseLanguage($codeClass));
+
+            // fix the class and replace the code element if necessary
+            $codeClassFixed = $this->fixClassname($codeClass);
+            if ($codeClass !== $codeClassFixed) {
+                $fixedCode = $code->setAttribute('class', $codeClassFixed);
+                $code->parentNode->replaceChild($fixedCode, $code);
+            }
+
+            // check for parent <pre> tag as well.
+            if ($code->parentNode->nodeName === 'PRE') {
+                $pre = $code->parentNode;
+                $preClass = $pre->getAttribute('class');
+                $langs = array_merge($langs, $this->parseLanguage($preClass));
+
+                // fix the class name, and replace the pre element if necessary
+                $preClassFixed = $this->fixClassname($preClass, true);
+                if ($preClass !== $preClassFixed) {
+                    $pre->parentNode->replaceChild($pre->setAttribute('class', $preClassFixed), $code);
+                }
+            }
+        }
+        // remove duplicates
+        $langs = array_unique($langs);
+        if (!count($langs)) return;
+
+        $markup = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
+        $markup = ltrim(rtrim($markup, '</body>'), '<body>');
+
+        $str = $markup . $this->renderIncludes($langs);
+    }
+
+    public function formatValue(Page $page, Field $field, &$value)
+    {
+        $this->format($value);
+    }
+
+    private function parseLanguage($className)
+    {
+        // extract language name from .language-xxx class names
+        if (preg_match_all('/language-([\w\-\S]+)/', $className, $matches)) {
+            return $matches[1];
+        }
+        return [];
+    }
+
+    private function fixClassname($className, $isPre = false)
+    {
+        if ($isPre) {
+            // if line-numbers is selected, and pre does not have the class already add it
+            $className .= in_array('line-numbers', $this->plugins) && strpos($className, 'line-numbers') < 0
+                ? ' line-numbers' : '';
+        } else {
+            // if default class is selected, add it
+            $className .= $this->defaultLang != ''
+                ? " language-$this->defaultLang" : '';
+        }
+        return $className;
+    }
+
+    public function ___getCss($languages, $plugins)
+    {
+        $css = [];
+        // include theme
+        $css[] = $this->baseUrl . "prism/themes/$this->theme";
+        // include plugins css
+        foreach ($this->plugins as $plugin) {
+            $pluginCssPath = $this->basePath . "prism/plugins/$plugin/prism-$plugin.css";
+            if (file_exists($pluginCssPath)) {
+                $css[] = $this->baseUrl . "prism/plugins/$plugin/prism-$plugin.css";
+            }
+        }
+        // include custom css
+        if($this->customCss) $css[] = $this->customCss;
+
+        return $css;
+    }
+
+    public function ___getJs($languages, $plugins)
+    {
+        $js = [];
+
+        // include main script
+        $js[] = $this->baseUrl . 'prism/prism.js';
+        // include language parsers
+        if ($this->autoInclude) {
+            foreach ($languages as $lang) {
+                $langJs = $lang . ($this->useMinified ? '.min' : '');
+                $scriptPath = $this->basePath . "prism/components/prism-$langJs.js";
+                // prevent 404s from nonexistent files
+                if (file_exists($scriptPath)) {
+                    $js[] = $this->baseUrl . "prism/components/prism-$langJs.js";
+                }
+            }
+
+            // include plugins scripts
+            foreach ($this->plugins as $plugin) {
+                $pluginJs = $plugin . ($this->useMinified ? '.min' : '');
+                $scriptPath = $this->basePath . "prism/plugins/$plugin/prism-$pluginJs.js";
+                // prevent 404s from nonexistent files
+                if (file_exists($scriptPath)) {
+                    $js[] = $this->baseUrl . "prism/plugins/$plugin/prism-$pluginJs.js";
+                }
+            }
+
+        }
+
+        // include custom js specified in module settings
+        if ($this->customJs) $js[] = $this->customJs;
+
+        return $js;
+    }
+
+    private function renderIncludes($languages)
+    {
+        $js = $this->getJs($languages, $this->plugins);
+        $css = $this->getCss($languages, $this->plugins);
+
+        return wireRenderFile($this->basePath . '/markup/markup.php', [
+            'js' => $js,
+            'css' => $css
+        ]);
+    }
+
+    public function init()
+    {
+        // check if xml extension is installed
+        if (!extension_loaded('xml')) {
+            $this->error("PHP XML extension isn't installed, please install it to use this module.");
+        }
+
+        // set base paths and urls for scripts
+        $this->basePath = $this->config->path($this->className);
+        $this->baseUrl = $this->config->url($this->className);
+    }
+}

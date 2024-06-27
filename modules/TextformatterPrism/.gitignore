@@ -1,0 +1,6 @@
+addon/
+prism/*
+!prism/components
+!prism/plugins
+!prism/themes
+!prism/prism.js
