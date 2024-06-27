@@ -198,7 +198,7 @@
     @apply border-none;
   }
   #content ul {
-    @apply pb-2;
+    @apply pb-4;
   }
   
   
