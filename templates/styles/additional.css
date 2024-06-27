@@ -94,6 +94,7 @@
     @apply decoration-2 underline-offset-2;
   }
   
+  /* Links */
   .event a {
     text-decoration: underline;
   }
@@ -125,6 +126,22 @@
 
   footer #attribution a {
     text-decoration: underline;
+  }
+  
+  /* Admonition */
+  #content div.admonition {
+    @apply  border-2 rounded-xl;
+    @apply p-4 text-xl font-normal;
+    @apply pb-0;
+  }
+  #content div.note {
+    @apply bg-green-200 border-green-400;
+  }
+  #content div.alert {
+    @apply bg-red-200 border-red-400;
+  }
+  #content div.warning {
+    @apply bg-yellow-200 border-yellow-400;
   }
   
   
