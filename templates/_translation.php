@@ -19,7 +19,6 @@ __('Speaker:');
 __('BioClub Members');
 __('News');
 __("Posted by:");
-__("on");
 
 
 Tranlate at PW/Admin
