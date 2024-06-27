@@ -21,11 +21,7 @@
       <a href="https://zoom.bioclub.tokyo">https://zoom.bioclub.tokyo</a>
     </div>
   </div>
-
   <div class="text-lg">
-    <div class="">
-  <?php echo $page->content; ?>
-    </div>
+    <?php echo $page->content; ?>
   </div>
-  
 </article>

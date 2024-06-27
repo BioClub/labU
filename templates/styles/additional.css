@@ -173,8 +173,8 @@
     @apply mx-auto;
   }
 
-  #content figure { 
-    @apply pb-1;
+  #content figure, #content > div > p > img { 
+    @apply py-2;
   }
   #content figure > p, #content blockquote p { 
     @apply pb-0;
