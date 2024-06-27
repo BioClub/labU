@@ -160,13 +160,13 @@
   
   
   /* Helper Classes for Image Markdown, because w-3/4 is NG, does not like "/" */
-  .w-100, width-100 {
+  .w-100, .width-100 {
     width: 100%;
   }
-  .w-75, width-75  {
+  .w-75, .width-75  {
     width: 75%;
   }
-  .w-50, width-50 {
+  .w-50, .width-50 {
     width: 50%;
   }
   
