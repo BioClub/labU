@@ -140,7 +140,7 @@ if($editURL): ?>
     </div>
 <?php endif; ?>
 
-  <div class="grid grid-cols-3 gap-4 font-medium">
+  <div class="grid gap-4 grid-cols-1 md:grid-cols-3 text-xl font-medium">
     <div class="pl-1">
 <?php showFooterMenu($menu, 'footer-left'); ?>
     </div>
