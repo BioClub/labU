@@ -8,6 +8,7 @@ Language Translation + Context
 https://processwire.com/api/ref/functions/_x/
 
 Global Translation Files
+Add short text to be translated in the backend, here:
 
 __('Event:');
 __('Events');
@@ -17,6 +18,8 @@ __('Location:');
 __('Speaker:');
 __('BioClub Members');
 __('News');
+__("Posted by:");
+__("on");
 
 
 Tranlate at PW/Admin
