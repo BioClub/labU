@@ -11,11 +11,11 @@ The following example assume, that your Field is called `images`:
 `![some alt text]({images:2}){.w-30}`  
 `![some more text]({images:3}){.w-10}`  
 
-_.w-50, .w-30, .w-10 is from [Tachyons CSS](http://tachyons.io). Use which suits your project best._
+_.w-50, .w-30, .w-10 are custom CSS class, which will be applied to `<img>`. Use which suits your project best._
 
 ### Text Formatter Order
+
 1. Image Tags
 2. Markdown/Parsedown Extra
-
 
 Original documentation at [https://github.com/ocorreiododiogo/PW-ImageTags/](https://github.com/ocorreiododiogo/PW-ImageTags)
