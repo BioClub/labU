@@ -161,14 +161,43 @@
   
   /* Helper Classes for Image Markdown, because w-3/4 is NG, does not like "/" */
   .w-100, .width-100 {
-    width: 100%;
+    @apply w-full;
+    @apply mx-auto;
   }
   .w-75, .width-75  {
-    width: 75%;
+    @apply w-full md:w-3/4;
+    @apply mx-auto;
   }
   .w-50, .width-50 {
-    width: 50%;
+    @apply w-full md:w-1/2;
+    @apply mx-auto;
   }
+
+  #content figure { 
+    @apply pb-1;
+  }
+  #content figure > p, #content blockquote p { 
+    @apply pb-0;
+  }
+  #content figure > figcaption {
+    @apply text-sm px-2 py-1 bg-gray-50 rounded-b-lg;
+  }  
+  #content blockquote {
+    @apply text-2xl font-normal text-slate-500 p-4 px-6 rounded-lg mb-2;
+    @apply bg-slate-50;
+    @apply border border-slate-500;
+  }
+  #content blockquote.dark {
+    @apply text-2xl font-normal text-slate-200 p-4 px-6 rounded-lg mb-2;
+    @apply bg-slate-700;
+    @apply border-none;
+  }
+  #content blockquote.rainbow {
+    @apply text-2xl font-normal text-slate-100 p-4 px-6 rounded-lg mb-2;
+    @apply bg-gradient-to-tr from-indigo-500 via-purple-500 via-green-500 via-yellow-500 to-pink-500;
+    @apply border-none;
+  }
+  
   
   @media (min-width: 640px) {
     .inventory_item_grid {
