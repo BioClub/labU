@@ -55,11 +55,11 @@
     @apply text-white bg-pure-magenta;
   }
   
-  #content a:hover {
+  #content a:hover, #content.news a:hover {
     @apply text-white bg-pure-blue;
   }
   
-  #content a:active {
+  #content a:active, #content.news a:active {
     @apply text-pure-blue bg-white;
   }
   
@@ -106,6 +106,10 @@
     text-decoration: none;
     color: #fff;
     background: #000;
+  }
+  
+  #content.news a {
+    @apply text-black bg-transparent;
   }
   
   #content a.events, #content a.events:visited, footer .grid a, footer .grid a:visited {
