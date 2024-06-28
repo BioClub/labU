@@ -2,31 +2,46 @@
 
 // Template file for pages using the “news” template
 
+
+  //$page->modified_users_id
+//$user = $users->get($page->created_users_id);
+  
+/*
+    <a href="<?=$u->user_nice_url?>" class="flex p-4">
+<?php showUserIcon($u, 12); ?>
+      <div href="<?=$u->user_nice_url?>" class="flex-auto pl-6">
+        <div class="text-xl font-medium"><?=$u->user_display_name?></div>
+        <div class="text-md"><?=$u->user_byline?></div>
+      </div>
+    </a>
+*/
+
+
+$createdUser = $users->get($page->created_users_id);
+$createdUserURL = $pages->get(1)->httpUrl . "members/" . $createdUser->user_nice_url;
+
+/*
+$modifiedUser = $users->get($page->modified_users_id);
+$modifiedUserURL = $pages->get(1)->httpUrl . "members/" . $modifiedUser->user_nice_url;
+*/
+
+
+
 ?>
 
 <article id="content" class="font-medium max-w-4xl mx-auto">
   <h1 class="mb-8 text-center"><?=$page->title?></h1>
-  <div class="text-sm pb-4">
-    <span class="rounded-full bg-slate-100 border-solid border border-slate-500 py-1 px-3">
-
-      <?= _t("Posted by:") ?> <?=$page->createdUser->user_display_name?>,
-      <?=$page->date?> JST
-
-    </span>
+  <div id="news" class="box pb-4 grid gap-2 grid-cols-1 md:grid-cols-2 ">
+    <a href="<?=$createdUser->user_nice_url?>" class="flex">
+<?php showUserIcon($createdUser, 6); ?>
+      <div href="<?=$createdUserURL?>" class="flex-auto">
+        <div class="text-ml pl-1"><?=$createdUser->user_display_name?></div>
+      </div>
+    </a>
+    <div class="flex-auto md:text-right">
+      <?php showDate($languages, $page->published); ?>
+    </div>
   </div>
-<?php /*
-  if ($page->images->first()):
-    $img = $page->images->first();
-?>
-  <div class="py-4">
-    <img src="<?=$img->url?>" />
-<?php if ($img->description): ?>
-    <div class="text-sm p-1"><?=$img->description?></div>
-<?php endif; ?>
-  </div>
-<?php endif; 
- */?>
-  
   <div class="text-lg">
 <?php echo $page->content; ?>
   </div>

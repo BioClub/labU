@@ -62,6 +62,14 @@
     @apply text-pure-blue bg-white;
   }
   
+  #content .box#news a {
+    @apply text-black bg-transparent underline;
+  }
+  #content .box#news a:hover {
+    @apply underline;
+  }
+  
+  
   #content #members a, #content #members a:visited {
     @apply text-black bg-white;
     @apply rounded-lg;

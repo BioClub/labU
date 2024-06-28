@@ -59,8 +59,15 @@ function showFooterMenu($menu, $location) {
       echo "      <div><a href='$item->url'>$item->title</a></div>\n";
     }
   }
-  
 }
+
+function showDate($languages, $timestamp) {
+  $language = $languages->getLanguage();
+  $f = ($language->name == "en") ? "F jS Y, H:i" : "Y年n月j日, H:i";
+  echo date($f, $timestamp) . " JST";
+}
+
+
 
 
 
