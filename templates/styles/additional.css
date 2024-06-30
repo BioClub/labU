@@ -33,35 +33,50 @@
     @apply text-xl font-semibold py-2;
   }
   
-  /* Content Markdown */
-  
+  /* Content */
   #content {
     @apply font-medium;
     @apply max-w-4xl mx-auto;
   }
-  
   #content p {
     padding-bottom: 1em;
   }
-  
   #content li {
     list-style-type: disc; 
     list-style-position: inside;
     margin-left: 1em;  
   }
   
+  /* Content Links */
+  /*
   #content a, #content a:visited {
     @apply text-white bg-pure-magenta;
   }
-  
   #content a:hover, #content.news a:hover {
     @apply text-white bg-pure-blue;
   }
-  
   #content a:active, #content.news a:active {
     @apply text-pure-blue bg-white;
   }
+  */
   
+  /* Box */
+  .box {
+    @apply border-solid border-2 border-black my-8 p-2;
+    box-shadow: 5px 5px 0px black;
+  }
+  
+  /* Box Links */
+  #content a.box:hover {
+    @apply border-pure-magenta;
+    box-shadow: 5px 5px 0px #ff00ff;
+  }
+  #content a.box:active {
+    @apply border-pure-blue;
+    box-shadow: 5px 5px 0px #0000ff;
+  }
+  
+  /* Links in News Box */
   #content .box#news a {
     @apply text-black bg-transparent underline;
   }
@@ -69,7 +84,7 @@
     @apply underline;
   }
   
-  
+  /* Content Members */
   #content #members a, #content #members a:visited {
     @apply text-black bg-white;
     @apply rounded-lg;
@@ -82,27 +97,28 @@
   }
   
   
-  /* Header */
-  
-  header a, nav a {
+  /* Links in Header, Nav & Footer */
+  header a, nav a, footer a {
     text-decoration: none;
   }
-  header a:hover, nav a:hover {
-   /* @apply text-white bg-red-500  */
+  header a.active, nav a.active, footer a.active {
    text-decoration: underline;
    @apply decoration-2 underline-offset-2;
+   @apply decoration-pure-magenta;
   }
-  header a:active, nav a:active {
-    /* @apply text-white bg-red-500; */
-    text-decoration: underline;
-    @apply decoration-4 underline-offset-2 decoration-red-500;
+  header a:hover, nav a:hover, footer a:hover, 
+  header a.active:hover, nav a.active:hover, footer a.active:hover {
+   text-decoration: underline;
+   @apply decoration-4 underline-offset-2;
+   @apply decoration-pure-magenta;
   }
-  header a.active, nav a.active {
-    text-decoration: underline;
-    @apply decoration-2 underline-offset-2;
+  header a:active, nav a:active, footer a:active,
+  header a.active:active, nav a.active:active, footer a.active:active {
+    @apply decoration-pure-blue;
   }
-  
-  /* Links */
+
+  /*
+  /* Event Links 
   .event a {
     text-decoration: underline;
   }
@@ -115,26 +131,13 @@
     color: #fff;
     background: #000;
   }
-  
+  */
   #content.news a {
     @apply text-black bg-transparent;
   }
   
-  #content a.events, #content a.events:visited, footer .grid a, footer .grid a:visited {
-    @apply text-black bg-transparent;
-  }
 
-  #content a.events:hover, footer .grid a:hover {
-    @apply text-white bg-pure-blue;
-  }
 
-  #content a.events:active, footer .grid a:active {
-    @apply text-pure-blue bg-white;
-  }
-
-  footer #attribution a {
-    text-decoration: underline;
-  }
   
   /* Admonition */
   #content div.admonition {
@@ -153,11 +156,6 @@
   }
   
   
-  /* Shadows */
-  .box {
-    @apply border-solid border-2 border-black my-8 p-2;
-    box-shadow: 5px 5px 0px black;
-  }
   
   /* Pills */
   .pill {

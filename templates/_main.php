@@ -187,7 +187,7 @@ if($editURL): ?>
   </div>
 
   <div class="text-center p-4" id="attribution">
-    Site built with <a href="https://github.com/BioClub/labU">LabU</a>, Logo &copy;<?php echo date("Y"); ?> BioClub Tokyo, User Contributed Content by <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
+    Site built with <a href="https://github.com/BioClub/labU" class="active">LabU</a>, Logo &copy;<?php echo date("Y"); ?> BioClub Tokyo, User Contributed Content by <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="active">CC BY-NC-SA 4.0</a>
   </div>
 
 </footer>
