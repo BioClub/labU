@@ -19,7 +19,6 @@ module.exports = {
         'pure-blue': '#0000ff',
         'pure-yellow': '#ffff00',
         'pure-magenta': '#ff00ff',
-
       },
     },
   },
