@@ -7,6 +7,10 @@
 <article id="content" class="text-center">
   <h3 class="text-4xl pb-12 pt-8">BioClub Projects</h3>
 
+  <div class="text-lg font-medium">
+    <?php echo $page->content; ?>
+  </div>
+  
   <div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 <?php 
 // Get all Projects by date
