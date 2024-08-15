@@ -2,9 +2,11 @@
 
 // Template file for pages using the “event-overview” template
 
-// Future Events
-// Events that have either "event_date" or "event_end_date" in the Future
-$future_events = $page->children("event_date|event_end_date>today, sort=event_date");
+// # Future Events
+// Future Events that have either "event_date" or "event_end_date" in the Future
+// Future Events can also have an empty date, when the presenter has not fixed the date yet
+// More about Selectors https://processwire.com/docs/selectors/
+$future_events = $page->children("(event_date|event_end_date>today), (event_date=), sort=event_date");
 
 ?>
 
