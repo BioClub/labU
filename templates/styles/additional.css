@@ -50,17 +50,24 @@
   }
   
   /* Content Links */
-  /*
+  
   #content a, #content a:visited {
-    @apply text-white bg-pure-magenta;
+    text-decoration: underline;
+    @apply decoration-2;
+    @apply decoration-pure-magenta;
   }
   #content a:hover, #content.news a:hover {
-    @apply text-white bg-pure-blue;
+    text-decoration: underline;
+    @apply decoration-4 underline-offset-2;
+    @apply decoration-pure-magenta;
   }
   #content a:active, #content.news a:active {
-    @apply text-pure-blue bg-white;
+    @apply decoration-pure-blue;
   }
-  */
+  
+  
+  
+  
   
   /* Box */
   .box {
