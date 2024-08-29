@@ -13,7 +13,7 @@ $parents = $page->parents("template=project");
 
 foreach ($parents as $p) {
 ?>
-  ↩︎ <a href="<?php echo $p->url ?>"><?php echo $p->name ?></a>
+  ↩︎ <a href="<?=$p->url?>"><?=$p->title?></a>
 <?php
 }
 
