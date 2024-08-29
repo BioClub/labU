@@ -1,4 +1,6 @@
 /* Tailwind */
+
+/* For Code Highlighting */
 @import url('prism.css');
 
 /* Tailwind */
@@ -101,10 +103,10 @@
   header a, nav a, footer a {
     text-decoration: none;
   }
-  header a.active, nav a.active, footer a.active {
-   text-decoration: underline;
-   @apply decoration-2 underline-offset-2;
-   @apply decoration-pure-magenta;
+  nav.breadcrumbs a {
+    text-decoration: underline;
+    @apply decoration-2;
+    @apply decoration-pure-magenta;
   }
   header a:hover, nav a:hover, footer a:hover, 
   header a.active:hover, nav a.active:hover, footer a.active:hover {
@@ -112,6 +114,12 @@
    @apply decoration-4 underline-offset-2;
    @apply decoration-pure-magenta;
   }
+  header a.active, nav a.active, footer a.active {
+   text-decoration: underline;
+   @apply decoration-2 underline-offset-2;
+   @apply decoration-pure-magenta;
+  }
+
   header a:active, nav a:active, footer a:active,
   header a.active:active, nav a.active:active, footer a.active:active {
     @apply decoration-pure-blue;
@@ -141,7 +149,7 @@
   
   /* Admonition */
   #content div.admonition {
-    @apply  border-2 rounded-xl;
+    @apply border-2 rounded-xl;
     @apply p-4 text-xl font-normal;
     @apply pb-0;
   }
