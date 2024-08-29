@@ -4,7 +4,7 @@
 
 ?>
 
-<article id="content" class="news">
+<article id="main" class="news">
   <h2 class="text-center pb-10"><?= _t("Latest News") ?></h2>
   
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">

@@ -4,10 +4,10 @@
 
 ?>
 
-<article id="content" class="">
+<article id="main" class="">
   <div class="text-4xl pb-4 text-center"><?=$page->title?></div>
   <?php showFirstImage($page); ?>
-  <div class="text-lg">
+  <div id="content" class="text-lg">
     <?=$page->content?>
   </div>
 

@@ -29,7 +29,7 @@ $modifiedUserURL = $pages->get(1)->httpUrl . "members/" . $modifiedUser->user_ni
 
 ?>
 
-<article id="content" class="font-medium max-w-4xl mx-auto">
+<article id="main" class="font-medium max-w-4xl mx-auto">
   <h1 class="mb-8 text-center"><?=$page->title?></h1>
   <div id="news" class="box pb-4 grid gap-2 grid-cols-1 md:grid-cols-2 ">
     <a href="<?=$createdUser->user_nice_url?>" class="flex">
@@ -42,7 +42,7 @@ $modifiedUserURL = $pages->get(1)->httpUrl . "members/" . $modifiedUser->user_ni
       <?php showDate($languages, $page->published); ?>
     </div>
   </div>
-  <div class="text-lg">
+  <div id="content" class="text-lg">
 <?php echo $page->content; ?>
   </div>
 </article>

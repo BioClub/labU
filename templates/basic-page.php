@@ -4,11 +4,11 @@
 
 ?>
 
-<article id="content">
+<article id="main">
    <h2>
      <?php echo $page->title; ?>
    </h2>
-   <div>
+   <div id="content">
 <?php echo $page->content; ?>
    </div>
 </article>

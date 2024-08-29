@@ -6,7 +6,7 @@ $userPage = $input->urlSegmentStr;
 if (!$userPage):
 ?>
 
-<article id="content" class="max-w-6xl mx-auto">
+<article id="main" class="max-w-6xl mx-auto">
   <h1 class="mb-8 text-center">
     <?= __("BioClub Members") ?>
   </h1>

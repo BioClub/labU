@@ -4,7 +4,7 @@
 
 ?>
 
-<article id="content" class="font-medium">
+<article id="main" class="font-medium">
   <h1 class="mb-8 text-center">
     <?=$page->title?>
   </h1>

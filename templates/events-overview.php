@@ -10,7 +10,7 @@ $future_events = $page->children("(event_date|event_end_date>today), (event_date
 
 ?>
 
-<article id="content">
+<article id="main">
   <h2 class="text-center pb-10"><?= _t("Upcoming Events") ?></h2>
     
   <div class="text-lg font-medium">

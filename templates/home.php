@@ -4,9 +4,9 @@
 
 ?>
 
-<div id="content">
+<div id="main">
    <h2 class=""><?php echo $page->title; ?></h2>
-   <div class="">
+   <div id="content" class="">
 <?php echo $page->content; ?>
    </div>
 </div>

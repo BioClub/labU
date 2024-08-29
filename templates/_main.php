@@ -110,7 +110,7 @@ $profileURL = $urls->admin . "profile/";
 
 
 <!-- article -->
-<article id="content" class="p-1">
+<article id="main" class="p-1">
 </article>
 
 <footer class="max-w-4xl mx-auto py-10">

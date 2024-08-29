@@ -132,29 +132,12 @@
     @apply decoration-pure-blue;
   }
 
-  /*
-  /* Event Links 
-  .event a {
-    text-decoration: underline;
-  }
-  .event a:hover {
-    text-decoration: underline;
-    @apply decoration-2 underline-offset-2;
-  }
-  .event a:active {
-    text-decoration: none;
-    color: #fff;
-    background: #000;
-  }
-  */
-  #content.news a {
+  #news a {
     @apply text-black bg-transparent;
   }
   
-
-
-  
-  /* Admonition */
+  /* Content */ 
+  /* Content Admonition */
   #content div.admonition {
     @apply border-2 rounded-xl;
     @apply p-4 text-xl font-normal;

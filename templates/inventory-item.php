@@ -7,7 +7,7 @@
 
 ?>
 
-<article id="content" class="event font-medium text-xl max-w-screen-md mx-auto">
+<article id="main" class="event font-medium text-xl max-w-screen-md mx-auto">
   <h1 class="mb-8 text-center">
     <?=$page->title?>
     (<?=$page->inventory_id?>)
@@ -29,9 +29,5 @@
        
 <?php endif; ?>
     </div>
-  </div>
-
-  
-  
-  
+  </div>  
 </article>

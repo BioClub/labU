@@ -4,10 +4,10 @@
 
 ?>
 
-<article id="content" class="text-center">
+<article id="main" class="text-center">
   <h3 class="text-4xl pb-12 pt-8">BioClub Projects</h3>
 
-  <div class="text-lg font-medium">
+  <div id="content" class="text-lg font-medium">
     <?php echo $page->content; ?>
   </div>
   

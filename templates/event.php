@@ -4,7 +4,7 @@
 
 ?>
 
-<article id="content" class="event font-medium max-w-screen-md mx-auto">
+<article id="main" class="font-medium max-w-screen-md mx-auto">
   <h1 class="mb-8 text-center">
     <?=$page->title?>
   </h1>
@@ -21,7 +21,7 @@
       <a href="https://zoom.bioclub.tokyo">https://zoom.bioclub.tokyo</a>
     </div>
   </div>
-  <div class="text-lg">
+  <div id="content" class="text-lg">
     <?php echo $page->content; ?>
   </div>
 </article>
