@@ -10,8 +10,8 @@ if (!$userPage):
   <h1 class="mb-8 text-center">
     <?= __("BioClub Members") ?>
   </h1>
-  <div class="text-lg font-medium pb-8">
-    <?= $page->content ?>
+  <div id="content" class="text-lg font-medium pb-8">
+    <?=$page->content?>
   </div>
 
   <div id="members" class="grid gap-3 grid-cols-1 lg:grid-cols-2">
