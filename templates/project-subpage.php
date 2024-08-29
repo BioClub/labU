@@ -20,7 +20,7 @@ foreach ($parents as $p) {
 ?>
   </nav>
 
-  <div class="text-4xl pb-4 text-center">Project Subpage: <?=$page->title?></div>
+  <div class="text-4xl pb-8 pt-4 text-center"><?=$page->title?></div>
   <div class="text-lg">
     <?=$page->content?>
   </div>

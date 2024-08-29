@@ -74,6 +74,10 @@ $profileURL = $urls->admin . "profile/";
       $nrOfUpcomingEvents = count($upcomingEvents);
 
       $menuItems = $menu->getMenuItems('header-menu', 2); // 2 -> return Object
+      
+      $isProjectChild = $page->parents("template=projects-overview")->count > 0;
+      
+      
       foreach($menuItems as $item) {
 
         $class = "";
@@ -86,6 +90,7 @@ $profileURL = $urls->admin . "profile/";
         // compare if parent is in menu
         if (($page->template->name == 'event') && ($templateParentName == "events-overview")) $class .= "active";
         if (($page->template->name == 'news') && ($templateParentName == "news-overview")) $class .= "active";
+        if ($isProjectChild && ($templateParentName == "projects-overview")) $class .= "active";
         
         // show menu item
         echo "<a href='$item->url' class='p-1  rounded-md $class'>$item->title</a>";
