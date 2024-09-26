@@ -20,8 +20,6 @@ if ($page->user_reference->count > 0) {
     <div class="my-4">
 <?php 
 
-
-
 $page->user_reference->each(function($u) {
   $m = wire('pages')->get('template=members-overview');  // $page not defined in functions: https://processwire.com/talk/topic/13776-why-is-pages-undefined/
 ?>

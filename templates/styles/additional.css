@@ -11,13 +11,13 @@
 /* Tailwind Additional Base Styles */
 
 @layer base {
-  
+
   /* Text Selection */
   ::selection {
     color: white;
     background-color: #0000ff;
   }
-  
+
   /* Headers */
   h1 {
     @apply text-6xl font-semibold py-2;
@@ -34,7 +34,7 @@
   h5 {
     @apply text-xl font-semibold py-2;
   }
-  
+
   /* Content */
   #content {
     @apply font-medium;
@@ -44,13 +44,13 @@
     padding-bottom: 1em;
   }
   #content li {
-    list-style-type: disc; 
+    list-style-type: disc;
     list-style-position: inside;
-    margin-left: 1em;  
+    margin-left: 1em;
   }
-  
+
   /* Content Links */
-  
+
   #content a, #content a:visited {
     text-decoration: underline;
     @apply decoration-2;
@@ -64,17 +64,17 @@
   #content a:active, #content.news a:active {
     @apply decoration-pure-blue;
   }
-  
-  
-  
-  
-  
+
+
+
+
+
   /* Box */
   .box {
     @apply border-solid border-2 border-black my-8 p-2;
     box-shadow: 5px 5px 0px black;
   }
-  
+
   /* Box Links */
   #content a.box:hover {
     @apply border-pure-magenta;
@@ -84,7 +84,7 @@
     @apply border-pure-blue;
     box-shadow: 5px 5px 0px #0000ff;
   }
-  
+
   /* Links in News Box */
   #content .box#news a {
     @apply text-black bg-transparent underline;
@@ -92,7 +92,7 @@
   #content .box#news a:hover {
     @apply underline;
   }
-  
+
   /* Content Members */
   #content #members a, #content #members a:visited {
     @apply text-black bg-white;
@@ -104,8 +104,8 @@
   #content #members a:active {
     @apply text-white bg-pure-magenta;
   }
-  
-  
+
+
   /* Links in Header, Nav & Footer */
   header a, nav a, footer a {
     text-decoration: none;
@@ -115,7 +115,7 @@
     @apply decoration-2;
     @apply decoration-pure-magenta;
   }
-  header a:hover, nav a:hover, footer a:hover, 
+  header a:hover, nav a:hover, footer a:hover,
   header a.active:hover, nav a.active:hover, footer a.active:hover {
    text-decoration: underline;
    @apply decoration-4 underline-offset-2;
@@ -135,8 +135,8 @@
   #news a {
     @apply text-black bg-transparent;
   }
-  
-  /* Content */ 
+
+  /* Content */
   /* Content Admonition */
   #content div.admonition {
     @apply border-2 rounded-xl;
@@ -152,9 +152,9 @@
   #content div.warning {
     @apply bg-yellow-200 border-yellow-400;
   }
-  
-  
-  
+
+
+
   /* Pills */
   .pill {
     @apply text-black bg-gray-200 rounded-full px-1.5 py-0.5;
@@ -165,12 +165,12 @@
   .pill-ng {
     @apply text-white bg-red-500 rounded-full px-1.5 py-0.5;
   }
-  
+
   /* Edit Button */
   .edit-button {
     @apply bg-white hover:bg-black text-black hover:text-white font-semibold py-2 px-4 border border-black active:bg-pure-magenta active:border-pure-magenta rounded-full;
   }
-  
+
   /* Login Button */
   a.login-button {
     @apply ml-4 no-underline bg-pure-magenta text-white font-semibold py-1 px-2 rounded-full;
@@ -181,8 +181,8 @@
   a.login-button:active {
     @apply no-underline bg-white text-pure-blue;
   }
-  
-  
+
+
   /* Helper Classes for Image Markdown, because w-3/4 is NG, does not like "/" */
   .w-100, .width-100 {
     @apply w-full;
@@ -197,15 +197,15 @@
     @apply mx-auto;
   }
 
-  #content figure, #content > div > p > img { 
+  #content figure, #content > div > p > img {
     @apply py-2;
   }
-  #content figure > p, #content blockquote p { 
+  #content figure > p, #content blockquote p {
     @apply pb-0;
   }
   #content figure > figcaption {
     @apply text-sm px-2 py-1 bg-gray-50 rounded-b-lg;
-  }  
+  }
   #content blockquote {
     @apply text-2xl font-normal text-slate-500 p-4 px-6 rounded-lg mb-2;
     @apply bg-slate-50;
@@ -221,18 +221,23 @@
     @apply bg-gradient-to-tr from-indigo-500 via-purple-500 via-green-500 via-yellow-500 to-pink-500;
     @apply border-none;
   }
+  #content blockquote.loggedin {
+    @apply text-lg font-medium text-slate-900 p-3 px-4 rounded-lg mb-2;
+    @apply bg-slate-100;
+    @apply border-slate-500;
+  }
   #content ul {
     @apply pb-4;
   }
-  
-  
+
+
   @media (min-width: 640px) {
     .inventory_item_grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
   }
-  
+
   @media (min-width: 768px) {
     .inventory_item_grid {
       display: grid;
@@ -240,4 +245,3 @@
     }
   }
 }
-
