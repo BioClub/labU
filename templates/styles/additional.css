@@ -225,6 +225,7 @@
     @apply text-lg font-medium text-slate-900 p-3 px-4 rounded-lg mb-2;
     @apply bg-slate-100;
     @apply border-slate-500;
+    @apply my-2;
   }
   #content ul {
     @apply pb-4;
