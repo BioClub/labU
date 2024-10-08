@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * Dynamic Role Support
+ *
+ * By Avoine and ProcessWire
+ * Concept: Antti Peisa
+ * Code: Ryan Cramer
+ *
+ */
+
+class ProcessDynamicRole extends ProcessPageType {
+
+	const minVersion = '2.4.6';
+
+	public function __construct() {
+		parent::__construct();
+		$this->set('showFields', array('name', 'permissions')); 
+	}
+
+	public function init() {
+		set_time_limit(3600); 
+		parent::init();
+		$this->addLabel = $this->_('Add Dynamic Role'); 
+		$this->addHookBefore('InputfieldMultiplier::render', $this, 'hookInputfieldMultiplierRender'); 
+		$this->addHookBefore('InputfieldForm::render', $this, 'hookInputfieldFormRender'); 
+		$this->addHookAfter('ProcessPageEdit::execute', $this, 'hookProcessPageEditExecute'); 
+	}
+	
+	public function hookInputfieldMultiplierRender($event) {
+		$f = $event->object;
+		$data = $this->wire('modules')->getModuleConfigData('DynamicRoleSupport'); 
+		$maxMultiplier = empty($data['maxMultiplier']) ? DynamicRoleSupport::maxMultiplier : (int) $data['maxMultiplier'];
+		$cnt = count($f->attr('value')); // if it already has more, make sure we don't lose them
+		if($cnt > $maxMultiplier) $maxMultiplier = $cnt;
+		$f->qtyMax = $maxMultiplier;
+		$f->wrapClass = 'InputfieldItemList';
+		$f->addLabel = $this->_('Add OR Condition');
+	}
+	
+	public function hookInputfieldFormRender($event) {
+		$form = $event->object;
+		$f = $form->getChildByName('permissions');
+		if(!$f) return;
+		$f->description = $this->_('Check each permission you would like to assign to users matching your selector above.');
+		$f->notes = $this->_('*Checking page-edit permission will reveal an additional field below where you can define specifically what they can edit. Note that page-edit permission is a prerequisite to using the admin, and thus a prerequisite to many of the permissions here being applicable. As a result, it is recommended that you check page-edit permission if you intend for this dynamic role to have any kind of admin access, even if you do not define anything for them to edit.');
+		$f = $f->getInputfield();
+		$f->table = true;
+		$f->thead = 'name|title';
+		$options = $f->getOptions();
+		foreach($options as $name => $label) $f->removeOption($name);
+		foreach($this->wire('permissions') as $permission) {
+			$name = $permission->name;
+			if($name == 'page-edit') $name .= " *";
+			if($name == 'page-view') $name .= " " . $this->_('(required)');
+			$f->addOption($permission->id, "$name|$permission->title");
+		}
+		$value = $f->attr('value');
+		if(!in_array(DynamicRoleSupport::viewPermissionID, $value)) {
+			$value[] = DynamicRoleSupport::viewPermissionID;
+			$f->attr('value', $value);
+		}
+
+		$f = $form->getChildByName('drole_user_selector');
+		$f->previewColumns = array('path', 'template', 'modified');  
+	}
+	
+	public function hookProcessPageEditExecute($event) {
+		$event->return .= "<p class='notes'>" . $this->_('Note: if you make changes to the view or edit selectors above, an index will be re-built upon save. Depending on how many pages are involved, it may take significantly longer than a normal page save.') . "</p>";
+	}
+
+	public function ___install() {
+		// this is here in case someone attempts to install on a version before PW version dependency checking was added
+		if(version_compare(wire('config')->version, self::minVersion, '<')) {
+			throw new WireException('Dynamic Roles require ProcessWire ' . self::minVersion . ' or newer.'); 
+		}
+	}
+
+	
+}
+
