@@ -89,7 +89,7 @@ What we need/want from a CMS/CMF:
 - [x] [Free and Open-Source Software](https://github.com/processwire/processwire/blob/master/LICENSE.TXT)
 - [x] Needs to run on Apache on a Shared Server (LAMP)
 - [x] User Management (Create new Users, change/update User Profile)
-- [x] User Passwort Reset
+- [x] User Password Reset
 - [x] Role-based Access Control (Admin, Editor, Project Member etc.)
 - [x] Bi-lingual JP/EN
 - [x] MarkDown
@@ -111,8 +111,8 @@ What we need/want from a CMS/CMF:
 ## TODO
 
 - [x] Add SSL Certificate via [Let's Encrypt](https://letsencrypt.org), so we can have https://bioclub.toyko
-- [x] Make Developement Site at [https://bioclub.tokyo](https://bioclub.tokyo)
-- [x] Install ProcessWire at Developement Site
+- [x] Make Development Site at [https://bioclub.tokyo](https://bioclub.tokyo)
+- [x] Install ProcessWire at Development Site
 - [x] Create Template/Fields Export/Import System
 - [x] Make Basic Pages
 - [x] Make Site Bi-lingual, Japanese/English
@@ -120,7 +120,4 @@ What we need/want from a CMS/CMF:
 - [x] Create Project-specific Permissions & Roles
 - [ ] ~~Add Contact Form!~~ Please use [BioClub Discord](https://discord.bioclub.tokyo)!
 
-Please share your ideas, whishes and content at the [Google Docs](https://docs.google.com/document/d/1o2WTNjTxkZYKmCmdziS-a4XgKwddnrclsKorgtMeCUo/edit?usp=sharing) , and any more Development-related issues at [GitHub Issues](https://github.com/BioClub/BioClub-Wordpress-Theme/issues).
-
-
-## Notes
+Please share your ideas, wishes and content at the [Google Docs](https://docs.google.com/document/d/1o2WTNjTxkZYKmCmdziS-a4XgKwddnrclsKorgtMeCUo/edit?usp=sharing) , and any more Development-related issues at [GitHub Issues](https://github.com/BioClub/BioClub-Wordpress-Theme/issues).
