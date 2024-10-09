@@ -107,7 +107,6 @@ $this->addHookAfter('Pages::saved', function(HookEvent $event) {
     // Remove Role from All Users. case: when a project removes a user
     $users = users();
     foreach($users as $u) {
-      $this->message("Removing User $u->name from $roleName.");
       $u->removeRole($roleName);
       $u->save();
     }
