@@ -16,7 +16,7 @@ The website and it's theme also need be free and open-source.
 - What is still missing?
 - What is needed to run the BioClub?
 
-Please write your ideas, suggestions and proposed content in the 
+Please write your ideas, suggestions and proposed content in the
 [Shared Google Doc](https://docs.google.com/document/d/1o2WTNjTxkZYKmCmdziS-a4XgKwddnrclsKorgtMeCUo/edit?usp=sharing).
 
 We also made a [Shared Google Sheet](https://docs.google.com/spreadsheets/d/1IQ1l39ResywoN4pn5pU7LXOjepU_J1jULcCjwXe4JaE/edit#gid=0) to track the tasks and processes. Idealy we could move it to GitHub Issues/Projects, but let's work now with tools that everyone is familiar with.
@@ -67,12 +67,20 @@ After evaluation other framesworks and alternatives like SSGs, we decided to bui
 ## 1. Bi-Lingual Events
 
 - Create an `Event Page` with all the necessary event info.
-- Based on that data, create an `Event Overview Page`, showing all future events, ordered by date, includung resized image previews, title, and event abstract.
+- Based on that data, create an `Event Overview Page`, showing all future events, ordered by date, including resized image previews, title, and event abstract.
 - Once the event is finished - i.e. the `event date` is older than the current date, the event page moves to the `Event Archive Page`.
 - User can write `Event Reports`, which can be linked to the `Event Page`. Links to the `Event Reports` appear on the `Event Page.`
 
 ## 2. BioClub Projects
 
+- A _BioClub Project_ is a place to document and share information about a project.
+- Project can have _Project Members_, each member can edit the project site and create/edit any number of sub-sites.
+
+### 2.1 Creating a Project (for Admins)
+
+- An Admin needs to initially create the project with template _New Project_.
+- On save, a new template and a new role is created, handling the user permissions, based upon the members on the project page.
+- On subsequent save, the user permissions are updated.
 
 ### Requirements
 
@@ -82,7 +90,7 @@ What we need/want from a CMS/CMF:
 - [x] Needs to run on Apache on a Shared Server (LAMP)
 - [x] User Management (Create new Users, change/update User Profile)
 - [x] User Passwort Reset
-- [x] Role-based Access Control (Admin, Editor, etc.)
+- [x] Role-based Access Control (Admin, Editor, Project Member etc.)
 - [x] Bi-lingual JP/EN
 - [x] MarkDown
 - [x] Custom Post/Page Types (ie. Events, Inventory, News, etc)
@@ -109,12 +117,10 @@ What we need/want from a CMS/CMF:
 - [x] Make Basic Pages
 - [x] Make Site Bi-lingual, Japanese/English
 - [x] Make Accounts for BioClub Community Members
-- [ ] Create Project-specific Permissions & Roles 
+- [x] Create Project-specific Permissions & Roles
 - [ ] ~~Add Contact Form!~~ Please use [BioClub Discord](https://discord.bioclub.tokyo)!
 
 Please share your ideas, whishes and content at the [Google Docs](https://docs.google.com/document/d/1o2WTNjTxkZYKmCmdziS-a4XgKwddnrclsKorgtMeCUo/edit?usp=sharing) , and any more Development-related issues at [GitHub Issues](https://github.com/BioClub/BioClub-Wordpress-Theme/issues).
 
 
 ## Notes
-
-
