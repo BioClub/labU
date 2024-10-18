@@ -1,4 +1,4 @@
-<?php namespace ProcessWire; 
+<?php namespace ProcessWire;
 
 // Template file for pages using the “event” template
 
@@ -10,15 +10,19 @@
   </h1>
 
   <?php /* Info Box */ ?>
-  <div class="pb-8 box text-xl leading-8">
+  <div id="content" class="pb-8 box text-xl leading-8">
 <?php if ($page->speaker_name): ?>
     <div><?= __("Speaker:") ?> <?= $page->speaker_name ?></div>
 <?php endif; ?>
     <div><?= __("Date:") ?> <?= $page->event_date ?> JST</div>
     <div><?= __("Location:") ?>
-      <a href="https://maps.app.goo.gl/xGpo5acrHNpescaX8">BioClub&nbsp;Tokyo</a>
-      &
-      <a href="https://zoom.bioclub.tokyo">https://zoom.bioclub.tokyo</a>
+      <?php
+      $location = $page->event_location->title;
+      $location = str_replace('BioClub Tokyo', '<a href="https://maps.app.goo.gl/xGpo5acrHNpescaX8">BioClub Tokyo</a>', $location);
+      $location = str_replace('Zoom', '<a href="https://zoom.bioclub.tokyo">Zoom</a>', $location);
+      echo $location;
+      ?>
+
     </div>
   </div>
   <div id="content" class="text-lg">

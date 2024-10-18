@@ -69,6 +69,8 @@
 
 
 
+
+
   /* Box */
   .box {
     @apply border-solid border-2 border-black my-8 p-2;
