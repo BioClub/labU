@@ -64,23 +64,31 @@ After evaluation other framesworks and alternatives like SSGs, we decided to bui
 
 # Use Cases
 
-## 1. Bi-Lingual Events
+## 1. Events
 
 - Create an `Event Page` with all the necessary event info.
 - Based on that data, create an `Event Overview Page`, showing all future events, ordered by date, including resized image previews, title, and event abstract.
 - Once the event is finished - i.e. the `event date` is older than the current date, the event page moves to the `Event Archive Page`.
 - User can write `Event Reports`, which can be linked to the `Event Page`. Links to the `Event Reports` appear on the `Event Page.`
 
-## 2. BioClub Projects
+## 2. BioClub Members
+
+BioClub Members should register using [BioClub Member Form](https://forms.gle/RdKtDLsee2776jTW7), then we will make a Member account. They can the edit/change their member page, and be added to any number of _Project_ pages. Members can also create Posts, Events, and edit the Inventory.
+
+## 3. BioClub Projects
 
 - A _BioClub Project_ is a place to document and share information about a project.
 - Project can have _Project Members_, each member can edit the project site and create/edit any number of sub-sites.
 
-### 2.1 Creating a Project (for Admins)
+### 3.1 Creating a Project (for Admins)
 
 - An Admin needs to initially create the project with template _New Project_.
 - On save, a new template and a new role is created, handling the user permissions, based upon the members on the project page.
 - On subsequent save, the user permissions are updated.
+
+## 4. Wiki
+
+The Wiki-section of the site it where all members have edit & write access. 
 
 ### Requirements
 
@@ -96,11 +104,12 @@ What we need/want from a CMS/CMF:
 - [x] Custom Post/Page Types (ie. Events, Inventory, News, etc)
 - [x] Support for Custom Fields [Support](_structure/ProcessWire.md)
 - [x] Server-side Image Resizing
-- [x] HTTPS
+- [x] https://
 
 
 
 ### Nice to have
+
 - [ ] Announce Mailing List Management (subscribe/unsubscribe)
 
 ### ProcessWire Installation
@@ -119,5 +128,7 @@ What we need/want from a CMS/CMF:
 - [x] Make Accounts for BioClub Community Members
 - [x] Create Project-specific Permissions & Roles
 - [ ] ~~Add Contact Form!~~ Please use [BioClub Discord](https://discord.bioclub.tokyo)!
+- [ ] Language-specific Search. [Example](https://github.com/ryancramerdesign/ProcessWire/blob/master/site-default/templates/search.php)
+- [ ] Wiki-like Pages
 
 Please share your ideas, wishes and content at the [Google Docs](https://docs.google.com/document/d/1o2WTNjTxkZYKmCmdziS-a4XgKwddnrclsKorgtMeCUo/edit?usp=sharing) , and any more Development-related issues at [GitHub Issues](https://github.com/BioClub/BioClub-Wordpress-Theme/issues).
