@@ -19,7 +19,8 @@ During development we need to watch for changes in the template files and update
 #### Start watching for changes
 
 `cd site/templates/`  
-`npx tailwindcss -i ./styles/additional.css -o ./styles/bioclub.css -w`
+`npx tailwindcss -i ./styles/additional.css -o ./styles/bioclub.css -w`  
+`npx tailwindcss -i ./styles/additional.css -o ./styles/bioclub.css --watch`
 
 `-i` ... _--input_, Input file  
 `-o` ... _--output_, Output file  
@@ -41,8 +42,7 @@ As a final step in each dev cycle, build and minfy the css.
 Build & [Minify](https://tailwindcss.com/docs/optimizing-for-production)
 
 `cd site/templates/`  
+`npx tailwindcss -i ./styles/additional.css -o ./styles/bioclub.css -m`  
 `npx tailwindcss -i ./styles/additional.css -o ./styles/bioclub.css --minify`
 
 `-m` ... _--minify_, Minify the output
-
-
