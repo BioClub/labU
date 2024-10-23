@@ -206,6 +206,11 @@
     @apply mx-auto;
   }
 
+  .logo {
+    @apply h-32;
+    @apply inline-block;
+  }
+
   #content figure, #content > div > p > img {
     @apply py-2;
   }
