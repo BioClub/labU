@@ -8,6 +8,13 @@
 @tailwind utilities;
 @tailwind base;
 
+/* Custom Font */
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-VariableFont_slnt,wght.woff2");
+}
+
+
 /* Tailwind Additional Base Styles */
 
 @layer base {
