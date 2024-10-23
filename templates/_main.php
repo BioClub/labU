@@ -1,11 +1,11 @@
 <?php namespace ProcessWire;
 
-// Optional main output file, called after rendering page’s template file. 
+// Optional main output file, called after rendering page’s template file.
 // This is defined by $config->appendTemplateFile in /site/config.php, and
 // is typically used to define and output markup common among most pages.
-// 	
+//
 // When the Markup Regions feature is used, template files can prepend, append,
-// replace or delete any element defined here that has an "id" attribute. 
+// replace or delete any element defined here that has an "id" attribute.
 // https://processwire.com/docs/front-end/output/markup-regions/
 
 /** @var Page $page */
@@ -51,11 +51,11 @@ $profileURL = $urls->admin . "profile/";
 
 
   <div class="font-mono text-sm font-bold text-right">
-    
+
 <!-- Language Switcher -->
-<?php 
+<?php
   $userPage = $input->urlSegmentStr;
-  foreach($languages as $language) : 
+  foreach($languages as $language) :
     $active = $user->language->id == $language->id;
     //if ($active) continue;
 ?>  <a href="<?=$page->localUrl($language)?><?=$input->urlSegmentStr?>" class="<?=$active ? 'active' : ''?>"><?=$language->title?></a><?php endforeach;?>
@@ -66,36 +66,36 @@ $profileURL = $urls->admin . "profile/";
       <a href="<?=$urls->admin?>" class="login-button">Sign In</a>
 <?php endif; ?>
   </div>
- 
+
 </header>
   <nav class="font-mono text-xl font-bold px-4 py-2">
-    <?php 
-      $upcomingEvents = $pages->get("template=events-overview")->children("event_date>today, sort=-date"); 
+    <?php
+      $upcomingEvents = $pages->get("template=events-overview")->children("event_date>today, sort=-date");
       $nrOfUpcomingEvents = count($upcomingEvents);
 
       $menuItems = $menu->getMenuItems('header-menu', 2); // 2 -> return Object
-      
+
       $isProjectChild = $page->parents("template=projects-overview")->count > 0;
-      
-      
+
+
       foreach($menuItems as $item) {
 
         $class = "";
         if ($item->isCurrent) $class .= "active";
-        
+
         // get template parent name
         $templateParent = $pages->getByIDs([$item->pagesID]);
         $templateParentName = $templateParent[0]->template->name;
-        
+
         // compare if parent is in menu
         if (($page->template->name == 'event') && ($templateParentName == "events-overview")) $class .= "active";
         if (($page->template->name == 'news') && ($templateParentName == "news-overview")) $class .= "active";
         if ($isProjectChild && ($templateParentName == "projects-overview")) $class .= "active";
-        
+
         // show menu item
         echo "<a href='$item->url' class='p-1  rounded-md $class'>$item->title</a>";
-        
-        if (($item->title == "Events" OR $item->title == "イベント") && $nrOfUpcomingEvents > 0) echo "<sup class='bg-red-500 text-white rounded-full'>&nbsp;$nrOfUpcomingEvents&nbsp;</sup>";
+
+        if (($item->title == "Events" OR $item->title == "イベント") && $nrOfUpcomingEvents > 0) echo "<sup class='bg-red-500 text-white rounded-full px-2'>$nrOfUpcomingEvents</sup>";
         if (!$item->isLast) echo " ";
 
       }
@@ -104,7 +104,7 @@ $profileURL = $urls->admin . "profile/";
   </nav>
 
 <main class="p-4">
-  
+
 <!-- navigation -->
 
 
@@ -114,7 +114,7 @@ $profileURL = $urls->admin . "profile/";
 </article>
 
 <footer class="max-w-4xl mx-auto py-10">
-<?php 
+<?php
 
 // If current page is editable by current logged-in user, show Edit Link
 
