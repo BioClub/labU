@@ -206,9 +206,12 @@
     @apply mx-auto;
   }
 
-  .logo {
+  .logos {
+    @apply text-center;
+  }
+  .logos img {
     @apply h-32;
-    @apply inline-block;
+    /* @apply inline-block; */
   }
 
   #content figure, #content > div > p > img {

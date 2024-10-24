@@ -31,6 +31,6 @@ module.exports = {
     'width-100', 'width-75', 'width-50',
     'figure', 'figcaption', 'blockquote', 'dark', 'rainbow',
     'admonition', 'note', 'alert', 'warning',
-    'logo',
+    'logos',
   ]
 }
