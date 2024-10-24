@@ -210,7 +210,7 @@
     @apply text-center;
   }
   .logos img {
-    @apply h-32;
+    @apply h-32 m-4;
     @apply inline-block;
   }
 
