@@ -70,7 +70,8 @@ $profileURL = $urls->admin . "profile/";
 </header>
   <nav class="font-mono text-xl font-bold px-4 py-2">
     <?php
-      $upcomingEvents = $pages->get("template=events-overview")->children("event_date>today, sort=-date");
+      // Get number of Upcoming Events
+      $upcomingEvents = $pages->get("template=events-overview")->children("(event_date>today), (event_date=), sort=-date"); // Match events with future or empty date https://processwire.com/docs/selectors/#or-selectors1
       $nrOfUpcomingEvents = count($upcomingEvents);
 
       $menuItems = $menu->getMenuItems('header-menu', 2); // 2 -> return Object
