@@ -25,6 +25,8 @@ After evaluation other framesworks and alternatives like SSGs, we decided to bui
 
 For detail on how to install a local development setup of the site, please have a look at [INSTALLATION.md](INSTALLATION.md).
 
+# Design
+
 ### TailwindCSS
 
 [TailwindCSS](https://tailwindcss.com) is another take on a utility-first CSS framework, the advantage of mix-ins and smaller file size, come with a slightly more [complex dev-setup](https://tailwindcss.com/docs/installation), that might deter first-time users, but comes with the benefit of smaller, tailor-made CSS files.
@@ -44,11 +46,15 @@ Because the generate code is very messy, slow and difficult to update. Exactly w
 - Once the event is finished - i.e. the `event date` is older than the current date, the event page moves to the `Event Archive Page`.
 - User can write `Event Reports`, which can be linked to the `Event Page`. Links to the `Event Reports` appear on the `Event Page.`
 
-## 2. News & Reports
+## 2. News & Reports [todo]
+
+Posts by Members. Markdown content, possibility to tag and connect `members` and `projects`.
 
 ## 3. BioClub Members
 
 BioClub Members should register using [BioClub Member Form](https://forms.gle/RdKtDLsee2776jTW7), then we will make a Member account. They can the edit/change their member page, and be added to any number of _Project_ pages. Members can also create Posts, Events, and edit the Inventory.
+
+Member pages will also have a list of all the _Projects_ & _Events_ the Member is involved in.
 
 ## 4. BioClub Projects
 
@@ -61,7 +67,18 @@ BioClub Members should register using [BioClub Member Form](https://forms.gle/Rd
 - On save, a new template and a new role is created, handling the user permissions, based upon the members on the project page.
 - On subsequent save, the user permissions are updated.
 
-## 5. Wiki
+## 5. Inventory
+
+Searchable Inventory of Machines, Devices and Reagents.
+
+- Description
+- ID
+- Image
+- Location (in the Lab)
+- Purchase Link (if applicable)
+- Usage Requirements
+
+## 6. Wiki [todo]
 
 The Wiki-section of the site it where all members have edit & write access. 
 
@@ -81,7 +98,6 @@ What we need/want from a CMS/CMF:
 - [x] Server-side Image Resizing
 - [x] https://
 
-
 ### ProcessWire Installation
 
 - ProcessWire [Installation](INSTALLATION.md) Notes.
@@ -100,6 +116,8 @@ What we need/want from a CMS/CMF:
 - [ ] ~~Add Contact Form!~~ Please use [BioClub Discord](https://discord.bioclub.tokyo)!
 - [ ] Language-specific Search. [Example](https://github.com/ryancramerdesign/ProcessWire/blob/master/site-default/templates/search.php)
 - [ ] Wiki-like Pages
+- [ ] News & Repors
+- [ ] Inventory
 
 # Discussion & Content
 
