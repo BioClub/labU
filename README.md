@@ -1,8 +1,6 @@
-# labU - A ProcessWire-based LIMS for Labs & Hackerspaces
+# BioClub Tokyo LIMS
 
-## BioClub Tokyo LIMS (Laboratory Information Management System)
-
-Public Development Repository for the  BioClub Tokyo Community Website & Laboratory Information Management System. 
+## A ProcessWire-based LIMS (Laboratory Information Management System) for Community Labs & Hackerspaces
 
 URL: [www.bioclub.tokyo](http://www.bioclub.tokyo).
 
