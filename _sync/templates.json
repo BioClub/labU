@@ -5,18 +5,85 @@
         "fieldgroups_id": "basic-member-page",
         "flags": 0,
         "cache_time": 0,
+        "useRoles": 0,
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": "",
+        "noParents": "",
+        "childTemplates": [],
+        "parentTemplates": [],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "",
+        "childNameFormat": "",
+        "pageLabelField": "fa-user title",
+        "noGlobal": 0,
+        "noMove": 0,
+        "noTrash": 0,
+        "noSettings": 0,
+        "noChangeTemplate": 0,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 0,
+        "nameContentTab": 0,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "ProcessWire",
+        "fieldgroupFields": [
+            "title"
+        ],
+        "fieldgroupContexts": {
+            "title": []
+        }
+    },
+    "basic-page": {
+        "id": 29,
+        "name": "basic-page",
+        "fieldgroups_id": "basic-page",
+        "flags": 0,
+        "cache_time": 0,
         "useRoles": 1,
         "editRoles": [
             "editor",
-            "member"
+            "member",
+            "admin"
         ],
         "addRoles": [
             "editor",
-            "member"
+            "member",
+            "admin"
         ],
         "createRoles": [
-            "editor",
-            "member"
+            "member",
+            "admin"
         ],
         "rolesPermissions": [],
         "noInherit": 0,
@@ -38,82 +105,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "fa-file-o title",
-        "noGlobal": 0,
-        "noMove": 0,
-        "noTrash": 0,
-        "noSettings": 0,
-        "noChangeTemplate": 0,
-        "noShortcut": 0,
-        "noUnpublish": 0,
-        "noLang": 0,
-        "compile": 0,
-        "nameContentTab": 0,
-        "noCacheGetVars": "",
-        "noCachePostVars": "",
-        "useCacheForUsers": 0,
-        "cacheExpire": 0,
-        "cacheExpirePages": [],
-        "cacheExpireSelector": "",
-        "label": "Basic Member Page",
-        "tags": "",
-        "titleNames": 0,
-        "noPrependTemplateFile": 0,
-        "noAppendTemplateFile": 0,
-        "prependFile": "",
-        "appendFile": "",
-        "pagefileSecure": 0,
-        "tabContent": "",
-        "tabChildren": "",
-        "nameLabel": "",
-        "contentType": "",
-        "errorAction": 0,
-        "connectedFieldID": null,
-        "ns": "ProcessWire",
-        "label1026": "Basic Member Page",
-        "roles": [
-            "guest",
-            "editor",
-            "member"
-        ],
-        "fieldgroupFields": [
-            "title",
-            "content",
-            "images"
-        ],
-        "fieldgroupContexts": {
-            "title": [],
-            "content": [],
-            "images": []
-        }
-    },
-    "basic-page": {
-        "id": 29,
-        "name": "basic-page",
-        "fieldgroups_id": "basic-page",
-        "flags": 0,
-        "cache_time": 0,
-        "useRoles": 0,
-        "noInherit": 0,
-        "childrenTemplatesID": 0,
-        "sortfield": "",
-        "noChildren": "",
-        "noParents": "",
-        "childTemplates": [],
-        "parentTemplates": [],
-        "allowPageNum": 0,
-        "allowChangeUser": 0,
-        "redirectLogin": 0,
-        "urlSegments": 0,
-        "https": 0,
-        "slashUrls": 1,
-        "slashPageNum": 0,
-        "slashUrlSegments": 0,
-        "altFilename": "",
-        "guestSearchable": 0,
-        "pageClass": "",
-        "childNameFormat": "",
-        "pageLabelField": "fa-file-o title",
+        "pageLabelField": "fa-file-text-o title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -145,7 +137,13 @@
         "errorAction": 0,
         "connectedFieldID": null,
         "ns": "ProcessWire",
-        "label1026": "Basic Page",
+        "label1021": "Basic Page",
+        "roles": [
+            "guest",
+            "editor",
+            "member",
+            "admin"
+        ],
         "fieldgroupFields": [
             "title",
             "content",
@@ -158,7 +156,7 @@
         }
     },
     "event": {
-        "id": 45,
+        "id": 48,
         "name": "event",
         "fieldgroups_id": "event",
         "flags": 0,
@@ -183,7 +181,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "fa-clock-o title",
+        "pageLabelField": "fa-calendar title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -215,20 +213,23 @@
         "errorAction": 0,
         "connectedFieldID": null,
         "ns": "ProcessWire",
-        "label1026": "Event",
+        "label1021": "Event",
         "fieldgroupFields": [
             "speaker_name",
             "title",
             "event_date",
             "event_end_date",
+            "event_location",
             "event_abstract",
             "content",
             "images",
-            "project_reference"
+            "project_reference",
+            "user_reference"
         ],
         "fieldgroupContexts": {
             "speaker_name": {
-                "columnWidth": 50
+                "columnWidth": 50,
+                "maxlength": 2048
             },
             "title": {
                 "columnWidth": 50
@@ -239,14 +240,20 @@
             "event_end_date": {
                 "columnWidth": 50
             },
+            "event_location": [],
             "event_abstract": [],
             "content": [],
             "images": [],
-            "project_reference": []
+            "project_reference": {
+                "columnWidth": 50
+            },
+            "user_reference": {
+                "columnWidth": 50
+            }
         }
     },
     "events-overview": {
-        "id": 46,
+        "id": 47,
         "name": "events-overview",
         "fieldgroups_id": "events-overview",
         "flags": 0,
@@ -273,7 +280,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "",
+        "pageLabelField": "fa-calendar title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -322,13 +329,16 @@
         "cache_time": 0,
         "useRoles": 1,
         "editRoles": [
-            "editor"
+            "editor",
+            "admin"
         ],
         "addRoles": [
-            "editor"
+            "editor",
+            "admin"
         ],
         "createRoles": [
-            "editor"
+            "editor",
+            "admin"
         ],
         "rolesPermissions": [],
         "noInherit": 0,
@@ -385,7 +395,8 @@
         "roles": [
             "guest",
             "editor",
-            "member"
+            "member",
+            "admin"
         ],
         "fieldgroupFields": [
             "title",
@@ -399,7 +410,7 @@
         }
     },
     "inventory": {
-        "id": 52,
+        "id": 56,
         "name": "inventory",
         "fieldgroups_id": "inventory",
         "flags": 0,
@@ -426,7 +437,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "",
+        "pageLabelField": "fa-cogs title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -468,7 +479,7 @@
         }
     },
     "inventory-item": {
-        "id": 53,
+        "id": 55,
         "name": "inventory-item",
         "fieldgroups_id": "inventory-item",
         "flags": 0,
@@ -477,7 +488,7 @@
         "noInherit": 0,
         "childrenTemplatesID": 0,
         "sortfield": "",
-        "noChildren": 1,
+        "noChildren": "",
         "noParents": "",
         "childTemplates": [],
         "parentTemplates": [
@@ -495,7 +506,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "",
+        "pageLabelField": "fa-cog title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -506,6 +517,74 @@
         "noLang": 0,
         "compile": 0,
         "nameContentTab": 0,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "Inventory Item",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "ProcessWire",
+        "label1021": "Inventory Item",
+        "fieldgroupFields": [
+            "title"
+        ],
+        "fieldgroupContexts": {
+            "title": []
+        }
+    },
+    "language": {
+        "id": 44,
+        "name": "language",
+        "fieldgroups_id": "language",
+        "flags": 8,
+        "cache_time": 0,
+        "useRoles": 0,
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": "",
+        "noParents": "",
+        "childTemplates": [],
+        "parentTemplates": [
+            "admin"
+        ],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "Language",
+        "childNameFormat": "",
+        "pageLabelField": "name",
+        "noGlobal": 1,
+        "noMove": 1,
+        "noTrash": 1,
+        "noSettings": 0,
+        "noChangeTemplate": 1,
+        "noShortcut": 0,
+        "noUnpublish": 1,
+        "noLang": 0,
+        "compile": 3,
+        "nameContentTab": 1,
         "noCacheGetVars": "",
         "noCachePostVars": "",
         "useCacheForUsers": 0,
@@ -526,35 +605,20 @@
         "contentType": "",
         "errorAction": 0,
         "connectedFieldID": null,
-        "ns": "ProcessWire",
+        "ns": "",
         "fieldgroupFields": [
             "title",
-            "inventory_id",
-            "user_reference",
-            "inventory_usage",
-            "content",
-            "images"
+            "language_files_site",
+            "language_files"
         ],
         "fieldgroupContexts": {
             "title": [],
-            "inventory_id": {
-                "columnWidth": 33,
-                "rows": 1
-            },
-            "user_reference": {
-                "columnWidth": 33
-            },
-            "inventory_usage": {
-                "columnWidth": 33
-            },
-            "content": {
-                "rows": 5
-            },
-            "images": []
+            "language_files_site": [],
+            "language_files": []
         }
     },
     "member": {
-        "id": 48,
+        "id": 49,
         "name": "member",
         "fieldgroups_id": "member",
         "flags": 0,
@@ -579,7 +643,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "",
+        "pageLabelField": "fa-user title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -619,7 +683,7 @@
         }
     },
     "members-overview": {
-        "id": 47,
+        "id": 50,
         "name": "members-overview",
         "fieldgroups_id": "members-overview",
         "flags": 0,
@@ -644,7 +708,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "",
+        "pageLabelField": "fa-users title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -655,6 +719,304 @@
         "noLang": 0,
         "compile": 0,
         "nameContentTab": 0,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "Users",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "ProcessWire",
+        "label1021": "Users",
+        "fieldgroupFields": [
+            "title",
+            "content"
+        ],
+        "fieldgroupContexts": {
+            "title": [],
+            "content": []
+        }
+    },
+    "menus": {
+        "id": 46,
+        "name": "menus",
+        "fieldgroups_id": "menus",
+        "flags": 0,
+        "cache_time": 0,
+        "useRoles": 0,
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": 1,
+        "noParents": "",
+        "childTemplates": [],
+        "parentTemplates": [
+            "admin"
+        ],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "",
+        "childNameFormat": "",
+        "pageLabelField": "fa-list title",
+        "noGlobal": 0,
+        "noMove": 0,
+        "noTrash": 0,
+        "noSettings": 0,
+        "noChangeTemplate": 0,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 0,
+        "nameContentTab": 0,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "Menus",
+        "tags": "menu",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "",
+        "label1021": "Menues",
+        "fieldgroupFields": [
+            "title",
+            "menu_pages",
+            "menu_items",
+            "menu_settings"
+        ],
+        "fieldgroupContexts": {
+            "title": [],
+            "menu_pages": [],
+            "menu_items": [],
+            "menu_settings": []
+        }
+    },
+    "news": {
+        "id": 57,
+        "name": "news",
+        "fieldgroups_id": "news",
+        "flags": 0,
+        "cache_time": 0,
+        "useRoles": 0,
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": 1,
+        "noParents": "",
+        "childTemplates": [],
+        "parentTemplates": [
+            "news-overview"
+        ],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "",
+        "childNameFormat": "",
+        "pageLabelField": "fa-newspaper-o title",
+        "noGlobal": 0,
+        "noMove": 0,
+        "noTrash": 0,
+        "noSettings": 0,
+        "noChangeTemplate": 0,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 0,
+        "nameContentTab": 0,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "News",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "ProcessWire",
+        "label1021": "News",
+        "fieldgroupFields": [
+            "title",
+            "date",
+            "abstract",
+            "content",
+            "images",
+            "reference"
+        ],
+        "fieldgroupContexts": {
+            "title": {
+                "columnWidth": 50
+            },
+            "date": {
+                "columnWidth": 50
+            },
+            "abstract": [],
+            "content": [],
+            "images": {
+                "columnWidth": 50
+            },
+            "reference": {
+                "columnWidth": 50
+            }
+        }
+    },
+    "news-overview": {
+        "id": 58,
+        "name": "news-overview",
+        "fieldgroups_id": "news-overview",
+        "flags": 0,
+        "cache_time": 0,
+        "useRoles": 0,
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": "",
+        "noParents": -1,
+        "childTemplates": [
+            "news"
+        ],
+        "parentTemplates": [],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "",
+        "childNameFormat": "",
+        "pageLabelField": "fa-newspaper-o title",
+        "noGlobal": 0,
+        "noMove": 0,
+        "noTrash": 0,
+        "noSettings": 0,
+        "noChangeTemplate": 0,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 0,
+        "nameContentTab": 0,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "News Overview",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "ProcessWire",
+        "label1021": "News Overview",
+        "fieldgroupFields": [
+            "title"
+        ],
+        "fieldgroupContexts": {
+            "title": []
+        }
+    },
+    "permission": {
+        "id": 5,
+        "name": "permission",
+        "fieldgroups_id": "permission",
+        "flags": 8,
+        "cache_time": 0,
+        "useRoles": 0,
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": 1,
+        "noParents": "",
+        "childTemplates": [],
+        "parentTemplates": [
+            "admin"
+        ],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 1,
+        "pageClass": "Permission",
+        "childNameFormat": "",
+        "pageLabelField": "",
+        "noGlobal": 1,
+        "noMove": 1,
+        "noTrash": 1,
+        "noSettings": 1,
+        "noChangeTemplate": 1,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 3,
+        "nameContentTab": 1,
         "noCacheGetVars": "",
         "noCachePostVars": "",
         "useCacheForUsers": 0,
@@ -675,14 +1037,12 @@
         "contentType": "",
         "errorAction": 0,
         "connectedFieldID": null,
-        "ns": "ProcessWire",
+        "ns": "",
         "fieldgroupFields": [
-            "title",
-            "content"
+            "title"
         ],
         "fieldgroupContexts": {
-            "title": [],
-            "content": []
+            "title": []
         }
     },
     "post": {
@@ -711,7 +1071,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "",
+        "pageLabelField": "fa-pencil title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -748,17 +1108,17 @@
             "title",
             "content",
             "images",
-            "project_reference"
+            "event_reference"
         ],
         "fieldgroupContexts": {
             "title": [],
             "content": [],
             "images": [],
-            "project_reference": []
+            "event_reference": []
         }
     },
     "project": {
-        "id": 50,
+        "id": 53,
         "name": "project",
         "fieldgroups_id": "project",
         "flags": 0,
@@ -770,11 +1130,10 @@
         "noChildren": "",
         "noParents": "",
         "childTemplates": [
-            "basic-member-page"
+            "basic-page",
+            "project-subpage"
         ],
-        "parentTemplates": [
-            "projects-overview"
-        ],
+        "parentTemplates": [],
         "allowPageNum": 0,
         "allowChangeUser": 0,
         "redirectLogin": 0,
@@ -787,7 +1146,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "fa-book title",
+        "pageLabelField": "fa-product-hunt title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -819,7 +1178,7 @@
         "errorAction": 0,
         "connectedFieldID": null,
         "ns": "ProcessWire",
-        "label1026": "Project",
+        "label1021": "Project",
         "fieldgroupFields": [
             "title",
             "content",
@@ -833,21 +1192,100 @@
             "user_reference": []
         }
     },
+    "project-subpage": {
+        "id": 59,
+        "name": "project-subpage",
+        "fieldgroups_id": "project-subpage",
+        "flags": 0,
+        "cache_time": 0,
+        "useRoles": 0,
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": "",
+        "noParents": "",
+        "childTemplates": [
+            "basic-page",
+            "project-subpage"
+        ],
+        "parentTemplates": [
+            "basic-page",
+            "project-subpage",
+            "project"
+        ],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "",
+        "childNameFormat": "",
+        "pageLabelField": "fa-product-hunt title",
+        "noGlobal": 0,
+        "noMove": 0,
+        "noTrash": 0,
+        "noSettings": 0,
+        "noChangeTemplate": 0,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 0,
+        "nameContentTab": 0,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "Project Subpage",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "ProcessWire",
+        "label1021": "Project Subpage",
+        "fieldgroupFields": [
+            "title",
+            "content",
+            "images"
+        ],
+        "fieldgroupContexts": {
+            "title": [],
+            "content": [],
+            "images": []
+        }
+    },
     "projects-overview": {
-        "id": 49,
+        "id": 52,
         "name": "projects-overview",
         "fieldgroups_id": "projects-overview",
         "flags": 0,
         "cache_time": 0,
         "useRoles": 1,
         "editRoles": [
-            "editor"
+            "editor",
+            "admin"
         ],
         "addRoles": [
-            "editor"
+            "editor",
+            "admin"
         ],
         "createRoles": [
-            "editor"
+            "admin"
         ],
         "rolesPermissions": [],
         "noInherit": 0,
@@ -871,7 +1309,7 @@
         "guestSearchable": 0,
         "pageClass": "",
         "childNameFormat": "",
-        "pageLabelField": "fa-clone title",
+        "pageLabelField": "fa-product-hunt title",
         "noGlobal": 0,
         "noMove": 0,
         "noTrash": 0,
@@ -903,17 +1341,185 @@
         "errorAction": 0,
         "connectedFieldID": null,
         "ns": "ProcessWire",
-        "label1026": "Projects Overview",
+        "label1021": "Projects Overview",
         "roles": [
             "guest",
             "editor",
-            "member"
+            "member",
+            "admin"
         ],
         "fieldgroupFields": [
-            "title"
+            "title",
+            "content"
         ],
         "fieldgroupContexts": {
-            "title": []
+            "title": [],
+            "content": []
+        }
+    },
+    "role": {
+        "id": 4,
+        "name": "role",
+        "fieldgroups_id": "role",
+        "flags": 8,
+        "cache_time": 0,
+        "useRoles": 0,
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": 1,
+        "noParents": "",
+        "childTemplates": [],
+        "parentTemplates": [
+            "admin"
+        ],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "Role",
+        "childNameFormat": "",
+        "pageLabelField": "",
+        "noGlobal": 1,
+        "noMove": 1,
+        "noTrash": 1,
+        "noSettings": 1,
+        "noChangeTemplate": 1,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 3,
+        "nameContentTab": 1,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "",
+        "fieldgroupFields": [
+            "permissions"
+        ],
+        "fieldgroupContexts": {
+            "permissions": []
+        }
+    },
+    "user": {
+        "id": 3,
+        "name": "user",
+        "fieldgroups_id": "user",
+        "flags": 8,
+        "cache_time": 0,
+        "useRoles": 1,
+        "editRoles": [],
+        "addRoles": [],
+        "createRoles": [],
+        "rolesPermissions": [],
+        "noInherit": 0,
+        "childrenTemplatesID": 0,
+        "sortfield": "",
+        "noChildren": 1,
+        "noParents": "",
+        "childTemplates": [],
+        "parentTemplates": [
+            "admin"
+        ],
+        "allowPageNum": 0,
+        "allowChangeUser": 0,
+        "redirectLogin": 0,
+        "urlSegments": 0,
+        "https": 0,
+        "slashUrls": 1,
+        "slashPageNum": 0,
+        "slashUrlSegments": 0,
+        "altFilename": "",
+        "guestSearchable": 0,
+        "pageClass": "User",
+        "childNameFormat": "",
+        "pageLabelField": "",
+        "noGlobal": 1,
+        "noMove": 1,
+        "noTrash": 1,
+        "noSettings": 1,
+        "noChangeTemplate": 1,
+        "noShortcut": 0,
+        "noUnpublish": 0,
+        "noLang": 0,
+        "compile": 0,
+        "nameContentTab": 1,
+        "noCacheGetVars": "",
+        "noCachePostVars": "",
+        "useCacheForUsers": 0,
+        "cacheExpire": 0,
+        "cacheExpirePages": [],
+        "cacheExpireSelector": "",
+        "label": "",
+        "tags": "",
+        "titleNames": 0,
+        "noPrependTemplateFile": 0,
+        "noAppendTemplateFile": 0,
+        "prependFile": "",
+        "appendFile": "",
+        "pagefileSecure": 0,
+        "tabContent": "",
+        "tabChildren": "",
+        "nameLabel": "",
+        "contentType": "",
+        "errorAction": 0,
+        "connectedFieldID": null,
+        "ns": "",
+        "roles": [],
+        "fieldgroupFields": [
+            "pass",
+            "email",
+            "roles",
+            "admin_theme",
+            "language",
+            "user_display_name",
+            "content",
+            "images",
+            "user_nice_url",
+            "user_byline",
+            "color"
+        ],
+        "fieldgroupContexts": {
+            "pass": [],
+            "email": [],
+            "roles": [],
+            "admin_theme": [],
+            "language": [],
+            "user_display_name": [],
+            "content": [],
+            "images": [],
+            "user_nice_url": {
+                "columnWidth": 33
+            },
+            "user_byline": {
+                "columnWidth": 33
+            },
+            "color": {
+                "columnWidth": 34
+            }
         }
     }
 }
