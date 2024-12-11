@@ -16,7 +16,7 @@
 if ($page->user_reference->count > 0) {
 ?>
   <div class="my-4 font-medium">
-    <div class="">Project Members:</div>
+    <div class=""><?= __("Project Members:"); ?></div>
     <div class="my-2">
 <?php
 
@@ -30,7 +30,7 @@ $page->user_reference->each(function($u) {
     </div>
   </div>
   <div class="my-4 font-medium">
-    <div class=" ">Related Events:</div>
+    <div class=""><?= __("Related Events:"); ?></div>
     <ul>
 <?php
 

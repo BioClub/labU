@@ -1,4 +1,4 @@
-/******************************************* 
+/*******************************************
 Translation file, intentionally commented out. __() is parsed, even in comments.
 
 Language Translation
@@ -19,6 +19,9 @@ __('Speaker:');
 __('BioClub Members');
 __('News');
 __("Posted by:");
+__('Project Members:');
+__('Related Events:');
+
 
 
 Tranlate at PW/Admin
