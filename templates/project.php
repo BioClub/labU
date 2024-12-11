@@ -36,7 +36,7 @@ $page->user_reference->each(function($u) {
 
 // Search all events, that have this page in project_reference
 // $events = $pages->find("template=event, project_reference=$page, limit=10");
-$events = $pages->find("template=event, project_reference=$page");
+$events = $pages->find("template=event, project_reference=$page, sort=-event_date");
 
 $events->each(function($e) {
   echo '<li><a href="'.$e->url.'">'.$e->title.', '.$e->event_date.'</a></li>';
