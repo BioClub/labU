@@ -26,6 +26,9 @@ __('Related Events:');
 
 Tranlate at PW/Admin
 
+EN -> JP:
+https://bioclub.tokyo/edit/setup/language-translator/edit/?textdomain=site--templates--_translation-php&language_id=1019
+
 Usage: <?= _t("Upcoming Events") ?>
 
 *******************************************/
