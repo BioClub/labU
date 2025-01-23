@@ -214,6 +214,22 @@
     @apply inline-block;
   }
 
+  .logogrid3 {
+    @apply grid grid-cols-3 gap-4;
+  }
+  .logogrid4 {
+    @apply grid grid-cols-4 gap-4;
+  }
+  .logogrid5 {
+    @apply grid grid-cols-5 gap-4;
+  }
+  .logogrid6 {
+    @apply grid grid-cols-6 gap-4;
+  }
+  .logogrid3 > div, .logogrid4 > div, .logogrid5 > div, .logogrid6 > div {
+    @apply content-center;
+  }
+
   #content figure, #content > div > p > img {
     @apply py-2;
   }
@@ -247,6 +263,7 @@
   #content ul {
     @apply pb-4;
   }
+
 
 
   @media (min-width: 640px) {
