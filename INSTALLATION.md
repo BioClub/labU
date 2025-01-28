@@ -23,7 +23,7 @@ In ProcessWire the atomic elements are `fields`, which can be used to assemble `
 
 ### Inventory Template
 
-Fields: 
+Fields:
 `title`
 `content`
 `inventory_id`: TextArea
@@ -49,7 +49,6 @@ Template: `inventory`, `inventory_overview`
 Module:ProcessLanguage
 
 
-
 ## ProcessWire: Resetting Passwords
 On a production server, resetting via email works.
 
@@ -61,7 +60,7 @@ https://processwire.com/talk/topic/1736-forgot-backend-password-how-do-you-reset
 
 ```
 $u = $users->get('admin'); // or whatever your username is
-$u->of(false); 
+$u->of(false);
 $u->pass = 'your-new-password';
 $u->save();
 ```
