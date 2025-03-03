@@ -132,6 +132,10 @@ elseif(is_object($u) AND $user->hasRole('superuser') AND ($user->id != $u->id)):
   $editURL = $page->editUrl();
   $userProfileUrl = $urls->admin . "access/users/edit/?id=" . $u->id;
   $editLabel = "Edit Profile of " . $u->user_display_name;
+elseif($page->template()['name'] == "labupdates-overview"):
+  // http://127.0.0.1/pw/edit/page/add/?parent_id=1072
+  $editURL = $config->urls->httpRoot . "edit/page/add/?parent_id=" . $page->id;
+  $editLabel = _t("Add New Lab Update");
 elseif($page->editable()):
   // case: has Page Edit Permission
   $editURL = $page->editUrl();
