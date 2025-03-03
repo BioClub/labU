@@ -4,26 +4,25 @@
 
 ?>
 
-<article id="main" class="">
+<article id="main">
   <h2 class="text-center pb-10"><?= $page->title ?></h2>
 
   <div class="grid grid-cols-1">
 <?php
 // Get Lab Updates
-$page->children("sort=-date")->each(function($news) {
+$page->children("sort=-date")->each(function($update) {
 ?>
-  <div>
-    <div class=""><?=$news->date?> JST</div>
+  <div id="content">
 
-<?php if ($news->images->first()):
-  $img = $news->images->first()->size(960, 333);
+<?php if ($update->images->first()):
+  $img = $update->images->first()->size(960, 333);
 ?>
-    <a href="<?=$news->url?>"><img src="<?=$img->url?>" class="w-full mb-3" /></a>
+    <a href="<?= $update->url ?>"><img src="<?= $img->url ?>" class="w-full mb-3" /></a>
 <?php endif; ?>
-
-    <a href="<?=$news->url?>"><h4><?=$news->title?></h4></a>
+    <div class=""><?= $update->date ?> JST</div>
+    <a href="<?= $update->url ?>"><h4><?= $update->title ?></h4></a>
     <div class="px-1">
-      <?=$news->content?>
+      <?= $update->content ?>
     </div>
   </div>
 <?php
