@@ -5,7 +5,7 @@
 ?>
 
 <article id="main" class="">
-  <h2 class="text-center pb-10"><?= _t("Lab Updates") ?></h2>
+  <h2 class="text-center pb-10"><?= $page->title ?></h2>
 
   <div class="grid grid-cols-1">
 <?php
