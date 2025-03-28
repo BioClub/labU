@@ -1,0 +1,150 @@
+<?php
+
+/**
+ * Page Edit Per User
+ * 
+ * Assign edit access to users on a per-page or per-branch basis.
+ *
+ * The user must already have page-edit permission on one of their roles in order to get 
+ * edit access to assigned pages. Otherwise, they will only gain view access. 
+ *
+ * This module is fully functional as-is, but intended as a proof-of-concept for those wanting
+ * to go further with adding custom edit and/or view access.
+ *
+ * Copyright 2013 by Ryan Cramer 
+ * http://processwire.com
+ *
+ * Per-branch editable additions by Netcarver, January 2013. 
+ *
+ */
+
+class PageEditPerUser extends WireData implements Module, ConfigurableModule {
+
+	public static function getModuleInfo() {
+		return array(
+			'title' => 'Page Edit Per User', 
+			'version' => 2, 
+			'summary' => 'Assign edit access to users on a per-page or per-branch basis.',
+			'singular' => true, 
+			'autoload' => true, 
+			);
+	}
+
+	/**
+	 * Attach our hooks to Page::editable and Page::viewable
+	 *
+	 */
+	public function init() {
+		$this->addHookAfter('Page::editable', $this, 'hookPageEditable'); 
+		$this->addHookAfter('Page::viewable', $this, 'hookPageEditable'); 
+	}
+
+	/**
+	 * Check if this page, or any ancestor pages, are editable
+	 *
+	 * From Netcarver
+	 *
+	 */
+	public function onMyBranch($page) {
+		$page_on_my_branch = $this->user->editable_pages->has($page);
+		if($this->scan_ancestors && !$page_on_my_branch) {
+			$parents = $page->parents();
+			while(!$page_on_my_branch && count($parents)) {
+				$p = $parents->pop();
+				$page_on_my_branch = $this->user->editable_pages->has($p);
+			}
+		}
+		return $page_on_my_branch;
+	}
+
+	/**
+	 * Page::editable hook
+	 *
+	 */
+	public function hookPageEditable($event) {
+		if($event->return) return;
+
+		if($this->user->hasPermission('page-edit')) {
+			$event->return = $this->onMyBranch($event->object);
+		} else {
+			$event->return = false;
+		}
+	}
+
+	/**
+	 * Page::viewable hook
+	 *
+	 */
+	public function hookPageViewable($event) {
+		if($event->return) return;
+		$event->return = $this->onMyBranch($event->object);
+	}
+
+	/**
+	 * Install the module and add the 'editable_pages' field to the user template
+	 *
+	 */
+	public function ___install() {
+		$field = new Field(); 
+		$field->name = 'editable_pages';
+		$field->label = 'Pages user may edit';
+		$field->labelFieldName = 'path';
+		$field->type = wire('modules')->get('FieldtypePage'); 
+		$field->inputfield = 'InputfieldPageListSelectMultiple';
+		$field->description = 
+			'In order to edit pages, the user must also have a role with page-edit permission. ' . 
+			'If they do not have page-edit permission, they will only be able to view the selected pages.';
+		$field->save();
+
+		$fieldgroup = $this->fieldgroups->get('user');
+		$fieldgroup->add($field);
+		$fieldgroup->save();
+
+		$this->message("Added field 'editable_pages' to the user template.");
+	}
+
+	/**
+	 * Uninstall 'editable_pages' field
+	 *
+	 */
+	public function ___uninstall() {
+		$field = $this->fields->get('editable_pages');
+		$fieldgroup = $this->fieldgroups->get('user');
+		if($field && $fieldgroup) {
+			$fieldgroup->remove($field);
+			$fieldgroup->save();
+		}
+		$this->fields->delete($field);
+		$this->message("Removed field: editable_pages");
+	}
+
+	/**
+	 * Default settings used by this module
+	 *
+	 */
+	static protected $defaultSettings = array(
+		'scan_ancestors' => 0
+	);
+
+	/**
+	 * Build a form allowing configuration of this Module
+	 *
+	 */
+	static public function getModuleConfigInputfields(array $data) {
+
+		$fields = new InputfieldWrapper();
+		$data = array_merge(self::$defaultSettings, $data);
+
+		// Scan ancestor nodes for edit permission?
+		$f = wire('modules')->get('InputfieldRadios');
+		$f->attr('name', 'scan_ancestors');
+		$f->label = __('Consider permissions further up the branch too?', __FILE__);
+		$f->addOption(0, __('No', __FILE__));
+		$f->addOption(1, __('Yes', __FILE__));
+		$f->attr('value', $data['scan_ancestors']);
+		$fields->add($f);
+
+		return $fields;
+	}
+}
+
