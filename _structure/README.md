@@ -6,45 +6,49 @@
 `/` -> Japanese Conent  
 `/en/` -> English Content
 
-`/about/`
+`/about/`  
 
 `/events/`  
 ↳ `eventURL/`  
+
+TODO:  
 - [ ] List View
 - [ ] Video Link Field for Single Event
 - [ ] Pagination, `/events/2/`, `/events/3/`, etc
 
-`/news/`
-↳ `newsURL/`
+`/news/`  
+↳ `newsURL/`  
 
-`/members/`
-↳ `projectURL/`
-TODO: List View
+`/members/`  
+↳ `projectURL/`  
 
-`/projects/`
-↳ `projectURL/`
+TODO:
+- [ ] : List View
 
-`/residencies/`
-↳ `residentNameURL/`
+`/projects/`  
+↳ `projectURL/`  
 
-`/lab/`
+`/residencies/`  
+↳ `residentNameURL/`  
+
+`/lab/`  
 - Description of the lab
 - How to use
 - Images
 
-`/inventory/`
-- List of items, nr, location
+`/inventory/`  
+- List of items, nr, location  
 
-/protocols/
-- Protocol contributed by Lab Users
+`/protocols/`  
+- Protocol contributed by Lab Users  
 
-/contact/
-- reference to Discord
-- Google Contact Form?
+`/contact/`  
+- reference to Discord  
+- Google Contact Form?  
 
-/access/
-- address
-- map
+`/access/`
+- address  
+- map  
 
 
 
