@@ -3,7 +3,7 @@
 
 ## Site Structure
 
-`/` -> Japanese Conent
+`/` -> Japanese Conent  
 `/en/` -> English Content
 
 
