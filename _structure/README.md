@@ -9,9 +9,10 @@
 `/about/`
 
 `/events/`
-- ↳ `eventURL/`
-- []: List View
-[ ]: Video Link Field for Single Event
+↳ `eventURL/`
+
+- [ ] List View
+- [ ]: Video Link Field for Single Event
 - [ ]: Pagination, `/events/2/`, `/events/3/`, etc
 
 `/news/`
