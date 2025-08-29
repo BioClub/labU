@@ -1,8 +1,26 @@
-# Site Structure & Requirements
+# Site Structure & Page Types
 
-> Everything need to be Bi-lingual (Japanese/English)
 
-> All Descriptions & Abstracts are Markdown-enabled
+## Site Structure
+
+`/` -> Japanese Conent
+`/en/` -> English Content
+
+
+### Off-site
+
+- Zoom Link Page: https://zoom.bioclub.tokyo
+- Discord Link Page: https://discord.bioclub.tokyo
+- *Links* Link Page: https://links.bioclub.tokyo
+- Video Archive Page: https://video.bioclub.tokyo (currently forward to Vimeo Showcase. TODO: Archived videos should also be included in the respective events.)
+
+
+
+
+## Page Types & Fields
+
+- All fields are Bi-lingual (Japanese/English)
+- All Long Texts, Descriptions & Abstracts are Markdown-enabled
 
 * Pages
   - Title
