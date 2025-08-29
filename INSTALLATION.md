@@ -48,6 +48,7 @@ Template: `inventory`, `inventory_overview`
 
 Module:ProcessLanguage
 
+## ProcessWire: Setting up Email 
 
 ## ProcessWire: Resetting Passwords
 On a production server, resetting via email works.
