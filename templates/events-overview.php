@@ -6,7 +6,8 @@
 // Future Events that have either "event_date" or "event_end_date" in the Future
 // Future Events can also have an empty date, when the presenter has not fixed the date yet
 // More about Selectors https://processwire.com/docs/selectors/
-$future_events = $page->children("(event_date|event_end_date>today), (event_date=), sort=event_date");
+
+$future_events = $page->children("(event_date>today), (event_date=), sort=event_date");
 
 ?>
 
@@ -28,11 +29,10 @@ $future_events = $page->children("(event_date|event_end_date>today), (event_date
 <?php endif; ?>
   </div>
 
-
-
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-3">
 <?php
 
+// Future Events, no pagination
 $future_events->each(function($event) {
 
   // Featured Image
@@ -88,8 +88,36 @@ $future_events->each(function($event) {
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
 <?php
-// Past Events
-$page->children("event_date<today, sort=-event_date")->each(function($event) {
+
+// Past Events, paginated
+
+// Get past events, sort by date
+$events_per_page = 2;
+$offset = 0;
+$pageNr = 1;
+$segmentStr = $input->urlSegmentStr;
+
+// check if urlSegmentStr is number and <= than total pages
+if (is_numeric($segmentStr)) {
+  $offset = $segmentStr;
+  $pageNr = $segmentStr;
+} elseif (empty($segmentStr)) {
+
+} else {
+  wire404();
+}
+
+
+$past_events = $page->children("event_date<today, sort=-event_date, limit=$events_per_page, start=$offset");
+
+$total = $past_events->getTotal();
+$maxNumberOfPages = ceil($total / $events_per_page);
+
+if ($pageNr > $maxNumberOfPages) {
+  wire404();
+}
+
+$past_events->each(function($event) {
   ?>
   <a class="box events" href="<?=$event->url?>">
 
@@ -102,8 +130,6 @@ $page->children("event_date<today, sort=-event_date")->each(function($event) {
 ?>
     <img src="<?=$img->url?>" class="w-full mb-3" />
 <?php endif; ?>
-
-
 
     <h2 class="px-1">
       <?php if ($event->speaker_name) { echo $event->speaker_name; echo ": ";} ?><?=$event->title?>
@@ -134,4 +160,42 @@ $page->children("event_date<today, sort=-event_date")->each(function($event) {
 });
 ?>
   </div>
+
+  <div id="pagination" class="text-center">
+<?php
+
+$config->pageNumUrlPrefix = "";
+
+
+
+if ($past_events->hasPrevPagination() ) {
+  $prevNr = $pageNr-1;
+  echo "<a href='".$page->url($prevNr)."' class='font-medium'>⟵ Previous</a>\n";
+} else {
+  echo "<span class=''>⟵ Previous</span>\n";
+}
+
+$p = 1;
+for ($i=0; $i<$total; $i++) {
+  if ($i%$events_per_page == 0) {
+    if ($p == $pageNr) {
+      echo "<span class=''>$p</span> ";
+    } else {
+      echo "<a href='".$page->url($p)."' class='font-medium'>$p</a> ";
+    }
+    $p++;
+  }
+}
+
+if ($past_events->hasNextPagination() ) {
+  if (!is_numeric($pageNr)) $pageNr = 1;
+  $nextNr = $pageNr+1;
+  echo "<a href='".$page->url($nextNr)."' class='font-medium'>Next ⟶</a>\n";
+} else {
+  echo "<span class=''>Next ⟶</span>\n";
+}
+?>
+  </div>
+
+
 </article>
