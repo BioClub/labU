@@ -92,7 +92,7 @@ $future_events->each(function($event) {
 // Past Events, paginated
 
 // Get past events, sort by date
-$events_per_page = 2;
+$events_per_page = 10;
 $offset = 0;
 $pageNr = 1;
 $segmentStr = $input->urlSegmentStr;
